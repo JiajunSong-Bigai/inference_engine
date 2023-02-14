@@ -1,0 +1,7 @@
+coll(A,B,Y)
+coll(A,X,Y)
+coll(E,F,G)
+coll(A,B,H)
+para(A,B,C,D)
+para(C,D,E,F)
+para(X,Y,U,V)

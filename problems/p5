@@ -1,0 +1,3 @@
+midp(C,A,B).
+midp(C,B,A).
+midp(D,A,C).
