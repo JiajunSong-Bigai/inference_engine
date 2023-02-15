@@ -10,10 +10,14 @@ class Database:
     para. a pair of line pointers l1 and l2 meaning that l1 // l2. 
     perp. a pair of line pointers l1 and l2 meaning that l1 |_ l2.
     midp. a three tuple of points [M, A, B], meaning that M is the midpoint of AB.
+    eqangle. a four tuple of line pointers l1, l2, l3, l4 meaning that [l1,l2]=[l3,l4]
+    cong. a list of pairs of points
 
     Attributes
-        collFacts: a list of coll
         paraFacts: a list of para
+        midpFacts: a list of midp
+        eqangleFacts: a list of eqangle
+        congFacts: a list of cong
         lineDict: a dictionary with line name, points on line as the key, value pair
     
 
@@ -35,6 +39,11 @@ class Database:
 
                 call paraFacts.add( para(lx, ly) ): if lx or ly exists in the
                 para line pairs, append them to the parallel line set
+            
+            3. adding a eqangle predicate. eqangle(p1,p2,p3,p4,p5,p6,p7,p8)
+                four lines: [p1,p2]...[p7,p8], call searchLineName...
+
+                call eqangleFacts.add( eqangle(l1,l2,l3,l4) )
 
 
     """
@@ -42,6 +51,7 @@ class Database:
     def __init__(self) -> None:
         self.paraFacts = []
         self.midpFacts = []
+        self.eqangleFacts = []
         self.lineDict = {}
 
     def add(self, predicate: Predicate) -> None:
@@ -51,6 +61,29 @@ class Database:
             self.paraHandler(predicate)
         elif predicate.type == "midp":
             self.midpHandler(predicate)
+        elif predicate.type == "eqangle":
+            self.eqangleHandler(predicate)
+
+    def eqangleHandler(self, predicate: Predicate):
+        # adding eqangle(p1,p2,p3,p4,p5,p6,p7,p8) predicate
+        p1, p2, p3, p4, p5, p6, p7, p8 = predicate.points
+
+        name1 = self._addLine([p1, p2])
+        name2 = self._addLine([p3, p4])
+        name3 = self._addLine([p5, p6])
+        name4 = self._addLine([p7, p8])
+
+        isNewAngle = True
+        for idx, eqanglefact in enumerate(self.eqangleFacts):
+            if [name1, name2] in eqanglefact:
+                self.eqangleFacts[idx].append([name3, name4])
+                isNewAngle = False
+            elif [name3, name4] in eqanglefact:
+                self.eqangleFacts[idx].append([name1, name2])
+                isNewAngle = False
+
+        if isNewAngle:
+            self.eqangleFacts.append([[name1, name2], [name3, name4]])
 
     def midpHandler(self, predicate: Predicate):
         # adding midp(M, A, B) predicate
@@ -180,5 +213,22 @@ class Database:
             M, A, B = midfact[0], list(midfact[1])[0], list(midfact[1])[1]
             s += f"  midp({M}, {A}, {B})\n"
 
+        # eqangle
+        s += "\n> Eqangle Facts\n"
+        for eqanglefact in self.eqangleFacts:
+            s += f"  eqangle("
+            for angle in eqanglefact:
+                l1, l2 = angle
+                s += f"  ([{', '.join(self.lineDict[l1])}],[{', '.join(self.lineDict[l2])}])  "
+            s += f")\n"
         s += "\n" + "#" * 40 + "\n\n"
         return s
+
+
+### Examples
+
+# paraFacts
+# [ [l1,l2], [l3,l4,l5], ... ]
+
+# eqangleFacts
+# [ [ [l1,l2], [l1,l3], [l4,l5] ], [ [l1,l4], [l5,l6]  ]  ]

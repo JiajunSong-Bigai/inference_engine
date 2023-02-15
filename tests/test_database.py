@@ -46,3 +46,12 @@ def test_p5():
         db.add(p)
 
     print(db)
+
+
+def test_p6():
+    predicates = parse_predicates_from_file("problems/p6")
+    db = Database()
+    for p in predicates:
+        db.add(p)
+
+    print(db)
