@@ -23,27 +23,27 @@ class Database:
 
     Methods
         add(self, predicate)
-            1. adding a collinear predicate. coll(p1, p2, p3)
-                call collFacts.add(predicate):
-                    if p1, p2, p3 dont appear in any lines before
-                        create a new line
-                    elif any two of them appear in a line before
-                        add points to the line
-                        merge if possible
-                        reset line dictionary
+        1. adding a collinear predicate. coll(p1, p2, p3)
+            call collFacts.add(predicate):
+                if p1, p2, p3 dont appear in any lines before
+                    create a new line
+                elif any two of them appear in a line before
+                    add points to the line
+                    merge if possible
+                    reset line dictionary
 
 
-            2. adding a parallel predicate. para(p1, p2, p3, p4)
-                call searchLineName for [p1, p2] and [p3, p4]
-                if not exists, create new entry in the lineDict for the lines
+        2. adding a parallel predicate. para(p1, p2, p3, p4)
+            call searchLineName for [p1, p2] and [p3, p4]
+            if not exists, create new entry in the lineDict for the lines
 
-                call paraFacts.add( para(lx, ly) ): if lx or ly exists in the
-                para line pairs, append them to the parallel line set
-            
-            3. adding a eqangle predicate. eqangle(p1,p2,p3,p4,p5,p6,p7,p8)
-                four lines: [p1,p2]...[p7,p8], call searchLineName...
+            call paraFacts.add( para(lx, ly) ): if lx or ly exists in the
+            para line pairs, append them to the parallel line set
+        
+        3. adding a eqangle predicate. eqangle(p1,p2,p3,p4,p5,p6,p7,p8)
+            four lines: [p1,p2]...[p7,p8], call searchLineName...
 
-                call eqangleFacts.add( eqangle(l1,l2,l3,l4) )
+            call eqangleFacts.add( eqangle(l1,l2,l3,l4) )
 
 
     """
@@ -73,22 +73,28 @@ class Database:
         name3 = self._addLine([p5, p6])
         name4 = self._addLine([p7, p8])
 
+        if self.isParallelLine([name1, name2]) or self.isParallelLine(
+            [name3, name4]):
+            return
+
         l1_sorted = sorted([name1, name2])
         l2_sorted = sorted([name3, name4])
-
-        isNewAngle = True
-        for idx, eqanglefact in enumerate(self.eqangleFacts):
+        found = False
+        idx = 0
+        while not found and idx < len(self.eqangleFacts):
+            eqanglefact = self.eqangleFacts[idx]
             if l1_sorted in eqanglefact and l2_sorted in eqanglefact:
-                isNewAngle = False
-                continue
-            if l1_sorted in eqanglefact:
+                found = True
+            elif l1_sorted in eqanglefact and l2_sorted not in eqanglefact:
+                found = True
                 self.eqangleFacts[idx].append(l2_sorted)
-                isNewAngle = False
-            elif l2_sorted in eqanglefact:
+            elif l2_sorted in eqanglefact and l1_sorted not in eqanglefact:
+                found = True
                 self.eqangleFacts[idx].append(l1_sorted)
-                isNewAngle = False
 
-        if isNewAngle:
+            idx += 1
+
+        if not found:
             self.eqangleFacts.append([l1_sorted, l2_sorted])
 
     def midpHandler(self, predicate: Predicate):
@@ -229,6 +235,18 @@ class Database:
             s += f")\n"
         s += "\n" + "#" * 40 + "\n\n"
         return s
+
+    def isCollinear(self, points: list[str]) -> bool:
+        for _, line in self.lineDict.items():
+            if all(p in line for p in points):
+                return True
+        return False
+
+    def isParallelLine(self, lines: list[str]) -> bool:
+        for parafact in self.paraFacts:
+            if all(line in parafact for line in lines):
+                return True
+        return False
 
 
 ### Examples

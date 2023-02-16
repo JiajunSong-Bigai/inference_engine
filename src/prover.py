@@ -79,13 +79,13 @@ class Prover:
 
             # [p1, p2, p3]
             # p1 != E, p2 = A, p3 != B
-            if p1 != E and p2 == A and p3 != B and not self.isCollinear(
+            if p1 != E and p2 == A and p3 != B and not self.database.isCollinear(
                 [A, B, p3]):
                 predicate = Predicate(type="para", points=[E, p1, B, p3])
                 predicates.append(predicate)
             # [p1, p3, p2]
             # p1 != E, p3 = A, p2 != B
-            elif p1 != E and p3 == A and p2 != B and not self.isCollinear(
+            elif p1 != E and p3 == A and p2 != B and not self.database.isCollinear(
                 [A, B, p2]):
                 predicate = Predicate(type="para", points=[E, p3, B, p2])
                 predicates.append(predicate)
@@ -122,9 +122,3 @@ class Prover:
 
             if predicate not in self.newFactsList:
                 self.newFactsList.append(predicate)
-
-    def isCollinear(self, points: list[str]) -> bool:
-        for _, line in self.database.lineDict.items():
-            if all(p in line for p in points):
-                return True
-        return False
