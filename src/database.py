@@ -1,5 +1,5 @@
 from src.predicate import Predicate
-from typing import List
+from src.util import deduplicate
 
 
 class Database:
@@ -53,6 +53,7 @@ class Database:
         self.midpFacts = []
         self.eqangleFacts = []
         self.lineDict = {}
+        self.congDict = {}
 
     def add(self, predicate: Predicate) -> None:
         if predicate.type == "coll":
@@ -63,6 +64,8 @@ class Database:
             self.midpHandler(predicate)
         elif predicate.type == "eqangle":
             self.eqangleHandler(predicate)
+        elif predicate.type == "cong":
+            self.congHandler(predicate)
 
     def eqangleHandler(self, predicate: Predicate):
         # adding eqangle(p1,p2,p3,p4,p5,p6,p7,p8) predicate
@@ -101,11 +104,38 @@ class Database:
         # adding midp(M, A, B) predicate
         p1, p2, p3 = predicate.points
 
-        self._addLine(predicate.points)
+        self.add(Predicate("coll", points=[p1, p2, p3]))
 
         if ([p1, p2, p3] not in self.midpFacts) and ([p1, p3, p2]
                                                      not in self.midpFacts):
             self.midpFacts.append([p1, p2, p3])
+
+    def congHandler(self, predicate: Predicate):
+        # adding a cong(p1,p2,p3,p4) predicate
+        p1, p2, p3, p4 = predicate.points
+        self._addLine([p1, p2])
+        self._addLine([p3, p4])
+
+        p12 = sorted([p1, p2])
+        p34 = sorted([p3, p4])
+        found = False
+        for congName, pointPairs in self.congDict.items():
+            if p12 in pointPairs and p34 in pointPairs:
+                found = True
+            elif p12 in pointPairs and p34 not in pointPairs:
+                found = True
+                self.congDict[congName].append(p34)
+            elif p34 in pointPairs and p12 not in pointPairs:
+                found = True
+                self.congDict[congName].append(p12)
+
+            if found:
+                break
+
+        if not found:
+            self.congDict[self.newCongName] = [p12, p34]
+        else:
+            self._congMerge()
 
     def collHandler(self, predicate: Predicate):
         # adding a coll(A,B,C) predicate
@@ -117,7 +147,7 @@ class Database:
             inCount = sum(p in pointsOnLine for p in points)
             if inCount >= 2:
                 self.lineDict[lineName] = sorted(
-                    list(set(pointsOnLine + points)))
+                    deduplicate(pointsOnLine + points))
                 isNewLine = False
                 break
 
@@ -139,12 +169,13 @@ class Database:
         for idx, paraLines in enumerate(self.paraFacts):
             if name1 in paraLines or name2 in paraLines:
                 exists = True
-                self.paraFacts[idx] = list(set(paraLines + [name1, name2]))
+                self.paraFacts[idx] = deduplicate(paraLines + [name1, name2])
 
         if not exists:
             self.paraFacts.append([name1, name2])
 
-    def _addLine(self, points: List[str]) -> str:
+    def _addLine(self, points: list[str]) -> str:
+        assert len(points) == 2
         for name, line in self.lineDict.items():
             if all(p in line for p in points):
                 return name
@@ -157,8 +188,15 @@ class Database:
     def newLineName(self):
         oldLineName = list(self.lineDict.keys())
         for c in range(1, 20):
-            if f"l{c}" not in oldLineName:
-                return f"l{c}"
+            if f"line{c}" not in oldLineName:
+                return f"line{c}"
+
+    @property
+    def newCongName(self):
+        oldCongName = list(self.congDict.keys())
+        for c in range(1, 20):
+            if f"cong{c}" not in oldCongName:
+                return f"cong{c}"
 
     def _lineMerge(self):
         """Merge the lines
@@ -194,12 +232,53 @@ class Database:
                 for idx2, line in enumerate(lines):
                     if line in to_merge[1:]:
                         self.paraFacts[idx1][idx2] = name
-                self.paraFacts[idx1] = list(set(self.paraFacts[idx1]))
+                self.paraFacts[idx1] = deduplicate(self.paraFacts[idx1])
 
-            res[name] = list(set(points))
+            res[name] = deduplicate(points)
 
         self.lineDict = res
 
+        return True
+
+    def _congMerge(self):
+        """Merge the lines
+        """
+
+        def more_than_one_overlap(first, second):
+            return sum(ppair in second for ppair in first) >= 1
+
+        # greedy expandsion
+        unmerged = list(self.congDict.keys())
+        merged = []
+        while len(unmerged) > 0:
+            first, rest = unmerged[0], unmerged[1:]
+            unmerged = []
+            merged_cur = [first]
+            for r in rest:
+                c1, c2 = self.congDict[first], self.congDict[r]
+                if more_than_one_overlap(c1, c2):
+                    merged_cur.append(r)
+                else:
+                    unmerged.append(r)
+            merged.append(merged_cur)
+
+        res = {}
+        for to_merge in merged:
+            name = to_merge[0]
+            ppairs = []
+            for n in to_merge:
+                ppairs += self.congDict[n]
+
+            # Reset line dictionary
+            # for idx1, lines in enumerate(self.paraFacts):
+            #     for idx2, line in enumerate(lines):
+            #         if line in to_merge[1:]:
+            #             self.paraFacts[idx1][idx2] = name
+            #     self.paraFacts[idx1] = list(set(self.paraFacts[idx1]))
+
+            res[name] = deduplicate(ppairs)
+
+        self.congDict = res
         return True
 
     def __repr__(self) -> str:
@@ -209,21 +288,21 @@ class Database:
         s += "> Coll Facts\n"
         for points in self.lineDict.values():
             if len(points) >= 3:
-                s += f"  coll({', '.join(sorted(points))})\n"
+                s += f"  coll({','.join(sorted(points))})\n"
 
         # para
         s += "\n> Para Facts\n"
         for lines in self.paraFacts:
             s += f"  para( "
             for lineName in lines:
-                s += f"[{', '.join(self.lineDict[lineName])}] "
+                s += f"[{','.join(self.lineDict[lineName])}] "
             s += f")\n"
 
         # midp
         s += "\n> Midp Facts\n"
         for midfact in self.midpFacts:
             M, A, B = midfact
-            s += f"  midp({M}, {A}, {B})\n"
+            s += f"  midp({M},{A},{B})\n"
 
         # eqangle
         s += "\n> Eqangle Facts\n"
@@ -231,9 +310,19 @@ class Database:
             s += f"  eqangle("
             for angle in eqanglefact:
                 l1, l2 = angle
-                s += f"  ([{', '.join(self.lineDict[l1])}],[{', '.join(self.lineDict[l2])}])  "
+                s += f" ([{','.join(self.lineDict[l1])}],[{','.join(self.lineDict[l2])}]) "
             s += f")\n"
+
+        # cong
+        s += "\n> Cong Facts\n"
+        for congfact in self.congDict.values():
+            s += f"  cong( "
+            for ppair in congfact:
+                s += f"[{','.join(ppair)}] "
+            s += f")\n"
+
         s += "\n" + "#" * 40 + "\n\n"
+
         return s
 
     def isCollinear(self, points: list[str]) -> bool:
@@ -256,3 +345,6 @@ class Database:
 
 # eqangleFacts
 # [ [ [l1,l2], [l1,l3], [l4,l5] ], [ [l1,l4], [l5,l6]  ]  ]
+
+# congFacts
+# [ [ [p1,p2], [p1,p3], [p4,p5] ],  [ [p6,p7], [p1,p8] ] ]

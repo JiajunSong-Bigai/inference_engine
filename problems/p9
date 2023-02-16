@@ -1,0 +1,3 @@
+cong(A,B,C,D).
+cong(E,F,G,H).
+cong(C,D,E,F).
