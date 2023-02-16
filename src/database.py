@@ -17,9 +17,8 @@ class Database:
         paraFacts: a list of para
         midpFacts: a list of midp
         eqangleFacts: a list of eqangle
-        congFacts: a list of cong
         lineDict: a dictionary with line name, points on line as the key, value pair
-    
+        congDict: a dictionary with cong name, cong fact as the key, value pair    
 
     Methods
         add(self, predicate)
@@ -106,8 +105,9 @@ class Database:
 
         self.add(Predicate("coll", points=[p1, p2, p3]))
 
-        if ([p1, p2, p3] not in self.midpFacts) and ([p1, p3, p2]
-                                                     not in self.midpFacts):
+        p2, p3 = sorted([p2, p3])
+
+        if ([p1, p2, p3] not in self.midpFacts):
             self.midpFacts.append([p1, p2, p3])
 
     def congHandler(self, predicate: Predicate):

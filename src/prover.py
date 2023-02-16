@@ -66,11 +66,56 @@ class Prover:
 
         return self.database
 
+    def prove(self, predicate: Predicate) -> bool:
+        if predicate.type == "coll":
+            for _, pointsOnLine in self.database.lineDict.items():
+                if all(p in pointsOnLine for p in predicate.points):
+                    return True
+            return False
+
+        if predicate.type == "midp":
+            return predicate.points in self.database.midpFacts
+
+        if predicate.type == "para":
+            p1, p2, p3, p4 = predicate.points
+            name1 = self.database._addLine([p1, p2])
+            name2 = self.database._addLine([p3, p4])
+
+            for parafact in self.database.paraFacts:
+                if name1 in parafact and name2 in parafact:
+                    return True
+            return False
+
+        if predicate.type == "eqangle":
+            p1, p2, p3, p4, p5, p6, p7, p8 = predicate.points
+            name1 = self.database._addLine([p1, p2])
+            name2 = self.database._addLine([p3, p4])
+            name3 = self.database._addLine([p5, p6])
+            name4 = self.database._addLine([p7, p8])
+
+            l1_sorted = sorted([name1, name2])
+            l2_sorted = sorted([name3, name4])
+            for eqanglefact in self.database.eqangleFacts:
+                if l1_sorted in eqanglefact and l2_sorted in eqanglefact:
+                    return True
+            return False
+
+        if predicate.type == "cong":
+            p1, p2, p3, p4 = predicate.points
+            name1 = self.database._addLine([p1, p2])
+            name2 = self.database._addLine([p3, p4])
+
+            for congfact in self.database.congDict.values():
+                if sorted([p1, p2]) in congfact and sorted([p3, p4
+                                                            ]) in congfact:
+                    return True
+            return False
+
+        return False
+
     def _ruleD44(self, predicate: Predicate):
         """
-        midp(E,A,B) & midp(F,A,C) => para(E,F,B,C)
-        
-        Given E, A, B and generate predicates
+        midp(E,A,B) & midp(F,A,C) => para(E,F,B,C)        
         """
         E, A, B = predicate.points
         predicates = []
