@@ -73,17 +73,23 @@ class Database:
         name3 = self._addLine([p5, p6])
         name4 = self._addLine([p7, p8])
 
+        l1_sorted = sorted([name1, name2])
+        l2_sorted = sorted([name3, name4])
+
         isNewAngle = True
         for idx, eqanglefact in enumerate(self.eqangleFacts):
-            if [name1, name2] in eqanglefact:
-                self.eqangleFacts[idx].append([name3, name4])
+            if l1_sorted in eqanglefact and l2_sorted in eqanglefact:
                 isNewAngle = False
-            elif [name3, name4] in eqanglefact:
-                self.eqangleFacts[idx].append([name1, name2])
+                continue
+            if l1_sorted in eqanglefact:
+                self.eqangleFacts[idx].append(l2_sorted)
+                isNewAngle = False
+            elif l2_sorted in eqanglefact:
+                self.eqangleFacts[idx].append(l1_sorted)
                 isNewAngle = False
 
         if isNewAngle:
-            self.eqangleFacts.append([[name1, name2], [name3, name4]])
+            self.eqangleFacts.append([l1_sorted, l2_sorted])
 
     def midpHandler(self, predicate: Predicate):
         # adding midp(M, A, B) predicate
@@ -91,9 +97,9 @@ class Database:
 
         self._addLine(predicate.points)
 
-        midpFact = [p1, set([p2, p3])]
-        if midpFact not in self.midpFacts:
-            self.midpFacts.append(midpFact)
+        if ([p1, p2, p3] not in self.midpFacts) and ([p1, p3, p2]
+                                                     not in self.midpFacts):
+            self.midpFacts.append([p1, p2, p3])
 
     def collHandler(self, predicate: Predicate):
         # adding a coll(A,B,C) predicate
@@ -210,7 +216,7 @@ class Database:
         # midp
         s += "\n> Midp Facts\n"
         for midfact in self.midpFacts:
-            M, A, B = midfact[0], list(midfact[1])[0], list(midfact[1])[1]
+            M, A, B = midfact
             s += f"  midp({M}, {A}, {B})\n"
 
         # eqangle
