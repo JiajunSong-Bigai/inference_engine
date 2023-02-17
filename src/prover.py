@@ -167,3 +167,18 @@ class Prover:
 
             if predicate not in self.newFactsList:
                 self.newFactsList.append(predicate)
+
+
+def test_10():
+    from src.util import parse_predicates_from_file
+
+    hypotheses = parse_predicates_from_file("problems/p10")
+    prover = Prover(hypotheses=hypotheses)
+    final_db = prover.fixedpoint()
+    print(prover.database.congDict)
+    print(prover.database.eqratioFacts)
+    print(final_db)
+
+
+if __name__ == "__main__":
+    test_10()

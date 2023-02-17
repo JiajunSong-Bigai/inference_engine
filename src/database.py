@@ -22,28 +22,6 @@ class Database:
 
     Methods
         add(self, predicate)
-        1. adding a collinear predicate. coll(p1, p2, p3)
-            call collFacts.add(predicate):
-                if p1, p2, p3 dont appear in any lines before
-                    create a new line
-                elif any two of them appear in a line before
-                    add points to the line
-                    merge if possible
-                    reset line dictionary
-
-
-        2. adding a parallel predicate. para(p1, p2, p3, p4)
-            call searchLineName for [p1, p2] and [p3, p4]
-            if not exists, create new entry in the lineDict for the lines
-
-            call paraFacts.add( para(lx, ly) ): if lx or ly exists in the
-            para line pairs, append them to the parallel line set
-        
-        3. adding a eqangle predicate. eqangle(p1,p2,p3,p4,p5,p6,p7,p8)
-            four lines: [p1,p2]...[p7,p8], call searchLineName...
-
-            call eqangleFacts.add( eqangle(l1,l2,l3,l4) )
-
 
     """
 
@@ -51,6 +29,7 @@ class Database:
         self.paraFacts = []
         self.midpFacts = []
         self.eqangleFacts = []
+        self.eqratioFacts = []
         self.lineDict = {}
         self.congDict = {}
 
@@ -63,8 +42,47 @@ class Database:
             self.midpHandler(predicate)
         elif predicate.type == "eqangle":
             self.eqangleHandler(predicate)
+        elif predicate.type == "eqratio":
+            self.eqratioHandler(predicate)
         elif predicate.type == "cong":
             self.congHandler(predicate)
+
+    def eqratioHandler(self, predicate: Predicate):
+        # adding eqratio(p1,p2,p3,p4,p5,p6,p7,p8) predicate
+        p1, p2, p3, p4, p5, p6, p7, p8 = predicate.points
+
+        self._addLine([p1, p2])
+        self._addLine([p3, p4])
+        self._addLine([p5, p6])
+        self._addLine([p7, p8])
+
+        name1 = self._addCong([p1, p2])
+        name2 = self._addCong([p3, p4])
+        name3 = self._addCong([p5, p6])
+        name4 = self._addCong([p7, p8])
+
+        found = False
+        for idx, eqratiofact in enumerate(self.eqratioFacts):
+            if [name1, name2] in eqratiofact and [name3, name4] in eqratiofact:
+                found = True
+            elif [name1, name2] in eqratiofact and [name3, name4
+                                                    ] not in eqratiofact:
+                found = True
+                self.eqratioFacts[idx].append([name3, name4])
+            elif [name3, name4] in eqratiofact and [name1, name2
+                                                    ] not in eqratiofact:
+                found = True
+                self.eqratioFacts[idx].append([name1, name2])
+
+            if found:
+                break
+
+        if not found:
+            self.eqratioFacts.append([[name1, name2], [name3, name4]])
+        else:
+            self._eqratioMerge()
+
+        print(self.eqratioFacts)
 
     def eqangleHandler(self, predicate: Predicate):
         # adding eqangle(p1,p2,p3,p4,p5,p6,p7,p8) predicate
@@ -182,6 +200,15 @@ class Database:
 
         newName = self.newLineName
         self.lineDict[newName] = points
+        return newName
+
+    def _addCong(self, points: list[str]) -> str:
+        assert len(points) == 2
+        for name, ppair in self.congDict.items():
+            if points in ppair:
+                return name
+        newName = self.newCongName
+        self.congDict[newName] = [points]
         return newName
 
     @property
@@ -316,10 +343,25 @@ class Database:
         # cong
         s += "\n> Cong Facts\n"
         for congfact in self.congDict.values():
-            s += f"  cong( "
-            for ppair in congfact:
-                s += f"[{','.join(ppair)}] "
-            s += f")\n"
+            if len(congfact) > 1:
+                s += f"  cong( "
+                for ppair in congfact:
+                    s += f"{''.join(ppair)} "
+                s += f")\n"
+
+        # eqratio
+        s += "\n> Eqratio Facts\n"
+        for eqratiofact in self.eqratioFacts:
+            s += f" eqratio( "
+            for namePair in eqratiofact:
+                s += f"[ "
+                for name in namePair:
+                    segNames = []
+                    for ppair in self.congDict[name]:
+                        segNames.append(f"{''.join(ppair)}")
+                    s += f"({','.join(segNames)}) "
+                s += f"] "
+            s += ")\n"
 
         s += "\n" + "#" * 40 + "\n\n"
 
@@ -340,11 +382,22 @@ class Database:
 
 ### Examples
 
+# lineDict
+
+# congDict
+# [ [  ] , [  ]  ]
+
 # paraFacts
 # [ [l1,l2], [l3,l4,l5], ... ]
 
 # eqangleFacts
 # [ [ [l1,l2], [l1,l3], [l4,l5] ], [ [l1,l4], [l5,l6]  ]  ]
 
-# congFacts
-# [ [ [p1,p2], [p1,p3], [p4,p5] ],  [ [p6,p7], [p1,p8] ] ]
+# congDict
+# {
+#   c1: [ [p1,p2], [p3,p4] ],
+#   c2: [ [p1,p3], [p3,p5] ]
+# }
+
+# eqratioFacts
+# [ [[c1,c2],[c3,c4]] , [[c5,c6],[c7,c8]] ]

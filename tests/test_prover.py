@@ -64,3 +64,10 @@ def test_09():
     prover = Prover(hypotheses=hypotheses)
     final_db = prover.fixedpoint()
     print(final_db)
+
+
+def test_10():
+    hypotheses = parse_predicates_from_file("problems/p10")
+    prover = Prover(hypotheses=hypotheses)
+    final_db = prover.fixedpoint()
+    print(final_db)
