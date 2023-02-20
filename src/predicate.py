@@ -1,6 +1,5 @@
 """predicate.py
 """
-from typing import List
 
 
 class Predicate:
@@ -10,7 +9,7 @@ class Predicate:
     Predicate will mostly be used when parsing the input hypotheses.
     '''
 
-    def __init__(self, type: str, points: List[str]) -> None:
+    def __init__(self, type: str, points: list[str]) -> None:
         self.type = type
         self.points = points
 
