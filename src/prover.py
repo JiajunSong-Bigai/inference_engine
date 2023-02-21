@@ -42,8 +42,9 @@ Data-driven Forward chaining
 """
 import itertools
 
-from src.database import Database
+from src.database_ import Database
 from src.predicate import Predicate
+from src.primitives import Angle, Ratio, Point, Segment
 
 
 class Prover:
@@ -68,18 +69,20 @@ class Prover:
 
     def prove(self, predicate: Predicate) -> bool:
         if predicate.type == "coll":
-            for _, pointsOnLine in self.database.lineDict.items():
+            for _, pointsOnLine in self.database.lines.items():
                 if all(p in pointsOnLine for p in predicate.points):
                     return True
             return False
 
         if predicate.type == "midp":
-            return predicate.points in self.database.midpFacts
+            p1, p2, p3 = predicate.points
+            p2, p3 = sorted([p2, p3])
+            return [p1, p2, p3] in self.database.midpFacts
 
         if predicate.type == "para":
             p1, p2, p3, p4 = predicate.points
-            name1 = self.database._addLine([p1, p2])
-            name2 = self.database._addLine([p3, p4])
+            name1 = self.database.matchLine([p1, p2])
+            name2 = self.database.matchLine([p3, p4])
 
             for parafact in self.database.paraFacts:
                 if name1 in parafact and name2 in parafact:
@@ -88,26 +91,27 @@ class Prover:
 
         if predicate.type == "eqangle":
             p1, p2, p3, p4, p5, p6, p7, p8 = predicate.points
-            name1 = self.database._addLine([p1, p2])
-            name2 = self.database._addLine([p3, p4])
-            name3 = self.database._addLine([p5, p6])
-            name4 = self.database._addLine([p7, p8])
+            l1 = self.database.matchLine([p1, p2])
+            l2 = self.database.matchLine([p3, p4])
+            l3 = self.database.matchLine([p5, p6])
+            l4 = self.database.matchLine([p7, p8])
 
-            l1_sorted = sorted([name1, name2])
-            l2_sorted = sorted([name3, name4])
-            for eqanglefact in self.database.eqangleFacts:
-                if l1_sorted in eqanglefact and l2_sorted in eqanglefact:
+            for angles in self.database.eqangleFacts:
+                if Angle(l1, l2) in angles and Angle(l3, l4) in angles:
+                    return True
+                if Angle(l2, l1) in angles and Angle(l4, l3) in angles:
+                    return True
+                if Angle(l1, l3) in angles and Angle(l2, l4) in angles:
                     return True
             return False
 
         if predicate.type == "cong":
             p1, p2, p3, p4 = predicate.points
-            name1 = self.database._addLine([p1, p2])
-            name2 = self.database._addLine([p3, p4])
+            s1 = Segment(p1, p2)
+            s2 = Segment(p3, p4)
 
-            for congfact in self.database.congDict.values():
-                if sorted([p1, p2]) in congfact and sorted([p3, p4
-                                                            ]) in congfact:
+            for segments in self.database.congs.values():
+                if s1 in segments and s2 in segments:
                     return True
             return False
 
@@ -124,14 +128,14 @@ class Prover:
 
             # [p1, p2, p3]
             # p1 != E, p2 = A, p3 != B
-            if p1 != E and p2 == A and p3 != B and not self.database.isCollinear(
-                [A, B, p3]):
+            if p1 != E and p2 == A and p3 != B and not self.prove(
+                    Predicate("coll", [A, B, p3])):
                 predicate = Predicate(type="para", points=[E, p1, B, p3])
                 predicates.append(predicate)
             # [p1, p3, p2]
             # p1 != E, p3 = A, p2 != B
-            elif p1 != E and p3 == A and p2 != B and not self.database.isCollinear(
-                [A, B, p2]):
+            elif p1 != E and p3 == A and p2 != B and not self.prove(
+                    Predicate("coll", [A, B, p2])):
                 predicate = Predicate(type="para", points=[E, p3, B, p2])
                 predicates.append(predicate)
 
@@ -146,11 +150,11 @@ class Prover:
         para(A,B,C,D) => eqangle(A,B,P,Q,C,D,P,Q)
         """
         p1, p2, p3, p4 = predicate.points
-        name1 = self.database._addLine([p1, p2])
-        name2 = self.database._addLine([p3, p4])
+        name1 = self.database.matchLine([p1, p2])
+        name2 = self.database.matchLine([p3, p4])
 
         predicates = []
-        for n, line in self.database.lineDict.items():
+        for n, line in self.database.lines.items():
             if n in [name1, name2]:
                 continue
 
@@ -167,18 +171,3 @@ class Prover:
 
             if predicate not in self.newFactsList:
                 self.newFactsList.append(predicate)
-
-
-def test_10():
-    from src.util import parse_predicates_from_file
-
-    hypotheses = parse_predicates_from_file("problems/p10")
-    prover = Prover(hypotheses=hypotheses)
-    final_db = prover.fixedpoint()
-    print(prover.database.congDict)
-    print(prover.database.eqratioFacts)
-    print(final_db)
-
-
-if __name__ == "__main__":
-    test_10()
