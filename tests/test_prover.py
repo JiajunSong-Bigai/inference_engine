@@ -71,3 +71,10 @@ def test_10():
     prover = Prover(hypotheses=hypotheses)
     final_db = prover.fixedpoint()
     print(final_db)
+
+
+def test_11():
+    hypotheses = parse_predicates_from_file("problems/p11")
+    prover = Prover(hypotheses=hypotheses)
+    final_db = prover.fixedpoint()
+    print(final_db)

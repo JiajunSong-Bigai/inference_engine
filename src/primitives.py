@@ -63,6 +63,15 @@ class Ratio:
 class Triangle:
 
     def __init__(self, p1: Point, p2: Point, p3: Point) -> None:
-        self.p1 = p1
-        self.p2 = p2
-        self.p3 = p3
+        self.p1, self.p2, self.p3 = sorted([p1, p2, p3])
+
+    def __eq__(self, other: 'Triangle') -> bool:
+        if isinstance(other, Triangle):
+            return self.p1, self.p2, self.p1 == other.p1, other.p2, other.p3
+        return False
+
+    def __hash__(self) -> int:
+        return hash(str(self))
+
+    def __repr__(self) -> str:
+        return "".join([self.p1, self.p2, self.p3])

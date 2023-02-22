@@ -1,24 +1,28 @@
-from src.primitives import Point, Segment, Angle, LineKey, CongKey, Ratio
+from src.primitives import Point, Segment, Angle, LineKey, CongKey, Ratio, Triangle
 from src.predicate import Predicate
 
 
 class Database:
 
-    def __init__(
-        self,
-        lines: dict[LineKey, set[Point]] = None,
-        congs: dict[CongKey, set[Segment]] = None,
-        midpFacts: list[list[Point]] = None,
-        paraFacts: list[set[LineKey]] = None,
-        eqangleFacts: list[set[Angle]] = None,
-        eqratioFacts: list[set[Ratio]] = None,
-    ) -> None:
+    def __init__(self,
+                 lines: dict[LineKey, set[Point]] = None,
+                 congs: dict[CongKey, set[Segment]] = None,
+                 midpFacts: list[list[Point]] = None,
+                 paraFacts: list[set[LineKey]] = None,
+                 perpFacts: list[set[LineKey]] = None,
+                 eqangleFacts: list[set[Angle]] = None,
+                 eqratioFacts: list[set[Ratio]] = None,
+                 simtriFacts: list[set[Triangle]] = None,
+                 contriFacts: list[set[Triangle]] = None) -> None:
         self.lines = lines if lines else {}
         self.congs = congs if congs else {}
         self.midpFacts = midpFacts if midpFacts else []
         self.paraFacts = paraFacts if paraFacts else []
+        self.perpFacts = perpFacts if perpFacts else []
         self.eqangleFacts = eqangleFacts if eqangleFacts else []
         self.eqratioFacts = eqratioFacts if eqratioFacts else []
+        self.simtriFacts = simtriFacts if simtriFacts else []
+        self.contriFacts = contriFacts if contriFacts else []
 
     def add(self, predicate: Predicate) -> None:
         if predicate.type == "coll":
@@ -27,12 +31,104 @@ class Database:
             self.midpHandler(predicate)
         elif predicate.type == "para":
             self.paraHandler(predicate)
+        elif predicate.type == "perp":
+            self.perpHandler(predicate)
         elif predicate.type == "eqangle":
             self.eqangleHandler(predicate)
         elif predicate.type == "cong":
             self.congHandler(predicate)
         elif predicate.type == "eqratio":
             self.eqratioHandler(predicate)
+        elif predicate.type == "simtri":
+            self.simtriHandler(predicate)
+        elif predicate.type == "contri":
+            self.contriHandler(predicate)
+
+    def contriHandler(self, predicate: Predicate):
+        """Example facts
+        [
+            {T1, T2, T3}, {T4, T5}
+        ]
+        """
+        p1, p2, p3, p4, p5, p6 = predicate.points
+        t1 = Triangle(p1, p2, p3)
+        t2 = Triangle(p4, p5, p6)
+
+        idx = 0
+        found = False
+        contains_idx = []
+        while idx < len(self.contriFacts):
+            if t1 in self.contriFacts[idx] or t2 in self.contriFacts[idx]:
+                found = True
+                contains_idx.append(idx)
+            idx += 1
+
+        if found:
+            if len(contains_idx) == 1:
+                self.contriFacts[contains_idx[0]] = self.contriFacts[
+                    contains_idx[0]].union({t1, t2})
+            else:
+                assert len(contains_idx) == 2
+                first, second = contains_idx
+                self.contriFacts[first] = self.contriFacts[first].union(
+                    self.contriFacts[second].union({t1, t2}))
+                del self.contriFacts[second]
+        else:
+            self.contriFacts.append({t1, t2})
+
+    def simtriHandler(self, predicate: Predicate):
+        """Example facts
+        [
+            {T1, T2, T3}, {T4, T5}
+        ]
+        """
+        p1, p2, p3, p4, p5, p6 = predicate.points
+        t1 = Triangle(p1, p2, p3)
+        t2 = Triangle(p4, p5, p6)
+
+        idx = 0
+        found = False
+        contains_idx = []
+        while idx < len(self.simtriFacts):
+            if t1 in self.simtriFacts[idx] or t2 in self.simtriFacts[idx]:
+                found = True
+                contains_idx.append(idx)
+            idx += 1
+
+        if found:
+            if len(contains_idx) == 1:
+                self.simtriFacts[contains_idx[0]] = self.simtriFacts[
+                    contains_idx[0]].union({t1, t2})
+            else:
+                assert len(contains_idx) == 2
+                first, second = contains_idx
+                self.simtriFacts[first] = self.simtriFacts[first].union(
+                    self.simtriFacts[second].union({t1, t2}))
+                del self.simtriFacts[second]
+        else:
+            self.simtriFacts.append({t1, t2})
+
+    def perpHandler(self, predicate: Predicate):
+        """Example facts
+        [
+            {l1, l2}, {l1, l3}, {l4, l5}
+        ]
+
+        Add perp(A,B,C,D)
+        """
+        p1, p2, p3, p4 = predicate.points
+        l1 = self.matchLine([p1, p2])
+        l2 = self.matchLine([p3, p4])
+
+        found = False
+        idx = 0
+        while not found and idx < len(self.perpFacts):
+            if self.perpFacts[idx] == {l1, l2}:
+                found = True
+            idx += 1
+
+        if not found:
+            self.perpFacts.append({l1, l2})
 
     def congHandler(self, predicate: Predicate):
         """Add cong(A,B,C,D) predicate into the congs dictionary
@@ -80,43 +176,13 @@ class Database:
         else:
             self._lineMerge()
 
-    def matchLine(self, points: list[Point]):
-        """Search for the line, if found, return the name;
-        else, create a new line connecting two points and
-        return the new name
-        """
-        assert len(points) == 2
-        for name, line in self.lines.items():
-            if all(p in line for p in points):
-                return name
-
-        newName = self.newLineName
-        self.lines[newName] = points
-        return newName
-
-    def matchCong(self, points: list[Point]):
-        """Search for the cong, if found, return the name;
-        else, create a new Cong object with a segment of two points and
-        return the new name
-        """
-        assert len(points) == 2
-        for name, cong in self.congs.items():
-            # cong is a list of segments
-            for segment in cong:
-                if str(segment) == "".join(sorted(points)):
-                    return name
-
-        newName = self.newCongName
-        self.congs[newName] = [Segment(*points)]
-        return newName
-
     def paraHandler(self, predicate: Predicate):
         """Example facts
         [
             {l1, l2, l3}, {l4, l5}
         ]
 
-        Adding a para(A,B,C,D) into the facts
+        Add para(A,B,C,D)
         """
         p1, p2, p3, p4 = predicate.points
         # prepare the line
@@ -168,7 +234,8 @@ class Database:
 
         if found:
             if len(contains_idx) == 1:
-                self.eqratioFacts[idx] = self.eqratioFacts[idx].union({r1, r2})
+                self.eqratioFacts[contains_idx[0]] = self.eqratioFacts[
+                    contains_idx[0]].union({r1, r2})
             else:
                 # expand first, delete second
                 assert len(contains_idx) == 2
@@ -177,7 +244,7 @@ class Database:
                     self.eqratioFacts[second].union({r1, r2}))
                 del self.eqratioFacts[second]
 
-        if not found:
+        else:
             self.eqratioFacts.append({r1, r2})
 
     def eqangleHandler(self, predicate: Predicate):
@@ -242,6 +309,14 @@ class Database:
         s += "\n> Para Facts\n"
         for lines in self.paraFacts:
             s += f"  para( "
+            for lineName in lines:
+                s += f"[{','.join(sorted(self.lines[lineName]))}] "
+            s += f")\n"
+
+        # perp
+        s += "\n> Perp Facts\n"
+        for lines in self.perpFacts:
+            s += f"  perp( "
             for lineName in lines:
                 s += f"[{','.join(sorted(self.lines[lineName]))}] "
             s += f")\n"
@@ -352,16 +427,32 @@ class Database:
 
         self.congs = res
 
+    def matchLine(self, points: list[Point]):
+        """Search for the line, if found, return the name;
+        else, create a new line connecting two points and
+        return the new name
+        """
+        assert len(points) == 2
+        for name, line in self.lines.items():
+            if all(p in line for p in points):
+                return name
 
-def test_p10():
-    from src.util import parse_predicates_from_file
-    predicates = parse_predicates_from_file("problems/p10")
-    db = Database()
-    for p in predicates:
-        db.add(p)
+        newName = self.newLineName
+        self.lines[newName] = set(points)
+        return newName
 
-    print(db)
+    def matchCong(self, points: list[Point]):
+        """Search for the cong, if found, return the name;
+        else, create a new Cong object with a segment of two points and
+        return the new name
+        """
+        assert len(points) == 2
+        for name, cong in self.congs.items():
+            # cong is a list of segments
+            for segment in cong:
+                if str(segment) == "".join(sorted(points)):
+                    return name
 
-
-if __name__ == "__main__":
-    test_p10()
+        newName = self.newCongName
+        self.congs[newName] = [Segment(*points)]
+        return newName
