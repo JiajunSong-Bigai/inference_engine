@@ -489,10 +489,21 @@ def test_rd60():
     assert prover.prove(quest)
 
 
-def test_rd61():
+def test_rd61simtri():
     hypotheses = [
         Predicate("simtri", ["A", "B", "C", "P", "Q", "R"]),
         Predicate("cong", ["A", "B", "P", "Q"])
+    ]
+    quest = Predicate("contri", ["A", "B", "C", "P", "Q", "R"])
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    assert prover.prove(quest)
+
+
+def test_rd61cong():
+    hypotheses = [
+        Predicate("cong", ["A", "B", "P", "Q"]),
+        Predicate("simtri", ["A", "B", "C", "P", "Q", "R"]),
     ]
     quest = Predicate("contri", ["A", "B", "C", "P", "Q", "R"])
     prover = Prover(hypotheses=hypotheses)
@@ -533,9 +544,9 @@ def test_rd64():
 
 def test_rd65():
     hypotheses = [
-        Predicate("para", ["A", "B", "C", "D"]),
         Predicate("coll", ["O", "A", "C"]),
-        Predicate("coll", ["O", "B", "D"])
+        Predicate("coll", ["O", "B", "D"]),
+        Predicate("para", ["A", "B", "C", "D"]),
     ]
     quest = Predicate("eqratio", ["O", "A", "A", "C", "O", "B", "B", "D"])
     prover = Prover(hypotheses=hypotheses)
@@ -553,7 +564,7 @@ def test_rd66():
     assert prover.prove(quest)
 
 
-def test_rd67():
+def test_rd67coll():
     hypotheses = [
         Predicate("coll", ["A", "B", "C"]),
         Predicate("cong", ["A", "B", "A", "C"]),
