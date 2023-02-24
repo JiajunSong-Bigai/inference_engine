@@ -38,7 +38,6 @@ class Prover:
             if d.type == "midp":
                 predicates += self._ruleD44(d)
                 predicates += self._ruleD52midp(d)
-                predicates += self._ruleD55midp(d)
                 predicates += self._ruleD63(d)
                 predicates += self._ruleD68(d)
                 predicates += self._ruleD70(d)
@@ -60,7 +59,6 @@ class Prover:
             if d.type == "cong":
                 predicates += self._ruleD46(d)
                 predicates += self._ruleD56(d)
-                predicates += self._ruleD61cong(d)
             if d.type == "perp":
                 predicates += self._ruleD09(d)
                 predicates += self._ruleD10perp(d)
@@ -74,11 +72,11 @@ class Prover:
                 predicates += self._ruleD62(d)
 
             for predicate in predicates:
-                if self.prove(predicate):
+                if self.prove(predicate) or predicate in self.newFactsList:
                     continue
                 self.newFactsList.append(predicate)
 
-            print(self.newFactsList)
+            # print(self.newFactsList)
 
         return self.database
 
@@ -269,22 +267,20 @@ class Prover:
         """
         para(A,B,C,D) => eqangle(A,B,P,Q,C,D,P,Q)
         """
-        p1, p2, p3, p4 = predicate.points
-        l1 = self.database.matchLine([p1, p2])
-        l2 = self.database.matchLine([p3, p4])
+        A, B, C, D = predicate.points
+        lAB = self.database.matchLine([A, B])
+        lCD = self.database.matchLine([C, D])
 
         predicates = []
         for line, points in self.database.lines.items():
-            if line in [l1, l2]:
+            if line in [lAB, lCD]:
                 continue
 
-            for ppair in itertools.combinations(points, 2):
-                predicate = Predicate(type="eqangle",
-                                      points=[
-                                          p1, p2, ppair[0], ppair[1], p3, p4,
-                                          ppair[0], ppair[1]
-                                      ])
-                predicates.append(predicate)
+            for [P, Q] in itertools.combinations(points, 2):
+                predicates += [
+                    Predicate(type="eqangle", points=[A, B, P, Q, C, D, P, Q]),
+                    Predicate(type="eqangle", points=[P, Q, A, B, P, Q, C, D])
+                ]
 
         return predicates
 
@@ -292,23 +288,40 @@ class Prover:
         """
         midp(E,A,B) & midp(F,A,C) => para(E,F,B,C)        
         """
-        E, A, B = predicate.points
+        E, A1, B = predicate.points
         predicates = []
         for midfact in self.database.midpFacts:
-            p1, p2, p3 = midfact
+            # p1, p2, p3 = midfact
 
-            # [p1, p2, p3]
-            # p1 != E, p2 = A, p3 != B
-            if p1 != E and p2 == A and p3 != B and not self.prove(
-                    Predicate("coll", [A, B, p3])):
-                predicate = Predicate(type="para", points=[E, p1, B, p3])
-                predicates.append(predicate)
-            # [p1, p3, p2]
-            # p1 != E, p3 = A, p2 != B
-            elif p1 != E and p3 == A and p2 != B and not self.prove(
-                    Predicate("coll", [A, B, p2])):
-                predicate = Predicate(type="para", points=[E, p3, B, p2])
-                predicates.append(predicate)
+            # # [p1, p2, p3]
+            # # p1 != E, p2 = A, p3 != B
+            # if p1 != E and p2 == A and p3 != B and not self.prove(
+            #         Predicate("coll", [A, B, p3])):
+            #     predicate = Predicate(type="para", points=[E, p1, B, p3])
+            #     predicates.append(predicate)
+            # # [p1, p3, p2]
+            # # p1 != E, p3 = A, p2 != B
+            # elif p1 != E and p3 == A and p2 != B and not self.prove(
+            #         Predicate("coll", [A, B, p2])):
+            #     predicate = Predicate(type="para", points=[E, p3, B, p2])
+            #     predicates.append(predicate)
+            F, A2, C = midfact
+            if E == F:
+                continue
+
+            As = [p for p in [A1, B] if p in [A2, C]]
+            if len(As) != 1:
+                continue
+
+            A = As[0]
+            B = B if A == A1 else A1
+            C = C if A == A2 else A2
+            if self.prove(Predicate("coll", [A, B, C])):
+                continue
+
+            predicates.append(Predicate("para", [E, F, B, C]))
+
+        return predicates
 
         return predicates
 
@@ -331,8 +344,11 @@ class Prover:
             not self.prove(Predicate("coll", [p1, p2, p4]))
         ])
         if valid:
-            predicate = Predicate("eqangle", [p1, p2, p2, p4, p2, p4, p1, p4])
-            return [predicate]
+
+            return [
+                Predicate("eqangle", [p1, p2, p2, p4, p2, p4, p1, p4]),
+                Predicate("eqangle", [p2, p4, p1, p2, p1, p4, p2, p4])
+            ]
         return []
 
     def _ruleD47(self, predicate: Predicate):
@@ -390,27 +406,6 @@ class Prover:
 
         return predicates
 
-    def _ruleD55midp(self, predicate: Predicate):
-        """
-        midp(M,A,B) & perp(O,M,A,B) => cong(O,A,O,B)
-        """
-        M, A, B = predicate.points
-        lab = self.database.matchLine([A, B])
-
-        predicates = []
-        # for lines in self.database.perpFacts:
-        #     if lab not in lines:
-        #         continue
-        #     lom = [l for l in lines if l != lab][0]
-        #     if M not in self.database.lines[lom]:
-        #         continue
-
-        #     for O in self.database.lines[lom]:
-        #         if O != M:
-        #             predicate = Predicate("cong", [O, A, O, B])
-        #             predicates.append(predicate)
-        return predicates
-
     def _ruleD55perp(self, predicate: Predicate):
         """
         perp(O,M,A,B) & midp(M,A,B) => cong(O,A,O,B)
@@ -453,17 +448,53 @@ class Prover:
         eqangle(A,B,B,C,P,Q,Q,R) & eqangle(A,C,B,C,P,R,Q,R) & ~ coll(A,B,C)
         => simtri(A,B,C,P,Q,R)
         """
-        A, B1, B2, C, P, Q1, Q2, R = predicate.points
-        predicates = []
-        if not all([
-                B1 == B2, Q1 == Q2,
-                not self.prove(Predicate("coll", [A, B1, C]))
-        ]):
-            return predicates
+        # # A and C can be replaced by other points on the line
+        # A, B1, B2, C, P, Q1, Q2, R = predicate.points
 
-        if self.prove(Predicate("eqangle", [A, C, B1, C, P, R, Q1, R])):
-            predicate = Predicate("simtri", [A, B1, C, P, Q1, R])
-            predicates.append(predicate)
+        # Input eqangle predicates only specifies the lines that construct
+        # the angle, but not the specific point
+        # i.e., \angle <l1, l2> = \angle <l3, l4>
+        # but the exact \angle ABC = \angle CDE is unknown
+
+        predicates = []
+        p1, p2, p3, p4, p5, p6, p7, p8 = predicate.points
+        lAB = self.database.matchLine([p1, p2])
+        lBC = self.database.matchLine([p3, p4])
+        lPQ = self.database.matchLine([p5, p6])
+        lQR = self.database.matchLine([p7, p8])
+
+        ptsAB = self.database.lines[lAB]
+        ptsBC = self.database.lines[lBC]
+        ptsPQ = self.database.lines[lPQ]
+        ptsQR = self.database.lines[lQR]
+
+        # lAB and lBC intersects, at B
+        Bs = ptsAB.intersection(ptsBC)
+        Qs = ptsPQ.intersection(ptsQR)
+
+        if len(Bs) != 1 or len(Qs) != 1:
+            return []
+
+        # print("Reaching here: rule 58 on", ptsAB, ptsBC, ptsPQ, ptsQR)
+
+        B = list(Bs)[0]
+        Q = list(Qs)[0]
+
+        As = [p for p in ptsAB if p != B]
+        Cs = [p for p in ptsBC if p != B]
+        Ps = [p for p in ptsPQ if p != Q]
+        Rs = [p for p in ptsQR if p != Q]
+
+        predicates = []
+        for A in As:
+            for C in Cs:
+                for P in Ps:
+                    for R in Rs:
+                        if self.prove(
+                                Predicate("eqangle",
+                                          [A, C, B, C, P, R, Q, R])):
+                            predicate = Predicate("simtri", [A, B, C, P, Q, R])
+                            predicates.append(predicate)
 
         return predicates
 
@@ -472,14 +503,22 @@ class Prover:
         simtri(A,B,C,P,Q,R) => eqratio(A,B,A,C,P,Q,P,R)
         """
         A, B, C, P, Q, R = predicate.points
-        return [Predicate("eqratio", [A, B, A, C, P, Q, P, R])]
+        return [
+            Predicate("eqratio", [A, B, A, C, P, Q, P, R]),
+            Predicate("eqratio", [A, B, B, C, P, Q, Q, R]),
+            Predicate("eqratio", [A, C, B, C, P, R, Q, R]),
+            Predicate("eqratio", [A, B, P, Q, B, C, Q, R])
+        ]
 
     def _ruleD60(self, predicate: Predicate):
         """
         simtri(A,B,C,P,Q,R) => eqangle(A,B,A,C,P,Q,P,R)
         """
         A, B, C, P, Q, R = predicate.points
-        return [Predicate("eqangle", [A, B, B, C, P, Q, Q, R])]
+        return [
+            Predicate("eqangle", [A, B, B, C, P, Q, Q, R]),
+            Predicate("eqangle", [B, C, A, B, Q, R, P, Q])
+        ]
 
     def _ruleD61simtri(self, predicate: Predicate):
         """
@@ -491,9 +530,6 @@ class Prover:
         for _, segments in self.database.congs.items():
             if sab in segments and spq in segments:
                 return [Predicate("contri", [A, B, C, P, Q, R])]
-        return []
-
-    def _ruleD61cong(self, predicate: Predicate):
         return []
 
     def _ruleD62(self, predicate: Predicate):

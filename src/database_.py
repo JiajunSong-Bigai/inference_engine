@@ -349,6 +349,14 @@ class Database:
             s += ", ".join(ratios_str)
             s += " )\n"
 
+        # simtri
+        s += "\n> Simtri Facts\n"
+        for tris in self.simtriFacts:
+            s += "  simtri( "
+            tris_str = ["".join([tri.p1, tri.p2, tri.p3]) for tri in tris]
+            s += ", ".join(tris_str)
+            s += ")\n"
+
         s += "\n" + "#" * 40 + "\n\n"
 
         return s
