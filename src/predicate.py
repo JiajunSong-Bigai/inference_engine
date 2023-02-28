@@ -26,6 +26,12 @@ class Predicate:
     def __repr__(self) -> str:
         return f"({self.type}, points({','.join(self.points)}))"
 
+    def __eq__(self, other: 'Predicate') -> bool:
+        return str(self) == str(other)
+
+    def __hash__(self) -> int:
+        return hash(str(self))
+
 
 if __name__ == "__main__":
     for test_line in [

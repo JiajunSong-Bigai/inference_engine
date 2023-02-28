@@ -28,11 +28,18 @@ class Prover:
             self.newFactsList.append(h)
 
     def fixedpoint(self):
-        predicates = []
+        usedFactsList = []
         while self.newFactsList:
-            d = self.newFactsList.pop(0)
-            if not self.prove(d):
-                self.database.add(d)
+            predicates = []
+            d: Predicate = self.newFactsList.pop(0)
+            self.database.add(d)
+            usedFactsList.append(d)
+
+            # print(d)
+            # print(len(self.newFactsList))
+            # print(self.database.lines)
+            # print(self.database.perpFacts)
+
             if d.type == "coll":
                 predicates += self._ruleD67(d)
             if d.type == "midp":
@@ -59,6 +66,7 @@ class Prover:
             if d.type == "cong":
                 predicates += self._ruleD46(d)
                 predicates += self._ruleD56(d)
+                predicates += self._ruleD75cong(d)
             if d.type == "perp":
                 predicates += self._ruleD09(d)
                 predicates += self._ruleD10perp(d)
@@ -70,13 +78,14 @@ class Prover:
                 predicates += self._ruleD61simtri(d)
             if d.type == "contri":
                 predicates += self._ruleD62(d)
+            if d.type == "eqratio":
+                predicates += self._ruleD30(d)
+                predicates += self._ruleD75eqratio(d)
 
             for predicate in predicates:
-                if self.prove(predicate) or predicate in self.newFactsList:
+                if predicate in self.newFactsList or predicate in usedFactsList:
                     continue
                 self.newFactsList.append(predicate)
-
-            # print(self.newFactsList)
 
         return self.database
 
@@ -172,6 +181,35 @@ class Prover:
 
         raise ValueError("Invalid type of predicate ", predicate.type)
 
+    def _ruleD30(self, predicate: Predicate):
+        """
+        eqratio(A,B,C,D,P,Q,U,V) & eqratio(P,Q,U,V,E,F,G,H) => eqratio(A,B,C,D,E,F,G,H)
+        """
+        A, B, C, D, P, Q, U, V = predicate.points
+
+        cAB = self.database.matchCong([A, B])
+        cCD = self.database.matchCong([C, D])
+        cPQ = self.database.matchCong([P, Q])
+        cUV = self.database.matchCong([U, V])
+
+        predicates = []
+        for ratios in self.database.eqratioFacts:
+            if Ratio(cPQ, cUV) not in ratios:
+                continue
+
+            for ratio in ratios:
+                if ratio == Ratio(cPQ, cUV) or ratio == Ratio(cAB, cCD):
+                    continue
+
+                for sEF in self.database.congs[ratio.c1]:
+                    for sGH in self.database.congs[ratio.c2]:
+                        E, F = sEF.p1, sEF.p2
+                        G, H = sGH.p1, sGH.p2
+                        predicates.append(
+                            Predicate("eqratio", [A, B, C, D, E, F, G, H]))
+
+        return predicates
+
     def _ruleD09(self, predicate: Predicate):
         """
         perp(A,B,C,D) & perp(C,D,E,F) => para(A,B,E,F)
@@ -183,6 +221,7 @@ class Prover:
         predicates = []
         # find perp(l2, ..) in perpfacts
         for lines in self.database.perpFacts:
+            assert len(lines) == 2, lines
             if l2 not in lines:
                 continue
             if list(lines)[0] == l2:
@@ -272,6 +311,9 @@ class Prover:
         lCD = self.database.matchLine([C, D])
 
         predicates = []
+        if lAB == lCD:
+            return predicates
+
         for line, points in self.database.lines.items():
             if line in [lAB, lCD]:
                 continue
@@ -291,20 +333,6 @@ class Prover:
         E, A1, B = predicate.points
         predicates = []
         for midfact in self.database.midpFacts:
-            # p1, p2, p3 = midfact
-
-            # # [p1, p2, p3]
-            # # p1 != E, p2 = A, p3 != B
-            # if p1 != E and p2 == A and p3 != B and not self.prove(
-            #         Predicate("coll", [A, B, p3])):
-            #     predicate = Predicate(type="para", points=[E, p1, B, p3])
-            #     predicates.append(predicate)
-            # # [p1, p3, p2]
-            # # p1 != E, p3 = A, p2 != B
-            # elif p1 != E and p3 == A and p2 != B and not self.prove(
-            #         Predicate("coll", [A, B, p2])):
-            #     predicate = Predicate(type="para", points=[E, p3, B, p2])
-            #     predicates.append(predicate)
             F, A2, C = midfact
             if E == F:
                 continue
@@ -320,8 +348,6 @@ class Prover:
                 continue
 
             predicates.append(Predicate("para", [E, F, B, C]))
-
-        return predicates
 
         return predicates
 
@@ -424,9 +450,9 @@ class Prover:
         """
         cong(A,P,B,P) & cong(A,Q,B,Q) => perp(A,B,P,Q)
         """
-        A, P, B, P = predicate.points
+        A, P1, B, P2 = predicate.points
         predicates = []
-        if A == B:
+        if A == B or P1 != P2:
             return predicates
 
         for _, segments in self.database.congs.items():
@@ -436,9 +462,9 @@ class Prover:
             if containsA and containsB:
                 qA = [p for s in containsA for p in [s.p1, s.p2] if p != A]
                 qB = [p for s in containsB for p in [s.p1, s.p2] if p != B]
-                qs = [p for p in qA if p in qB and p != P]
+                qs = [p for p in qA if p in qB and p != P1]
                 for Q in qs:
-                    predicate = Predicate("perp", [A, B, P, Q])
+                    predicate = Predicate("perp", [A, B, P1, Q])
                     predicates.append(predicate)
 
         return predicates
@@ -475,8 +501,6 @@ class Prover:
         if len(Bs) != 1 or len(Qs) != 1:
             return []
 
-        # print("Reaching here: rule 58 on", ptsAB, ptsBC, ptsPQ, ptsQR)
-
         B = list(Bs)[0]
         Q = list(Qs)[0]
 
@@ -491,8 +515,9 @@ class Prover:
                 for P in Ps:
                     for R in Rs:
                         if self.prove(
-                                Predicate("eqangle",
-                                          [A, C, B, C, P, R, Q, R])):
+                                Predicate("eqangle", [
+                                    A, C, B, C, P, R, Q, R
+                                ])) and Triangle(A, B, C) != Triangle(P, Q, R):
                             predicate = Predicate("simtri", [A, B, C, P, Q, R])
                             predicates.append(predicate)
 
@@ -506,8 +531,8 @@ class Prover:
         return [
             Predicate("eqratio", [A, B, A, C, P, Q, P, R]),
             Predicate("eqratio", [A, B, B, C, P, Q, Q, R]),
-            Predicate("eqratio", [A, C, B, C, P, R, Q, R]),
-            Predicate("eqratio", [A, B, P, Q, B, C, Q, R])
+            Predicate("eqratio", [A, B, P, Q, B, C, Q, R]),
+            Predicate("eqratio", [A, B, P, Q, A, C, P, R]),
         ]
 
     def _ruleD60(self, predicate: Predicate):
@@ -517,7 +542,8 @@ class Prover:
         A, B, C, P, Q, R = predicate.points
         return [
             Predicate("eqangle", [A, B, B, C, P, Q, Q, R]),
-            Predicate("eqangle", [B, C, A, B, Q, R, P, Q])
+            Predicate("eqangle", [A, B, A, C, P, Q, P, R]),
+            Predicate("eqangle", [B, C, A, C, Q, R, P, R])
         ]
 
     def _ruleD61simtri(self, predicate: Predicate):
@@ -537,7 +563,11 @@ class Prover:
         contri(A,B,C,P,Q,R) => cong(A,B,P,Q)
         """
         A, B, C, P, Q, R = predicate.points
-        return [Predicate("cong", [A, B, P, Q])]
+        return [
+            Predicate("cong", [A, B, P, Q]),
+            Predicate("cong", [A, C, P, R]),
+            Predicate("cong", [B, C, Q, R])
+        ]
 
     def _ruleD63(self, predicate: Predicate):
         """
@@ -698,3 +728,102 @@ class Prover:
         if self.prove(Predicate("perp", [P, Q, U, V])):
             return [Predicate("perp", [A, B, C, D])]
         return []
+
+    def _ruleD75cong(self, predicate: Predicate):
+        """
+        cong(P,Q,U,V) & eqratio(A,B,C,D,P,Q,U,V) => cong(A,B,C,D)
+        """
+        P, Q, U, V = predicate.points
+        cPQ = self.database.matchCong([P, Q])
+        cUV = self.database.matchCong([U, V])
+
+        predicates = []
+        for ratios in self.database.eqratioFacts:
+            for ratioPair in itertools.combinations(ratios, 2):
+                ratioA, ratioB = ratioPair
+                a1, a2 = ratioA.c1, ratioA.c2
+                b1, b2 = ratioB.c1, ratioB.c2
+                # a1/a2 = b1/b2
+                if a1 in [cPQ, cUV] and b1 in [cPQ, cUV]:
+                    # a2 = b2
+                    segsA2 = self.database.congs[a2]
+                    segsB2 = self.database.congs[b2]
+                    for s1 in segsA2:
+                        for s2 in segsB2:
+                            A, B, C, D = s1.p1, s1.p2, s2.p1, s2.p2
+                            predicates.append(Predicate("cong", [A, B, C, D]))
+
+                if a2 in [cPQ, cUV] and b2 in [cPQ, cUV]:
+                    # a1 = b1
+                    segsA1 = self.database.congs[a1]
+                    segsB1 = self.database.congs[b1]
+                    for s1 in segsA1:
+                        for s2 in segsB1:
+                            A, B, C, D = s1.p1, s1.p2, s2.p1, s2.p2
+                            predicates.append(Predicate("cong", [A, B, C, D]))
+
+                if a1 in [cPQ, cUV] and a2 in [cPQ, cUV]:
+                    # b1 = b2
+                    segsB1 = self.database.congs[b1]
+                    segsB2 = self.database.congs[b2]
+                    for s1 in segsB1:
+                        for s2 in segsB2:
+                            A, B, C, D = s1.p1, s1.p2, s2.p1, s2.p2
+                            predicates.append(Predicate("cong", [A, B, C, D]))
+
+                if b1 in [cPQ, cUV] and b2 in [cPQ, cUV]:
+                    # a1 = a2
+                    segsA1 = self.database.congs[a1]
+                    segsA2 = self.database.congs[a2]
+                    for s1 in segsA1:
+                        for s2 in segsA2:
+                            A, B, C, D = s1.p1, s1.p2, s2.p1, s2.p2
+                            predicates.append(Predicate("cong", [A, B, C, D]))
+
+        return predicates
+
+    def _ruleD75eqratio(self, predicate: Predicate):
+        """
+        eqratio(A,B,C,D,P,Q,U,V) & cong(P,Q,U,V) => cong(A,B,C,D)
+
+        This is not geometry properties but numerically correct
+        """
+        A, B, C, D, P, Q, U, V = predicate.points
+        cAB = self.database.matchCong([A, B])
+        cCD = self.database.matchCong([C, D])
+        cPQ = self.database.matchCong([P, Q])
+        cUV = self.database.matchCong([U, V])
+
+        if cAB == cPQ:
+            return [Predicate("cong", [C, D, U, V])]
+        if cAB == cCD:
+            return [Predicate("cong", [P, Q, U, V])]
+        if cCD == cUV:
+            return [Predicate("cong", [A, B, P, Q])]
+        if cPQ == cUV:
+            return [Predicate("cong", [A, B, C, D])]
+        return []
+
+    def _ruleX1(self):
+        """
+        eqratio => cong
+
+        a/b = c/d
+
+        Case 1: a = b  <-->  c = d
+        Case 2: a = c  <-->  b = d
+        """
+
+        predicates = []
+        for ratios in self.database.eqratioFacts:
+            for (r1, r2) in ratios:
+                a, b, c, d = r1.c1, r1.c2, r2.c1, r2.c2
+
+                if a == b:
+                    # Case 1.1
+                    sc, sd = self.database.congs[c], self.database.congs[d]
+                    for s1 in sc:
+                        for s2 in sd:
+                            predicates.append(
+                                Predicate("cong",
+                                          [s1.p1, s1.p2, s2.p1, s2.p2]))

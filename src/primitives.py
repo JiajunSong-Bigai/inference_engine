@@ -24,6 +24,9 @@ class Angle:
     def __hash__(self) -> int:
         return hash(f"{self.lk1}, {self.lk2}")
 
+    def __repr__(self) -> str:
+        return f"[ {self.lk1}, {self.lk2} ]"
+
 
 class Segment:
 
@@ -32,7 +35,7 @@ class Segment:
 
     def __eq__(self, other: 'Segment') -> bool:
         if isinstance(other, Segment):
-            return self.p1, self.p2 == other.p1, other.p2
+            return self.p1 == other.p1 and self.p2 == other.p2
         return False
 
     def __hash__(self) -> int:

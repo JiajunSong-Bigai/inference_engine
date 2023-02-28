@@ -48,7 +48,6 @@ def test_07():
         Predicate("eqangle", ["A", "D", "D", "E", "A", "B", "B", "C"]),
         Predicate("simtri", ["A", "D", "E", "A", "B", "C"]),
     ]
-    print(final_db)
     for quest in quests:
         assert prover.prove(quest), f"{quest} not proved"
 
@@ -61,21 +60,9 @@ def test_08():
     print(final_db)
 
 
+# @pytest.mark.skip()
 def test_09():
     hypotheses = parse_predicates_from_file("problems/p9")
     prover = Prover(hypotheses=hypotheses)
     final_db = prover.fixedpoint()
     print(final_db)
-
-
-# def test_10():
-#     hypotheses = parse_predicates_from_file("problems/p10")
-#     prover = Prover(hypotheses=hypotheses)
-#     final_db = prover.fixedpoint()
-#     print(final_db)
-
-# def test_11():
-#     hypotheses = parse_predicates_from_file("problems/p11")
-#     prover = Prover(hypotheses=hypotheses)
-#     final_db = prover.fixedpoint()
-#     print(final_db)

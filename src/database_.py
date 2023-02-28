@@ -1,3 +1,4 @@
+import itertools
 from src.primitives import Point, Segment, Angle, LineKey, CongKey, Ratio, Triangle
 from src.predicate import Predicate
 
@@ -14,15 +15,15 @@ class Database:
                  eqratioFacts: list[set[Ratio]] = None,
                  simtriFacts: list[set[Triangle]] = None,
                  contriFacts: list[set[Triangle]] = None) -> None:
-        self.lines = lines if lines else {}
-        self.congs = congs if congs else {}
-        self.midpFacts = midpFacts if midpFacts else []
-        self.paraFacts = paraFacts if paraFacts else []
-        self.perpFacts = perpFacts if perpFacts else []
-        self.eqangleFacts = eqangleFacts if eqangleFacts else []
-        self.eqratioFacts = eqratioFacts if eqratioFacts else []
-        self.simtriFacts = simtriFacts if simtriFacts else []
-        self.contriFacts = contriFacts if contriFacts else []
+        self.lines = lines or {}
+        self.congs = congs or {}
+        self.midpFacts = midpFacts or []
+        self.paraFacts = paraFacts or []
+        self.perpFacts = perpFacts or []
+        self.eqangleFacts = eqangleFacts or []
+        self.eqratioFacts = eqratioFacts or []
+        self.simtriFacts = simtriFacts or []
+        self.contriFacts = contriFacts or []
 
     def add(self, predicate: Predicate) -> None:
         if predicate.type == "coll":
@@ -77,7 +78,7 @@ class Database:
             self.contriFacts.append({t1, t2})
 
     def simtriHandler(self, predicate: Predicate):
-        """Example facts
+        """Add simtri(A,B,C,D,E,F)
         [
             {T1, T2, T3}, {T4, T5}
         ]
@@ -109,12 +110,10 @@ class Database:
             self.simtriFacts.append({t1, t2})
 
     def perpHandler(self, predicate: Predicate):
-        """Example facts
+        """Add perp(A,B,C,D)
         [
             {l1, l2}, {l1, l3}, {l4, l5}
         ]
-
-        Add perp(A,B,C,D)
         """
         p1, p2, p3, p4 = predicate.points
         l1 = self.matchLine([p1, p2])
@@ -132,28 +131,52 @@ class Database:
 
     def congHandler(self, predicate: Predicate):
         """Add cong(A,B,C,D) predicate into the congs dictionary
-        {
-            "cong1": [s1, s2, s3],
-            "cong2": [s4, s5]
-        }
+        congs = { "cong1": {s1, s2, s3}, "cong2": {s4, s5} }
+
+        Case 1: cong(s1, s2)
+        Case 2: cong(s1, s6)
+        Case 3: cong(s1, s4)
+        Case 4: cong(s7, s8)
+
+        Additionally, we need to handle the key changes in eqratioFacts
+        maintain a dictionary that map old key to new key
         """
+
         p1, p2, p3, p4 = predicate.points
         self.matchLine([p1, p2])
         self.matchLine([p3, p4])
 
         s1 = Segment(p1, p2)
         s2 = Segment(p3, p4)
-        found = False
-        for congKey, cong in self.congs.items():
-            if s1 in cong or s2 in cong:
-                found = True
-                self.congs[congKey] = self.congs[congKey].union({s1, s2})
-                break
 
-        if not found:
+        def overlaps(set1: set, set2: set) -> bool:
+            return len(set1.intersection(set2)) > 0
+
+        overlapsMap = [
+            cKey for cKey, segments in self.congs.items()
+            if overlaps(segments, {s1, s2})
+        ]
+
+        if len(overlapsMap) == 0:
+            # case 4
             self.congs[self.newCongName] = {s1, s2}
-        else:
-            self._congMerge()
+        elif len(overlapsMap) == 1:
+            # case 1 and case 3
+            self.congs[overlapsMap[0]] = self.congs[overlapsMap[0]].union(
+                {s1, s2})
+        elif len(overlapsMap) == 2:
+            # case 2
+            keep, drop = overlapsMap
+            self.congs[keep] = self.congs[keep].union(self.congs[drop])
+            del self.congs[drop]
+
+            # handle key changes in eqratioFacts
+            for ratios in self.eqratioFacts:
+                for ratio in ratios:
+                    if ratio.c1 == drop:
+                        ratio.c1 = keep
+                    if ratio.c2 == drop:
+                        ratio.c2 = keep
 
     def collHandler(self, predicate: Predicate):
         """Add coll(A,B,C) predicate into the lines dictionary
@@ -210,10 +233,6 @@ class Database:
         Add a eqratio(A,B,C,D,E,F,G,H) into facts
         """
         p1, p2, p3, p4, p5, p6, p7, p8 = predicate.points
-        # l1 = self.matchLine([p1, p2])
-        # l2 = self.matchLine([p3, p4])
-        # l3 = self.matchLine([p5, p6])
-        # l4 = self.matchLine([p7, p8])
 
         c1 = self.matchCong([p1, p2])
         c2 = self.matchCong([p3, p4])
@@ -248,12 +267,10 @@ class Database:
             self.eqratioFacts.append({r1, r2})
 
     def eqangleHandler(self, predicate: Predicate):
-        """Example facts
+        """Add eqangle(A,B,C,D,E,F,G,H)
         [
             {A1, A2, A3}, {A4, A5}...
         ]
-
-        Adding a eqangle(A,B,C,D,E,F,G,H) into the facts
         """
         p1, p2, p3, p4, p5, p6, p7, p8 = predicate.points
         l1 = self.matchLine([p1, p2])
@@ -262,17 +279,19 @@ class Database:
         l4 = self.matchLine([p7, p8])
 
         a1, a2 = Angle(l1, l2), Angle(l3, l4)
-        # in the existing facts
-        # search for the lines
-        idx = 0
-        found = False
-        while not found and idx < len(self.eqangleFacts):
-            if a1 in self.eqangleFacts[idx] or a2 in self.eqangleFacts[idx]:
-                found = True
-                self.eqangleFacts[idx] = self.eqangleFacts[idx].union({a1, a2})
-            idx += 1
-        if not found:
-            self.eqangleFacts.append({a1, a2})
+        if a1 != a2:
+            # in the existing facts
+            # search for the lines
+            idx = 0
+            found = False
+            while not found and idx < len(self.eqangleFacts):
+                if a1 in self.eqangleFacts[idx] or a2 in self.eqangleFacts[idx]:
+                    found = True
+                    self.eqangleFacts[idx] = self.eqangleFacts[idx].union(
+                        {a1, a2})
+                idx += 1
+            if not found:
+                self.eqangleFacts.append({a1, a2})
 
     def midpHandler(self, predicate: Predicate):
         # Adding midp(M, A, B) predicate
@@ -357,6 +376,14 @@ class Database:
             s += ", ".join(tris_str)
             s += ")\n"
 
+        # contri
+        s += "\n> Contri Facts\n"
+        for tris in self.contriFacts:
+            s += "  contri( "
+            tris_str = ["".join([tri.p1, tri.p2, tri.p3]) for tri in tris]
+            s += ", ".join(tris_str)
+            s += ")\n"
+
         s += "\n" + "#" * 40 + "\n\n"
 
         return s
@@ -404,37 +431,6 @@ class Database:
 
         self.lines = res
 
-    def _congMerge(self):
-
-        def more_than_one_overlap(first, second):
-            return sum(p in second for p in first) >= 1
-
-        # greedy expandsion
-        unmerged = list(self.congs.keys())
-        merged = []
-        while len(unmerged) > 0:
-            first, rest = unmerged[0], unmerged[1:]
-            unmerged = []
-            merged_cur = [first]
-            for c in rest:
-                s1, s2 = self.congs[first], self.congs[c]
-                if more_than_one_overlap(s1, s2):
-                    merged_cur.append(c)
-                else:
-                    unmerged.append(c)
-            merged.append(merged_cur)
-
-        res = {}
-        for to_merge in merged:
-            name = to_merge[0]
-            segments = set()
-            for n in to_merge:
-                segments = segments.union(self.congs[n])
-
-            res[name] = segments
-
-        self.congs = res
-
     def matchLine(self, points: list[Point]):
         """Search for the line, if found, return the name;
         else, create a new line connecting two points and
@@ -462,5 +458,5 @@ class Database:
                     return name
 
         newName = self.newCongName
-        self.congs[newName] = [Segment(*points)]
+        self.congs[newName] = {Segment(*points)}
         return newName

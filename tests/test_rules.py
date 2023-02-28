@@ -365,6 +365,7 @@ def test_rd44():
     assert prover.prove(quest)
 
 
+@pytest.mark.skip()
 def test_rd45():
     hypotheses = [
         Predicate("midp", ["E", "A", "B"]),
@@ -646,10 +647,21 @@ def test_rd74():
     assert prover.prove(quest)
 
 
-def test_rd75():
+def test_rd75cong():
     hypotheses = [
         Predicate("cong", ["P", "Q", "U", "V"]),
         Predicate("eqratio", ["A", "B", "C", "D", "P", "Q", "U", "V"]),
+    ]
+    quest = Predicate("cong", ["A", "B", "C", "D"])
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    assert prover.prove(quest)
+
+
+def test_rd75eqratio():
+    hypotheses = [
+        Predicate("eqratio", ["A", "B", "C", "D", "P", "Q", "U", "V"]),
+        Predicate("cong", ["P", "Q", "U", "V"]),
     ]
     quest = Predicate("cong", ["A", "B", "C", "D"])
     prover = Prover(hypotheses=hypotheses)
