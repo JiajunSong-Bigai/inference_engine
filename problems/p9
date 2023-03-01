@@ -1,4 +1,0 @@
-midp(M,A,D).
-midp(K,B,D).
-midp(N,B,C).
-cong(A,B,C,D).

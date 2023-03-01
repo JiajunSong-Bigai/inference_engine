@@ -1,4 +1,3 @@
-import itertools
 from src.primitives import Point, Segment, Angle, LineKey, CongKey, Ratio, Triangle
 from src.predicate import Predicate
 
@@ -46,7 +45,7 @@ class Database:
             self.contriHandler(predicate)
 
     def contriHandler(self, predicate: Predicate):
-        """Example facts
+        """Add contri(A,B,C,D,E,F)
         [
             {T1, T2, T3}, {T4, T5}
         ]
@@ -139,7 +138,7 @@ class Database:
         Case 4: cong(s7, s8)
 
         Additionally, we need to handle the key changes in eqratioFacts
-        maintain a dictionary that map old key to new key
+        by maintaining a dictionary that maps old key to new key
         """
 
         p1, p2, p3, p4 = predicate.points
@@ -179,7 +178,7 @@ class Database:
                         ratio.c2 = keep
 
     def collHandler(self, predicate: Predicate):
-        """Add coll(A,B,C) predicate into the lines dictionary
+        """Add coll(A,B,C) predicate
         {
             "line1": [A, B, C],
             "line2": [A, D]
@@ -200,12 +199,10 @@ class Database:
             self._lineMerge()
 
     def paraHandler(self, predicate: Predicate):
-        """Example facts
+        """Add para(A,B,C,D)
         [
             {l1, l2, l3}, {l4, l5}
         ]
-
-        Add para(A,B,C,D)
         """
         p1, p2, p3, p4 = predicate.points
         # prepare the line
@@ -225,12 +222,10 @@ class Database:
             self.paraFacts.append({l1, l2})
 
     def eqratioHandler(self, predicate: Predicate):
-        """Example facts
+        """Add eqratio(A,B,C,D,E,F,G,H)
         [
             {R1, R2, R3}, {R4, R5}
-        ]
-        
-        Add a eqratio(A,B,C,D,E,F,G,H) into facts
+        ]        
         """
         p1, p2, p3, p4, p5, p6, p7, p8 = predicate.points
 
@@ -294,7 +289,9 @@ class Database:
                 self.eqangleFacts.append({a1, a2})
 
     def midpHandler(self, predicate: Predicate):
-        # Adding midp(M, A, B) predicate
+        """
+        Add midp(M, A, B) predicate
+        """
         p1, p2, p3 = predicate.points
         self.add(Predicate("coll", points=[p1, p2, p3]))
         p2, p3 = sorted([p2, p3])
@@ -303,14 +300,14 @@ class Database:
 
     @property
     def newLineName(self):
-        for n in range(1, 20):
+        for n in range(1, 50):
             if f'line{n}' not in self.lines:
                 return f'line{n}'
         raise ValueError("Running out names for lines!")
 
     @property
     def newCongName(self):
-        for n in range(1, 20):
+        for n in range(1, 50):
             if f'cong{n}' not in self.congs:
                 return f'cong{n}'
         raise ValueError("Running out names for congs!")

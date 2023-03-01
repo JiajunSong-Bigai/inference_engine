@@ -37,11 +37,10 @@ class Prover:
 
             # print(d)
             # print(len(self.newFactsList))
-            # print(self.database.lines)
-            # print(self.database.perpFacts)
+            # print(self.database.midpFacts)
 
             if d.type == "coll":
-                predicates += self._ruleD67(d)
+                predicates += self._ruleD67coll(d)
             if d.type == "midp":
                 predicates += self._ruleD44(d)
                 predicates += self._ruleD52midp(d)
@@ -66,6 +65,7 @@ class Prover:
             if d.type == "cong":
                 predicates += self._ruleD46(d)
                 predicates += self._ruleD56(d)
+                predicates += self._ruleD67cong(d)
                 predicates += self._ruleD75cong(d)
             if d.type == "perp":
                 predicates += self._ruleD09(d)
@@ -640,7 +640,7 @@ class Prover:
             return [Predicate("coll", [A1, B, C])]
         return []
 
-    def _ruleD67(self, predicate: Predicate):
+    def _ruleD67coll(self, predicate: Predicate):
         """
         coll(A,B,C) & cong(A,B,A,C) => midp(A,B,C)
         """
@@ -652,6 +652,21 @@ class Prover:
             if sab in segments and sac in segments:
                 return [Predicate("midp", [A, B, C])]
         return []
+
+    def _ruleD67cong(self, predicate: Predicate):
+        """
+        cong(A,B,A,C) & coll(A,B,C) => midp(A,B,C)
+        """
+        A1, B, A2, C = predicate.points
+        predicates = []
+        if A1 != A2 or B == C:
+            return predicates
+
+        for points in self.database.lines.values():
+            if all([A1 in points, B in points, C in points]):
+                predicates.append(Predicate("midp", [A1, B, C]))
+
+        return predicates
 
     def _ruleD68(self, predicate: Predicate):
         """

@@ -1,5 +1,0 @@
-coll(A,B,P).
-coll(E,G,Q).
-eqangle(A,B,C,D,E,F,G,H).
-eqangle(A,B,C,D,E,F,X,Y).
-eqangle(C,D,A,B,U,V,W,Z).

@@ -1,3 +1,7 @@
-midp(C,A,B).
-midp(C,B,A).
-midp(D,A,C).
+coll(M,N,E).
+coll(A,K,B).
+coll(B,E,C).
+coll(C,N,K).
+para(A,B,C,D).
+midp(M,A,C).
+midp(N,B,D).

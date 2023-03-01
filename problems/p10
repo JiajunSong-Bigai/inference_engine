@@ -1,4 +1,0 @@
-cong(A,B,U,V).
-eqratio(A,B,C,D,E,F,G,H).
-eqratio(X,Y,Z,W,U,V,P,Q).
-eqratio(A,B,C,D,X,Y,Z,W).

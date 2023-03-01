@@ -1,8 +1,0 @@
-coll(E,A,B).
-coll(E,M,N).
-coll(F,M,N).
-coll(F,D,C).
-midp(M,A,D).
-midp(N,B,C).
-midp(K,B,D).
-cong(A,B,C,D).

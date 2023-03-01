@@ -1,7 +1,4 @@
-coll(A,B,Y)
-coll(A,X,Y)
-coll(E,F,G)
-coll(A,B,H)
-para(A,B,C,D)
-para(C,D,E,F)
-para(X,Y,U,V)
+midp(M,A,D).
+midp(N,B,C).
+midp(K,B,D).
+cong(A,B,C,D).

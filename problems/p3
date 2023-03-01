@@ -1,4 +1,2 @@
-coll(A,B,C).
-coll(A,B,D).
-coll(D,E,F).
-coll(A,E,F).
+midp(D,A,B).
+midp(E,A,C).

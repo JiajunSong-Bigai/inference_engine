@@ -22,7 +22,7 @@ def test_01():
 def test_02():
     hypotheses = parse_predicates_from_file("problems/p2")
     prover = Prover(hypotheses=hypotheses)
-    final_db = prover.fixedpoint()
+    prover.fixedpoint()
     quests = [
         Predicate("para", ["A", "C", "D", "E"]),
         Predicate("para", ["D", "E", "C", "B"])
@@ -31,10 +31,10 @@ def test_02():
         assert prover.prove(quest)
 
 
-def test_07():
-    hypotheses = parse_predicates_from_file("problems/p7")
+def test_03():
+    hypotheses = parse_predicates_from_file("problems/p3")
     prover = Prover(hypotheses=hypotheses)
-    final_db = prover.fixedpoint()
+    prover.fixedpoint()
     quests = [
         Predicate("coll", ["A", "B", "D"]),
         Predicate("coll", ["A", "C", "E"]),
@@ -52,17 +52,14 @@ def test_07():
         assert prover.prove(quest), f"{quest} not proved"
 
 
-@pytest.mark.skip()
-def test_08():
-    hypotheses = parse_predicates_from_file("problems/p8")
+def test_04():
+    hypotheses = parse_predicates_from_file("problems/p4")
     prover = Prover(hypotheses=hypotheses)
-    final_db = prover.fixedpoint()
-    print(final_db)
-
-
-# @pytest.mark.skip()
-def test_09():
-    hypotheses = parse_predicates_from_file("problems/p9")
-    prover = Prover(hypotheses=hypotheses)
-    final_db = prover.fixedpoint()
-    print(final_db)
+    prover.fixedpoint()
+    quests = [
+        Predicate("cong", ["K", "M", "K", "N"]),
+        Predicate("eqangle", ["A", "B", "M", "N", "M", "N", "C", "D"]),
+        Predicate("simtri", ["B", "K", "N", "B", "D", "C"]),
+    ]
+    for quest in quests:
+        assert prover.prove(quest), f"{quest} not proved"
