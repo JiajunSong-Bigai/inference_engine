@@ -12,7 +12,7 @@ Data-driven Forward chaining
 """
 import itertools
 
-from src.database_ import Database
+from src.database import Database
 from src.predicate import Predicate
 from src.primitives import Angle, Ratio, Point, Segment, Triangle
 

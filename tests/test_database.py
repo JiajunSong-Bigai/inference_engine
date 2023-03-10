@@ -1,6 +1,6 @@
 import pytest
 from src.util import parse_predicates_from_file
-from src.database_ import Database
+from src.database import Database
 
 
 def test_p1():
