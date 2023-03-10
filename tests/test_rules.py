@@ -118,6 +118,70 @@ def test_rd11():
 # cyclic is not implemented yet
 
 
+def test_rd12():
+    hypotheses = [
+        Predicate("cong", ["O", "A", "O", "B"]),
+        Predicate("cong", ["O", "A", "O", "C"])
+    ]
+    quest = Predicate("circle", ["O", "A", "B", "C"])
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    assert prover.prove(quest)
+
+
+def test_rd13():
+    hypotheses = [
+        Predicate("cong", ["O", "A", "O", "B"]),
+        Predicate("cong", ["O", "A", "O", "C"]),
+        Predicate("cong", ["O", "A", "O", "D"])
+    ]
+    quest = Predicate("cyclic", ["A", "B", "C", "D"])
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    assert prover.prove(quest)
+
+
+def test_rd14():
+    hypotheses = [
+        Predicate("cyclic", ["A", "B", "C", "D"]),
+    ]
+    quest = Predicate("cyclic", ["A", "B", "D", "C"])
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    assert prover.prove(quest)
+
+
+def test_rd15():
+    hypotheses = [
+        Predicate("cyclic", ["A", "B", "C", "D"]),
+    ]
+    quest = Predicate("cyclic", ["A", "C", "B", "D"])
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    assert prover.prove(quest)
+
+
+def test_rd16():
+    hypotheses = [
+        Predicate("cyclic", ["A", "B", "C", "D"]),
+    ]
+    quest = Predicate("cyclic", ["B", "A", "C", "D"])
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    assert prover.prove(quest)
+
+
+def test_rd17():
+    hypotheses = [
+        Predicate("cyclic", ["A", "B", "C", "D"]),
+        Predicate("cyclic", ["A", "B", "C", "E"])
+    ]
+    quest = Predicate("cyclic", ["B", "C", "D", "E"])
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    assert prover.prove(quest)
+
+
 def test_rd18():
     hypotheses = [
         Predicate("eqangle", ["A", "B", "C", "D", "P", "Q", "U", "V"])
@@ -353,6 +417,53 @@ def test_rd40():
 # skip d41 to d43
 
 
+def test_rd41():
+    hypotheses = [Predicate("cyclic", ["A", "B", "P", "Q"])]
+    quest = Predicate("eqangle", ["P", "A", "P", "B", "Q", "A", "Q", "B"])
+
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    assert prover.prove(quest)
+
+
+def test_rd42a():
+    hypotheses = [
+        Predicate("eqangle", ["P", "A", "P", "B", "Q", "A", "Q", "B"]),
+        # not coll(P, Q, A)
+    ]
+    quest = Predicate("cyclic", ["A", "B", "P", "Q"])
+
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    assert prover.prove(quest)
+
+
+def test_rd42b():
+    hypotheses = [
+        Predicate("eqangle", ["P", "A", "P", "B", "Q", "A", "Q", "B"]),
+        Predicate("coll", ["P", "Q", "B"])
+    ]
+    quest = Predicate("cyclic", ["A", "B", "P", "Q"])
+
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    assert prover.prove(quest)
+
+
+def test_rd43():
+    hypotheses = [
+        Predicate("cyclic", ["A", "B", "C", "P"]),
+        Predicate("cyclic", ["A", "B", "C", "Q"]),
+        Predicate("cyclic", ["A", "B", "C", "R"]),
+        Predicate("eqangle", ["C", "A", "C", "B", "R", "P", "R", "Q"])
+    ]
+    quest = Predicate("cong", ["A", "B", "P", "Q"])
+
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    assert prover.prove(quest)
+
+
 def test_rd44():
     hypotheses = [
         Predicate("midp", ["E", "A", "B"]),
@@ -399,6 +510,49 @@ def test_rd47():
 
 
 # skip 48, 49, 50, 51; involves circle
+def test_rd48():
+    hypotheses = [
+        Predicate("circle", ["O", "A", "B", "C"]),
+        Predicate("perp", ["O", "A", "A", "X"])
+    ]
+    quest = Predicate("eqangle", ["A", "X", "A", "B", "C", "A", "C", "B"])
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    assert prover.prove(quest)
+
+
+def test_rd49():
+    hypotheses = [
+        Predicate("circle", ["O", "A", "B", "C"]),
+        Predicate("eqangle", ["A", "X", "A", "B", "C", "A", "C", "B"])
+    ]
+    quest = Predicate("perp", ["O", "A", "A", "X"])
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    assert prover.prove(quest)
+
+
+def test_rd50():
+    hypotheses = [
+        Predicate("circle", ["O", "A", "B", "C"]),
+        Predicate("midp", ["M", "B", "C"])
+    ]
+    quest = Predicate("eqangle", ["A", "B", "A", "C", "O", "B", "O", "M"])
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    assert prover.prove(quest)
+
+
+def test_rd51():
+    hypotheses = [
+        Predicate("circle", ["O", "A", "B", "C"]),
+        Predicate("coll", ["M", "B", "C"]),
+        Predicate("eqangle", ["A", "B", "A", "C", "O", "B", "O", "M"])
+    ]
+    quest = Predicate("midp", ["M", "B", "C"])
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    assert prover.prove(quest)
 
 
 def test_rd52perp():
@@ -424,6 +578,28 @@ def test_rd52midp():
 
 
 # skip 53, 54; involves circle
+
+
+def test_rd53():
+    hypotheses = [
+        Predicate("circle", ["O", "A", "B", "C"]),
+        Predicate("coll", ["O", "A", "C"])
+    ]
+    quest = Predicate("perp", ["A", "B", "B", "C"])
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    assert prover.prove(quest)
+
+
+def test_rd54():
+    hypotheses = [
+        Predicate("cyclic", ["A", "B", "C", "D"]),
+        Predicate("para", ["A", "B", "C", "D"])
+    ]
+    quest = Predicate("eqangle", ["A", "D", "C", "D", "C", "D", "C", "B"])
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    assert prover.prove(quest)
 
 
 def test_rd55perp():
@@ -460,6 +636,18 @@ def test_rd56():
 
 
 # skip 57
+
+
+def test_rd57():
+    hypotheses = [
+        Predicate("cong", ["A", "P", "B", "P"]),
+        Predicate("cong", ["A", "Q", "B", "Q"]),
+        Predicate("cyclic", ["A", "B", "P", "Q"])
+    ]
+    quest = Predicate("perp", ["P", "A", "A", "Q"])
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    assert prover.prove(quest)
 
 
 def test_rd58():
