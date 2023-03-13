@@ -1,0 +1,7 @@
+coll(B,D,C)
+coll(A,E,C)
+coll(A,H,D)
+coll(B,H,E)
+midp(K,A,B)
+perp(A,D,B,C)
+perp(B,E,A,C)

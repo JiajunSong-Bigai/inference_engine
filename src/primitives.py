@@ -79,3 +79,22 @@ class Triangle:
 
     def __repr__(self) -> str:
         return "".join(sorted([self.p1, self.p2, self.p3]))
+
+
+class Circle:
+
+    def __init__(self, center: Point, points: set[Point]) -> None:
+        self.center = center
+        self.points = points
+
+    def __eq__(self, other: 'Circle') -> bool:
+        if isinstance(other, Circle):
+            return self.center == other.center and all(
+                sorted(self.points) == sorted(other.points))
+        return False
+
+    def __repr__(self) -> str:
+        return f"circle({self.center}, {','.join(sorted(self.points))})"
+
+    def __hash__(self) -> int:
+        return hash(str(self))

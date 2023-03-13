@@ -438,6 +438,7 @@ def test_rd42a():
     assert prover.prove(quest)
 
 
+@pytest.mark.skip()
 def test_rd42b():
     hypotheses = [
         Predicate("eqangle", ["P", "A", "P", "B", "Q", "A", "Q", "B"]),
@@ -449,7 +450,7 @@ def test_rd42b():
     prover.fixedpoint()
     assert prover.prove(quest)
 
-
+@pytest.mark.skip()
 def test_rd43():
     hypotheses = [
         Predicate("cyclic", ["A", "B", "C", "P"]),

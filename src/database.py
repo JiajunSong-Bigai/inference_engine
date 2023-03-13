@@ -1,4 +1,4 @@
-from src.primitives import Point, Segment, Angle, LineKey, CongKey, Ratio, Triangle
+from src.primitives import Point, Segment, Angle, LineKey, CongKey, Ratio, Triangle, Circle
 from src.predicate import Predicate
 
 
@@ -7,6 +7,7 @@ class Database:
     def __init__(self,
                  lines: dict[LineKey, set[Point]] = None,
                  congs: dict[CongKey, set[Segment]] = None,
+                 circles: list[Circle] = None,
                  midpFacts: list[list[Point]] = None,
                  paraFacts: list[set[LineKey]] = None,
                  perpFacts: list[set[LineKey]] = None,
@@ -16,6 +17,7 @@ class Database:
                  contriFacts: list[set[Triangle]] = None) -> None:
         self.lines = lines or {}
         self.congs = congs or {}
+        self.circles = circles or []
         self.midpFacts = midpFacts or []
         self.paraFacts = paraFacts or []
         self.perpFacts = perpFacts or []
@@ -43,6 +45,55 @@ class Database:
             self.simtriHandler(predicate)
         elif predicate.type == "contri":
             self.contriHandler(predicate)
+        elif predicate.type == "circle":
+            self.circleHandler(predicate)
+        elif predicate.type == "cyclic":
+            self.cyclicHandler(predicate)
+
+    def circleHandler(self, predicate: Predicate):
+        """Add circle(O,A,B,C)
+        {
+            Circle(O1, A1, B1, C1, D1),
+            Circle(O2, A2, B2, C2)
+        }
+        """
+        center, points = predicate.points[0], predicate.points[1:]
+        found = False
+        i = 0
+        while i < len(self.circles) and not found:
+            circle = self.circles[i]
+            if circle.center != center:
+                continue
+
+            in_counts = sum(p in circle.points for p in points)
+            if in_counts >= 1:
+                found = True
+                new_points = circle.points.union(set(points))
+                self.circles[i] = Circle(center, new_points)
+
+        if not found:
+            self.circles.append(Circle(center, set(points)))
+
+    def cyclicHandler(self, predicate: Predicate):
+        """Add cyclic(A,B,C,D)
+        {
+            Circle(O1, A1, B1, C1, D1),
+            Circle(O2, A2, B2, C2)        
+        }
+        """
+        found = False
+        i = 0
+        while i < len(self.circles) and not found:
+            circle = self.circles[i]
+            in_counts = sum(p in circle.points for p in predicate.points)
+            if in_counts >= 3:
+                found = True
+                new_points = circle.points.union(set(predicate.points))
+                self.circles[i] = Circle(circle.center, new_points)
+
+        if not found:
+            self.circles.append(
+                Circle(self.newCenterName, set(predicate.points)))
 
     def contriHandler(self, predicate: Predicate):
         """Add contri(A,B,C,D,E,F)
@@ -312,6 +363,13 @@ class Database:
                 return f'cong{n}'
         raise ValueError("Running out names for congs!")
 
+    @property
+    def newCenterName(self):
+        for n in range(1, 50):
+            if f'O{n}' not in self.lines:
+                return f'O{n}'
+        raise ValueError("Running out names for lines!")
+
     def __repr__(self) -> str:
         s = "Database\n\n"
 
@@ -380,6 +438,12 @@ class Database:
             tris_str = ["".join([tri.p1, tri.p2, tri.p3]) for tri in tris]
             s += ", ".join(tris_str)
             s += ")\n"
+
+        # circle
+        s += "\n> Circle Facts\n"
+        for circle in self.circles:
+            s += str(circle)
+            s += "\n"
 
         s += "\n" + "#" * 40 + "\n\n"
 

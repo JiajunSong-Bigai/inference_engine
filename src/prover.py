@@ -35,10 +35,6 @@ class Prover:
             self.database.add(d)
             usedFactsList.append(d)
 
-            # print(d)
-            # print(len(self.newFactsList))
-            # print(self.database.midpFacts)
-
             if d.type == "coll":
                 predicates += self._ruleD67coll(d)
             if d.type == "midp":
@@ -62,11 +58,15 @@ class Prover:
                 predicates += self._ruleD72(d)
                 predicates += self._ruleD73(d)
                 predicates += self._ruleD74(d)
+                predicates += self._ruleD42a(d)
             if d.type == "cong":
+                predicates += self._ruleD12(d)
                 predicates += self._ruleD46(d)
                 predicates += self._ruleD56(d)
                 predicates += self._ruleD67cong(d)
                 predicates += self._ruleD75cong(d)
+            if d.type == "cyclic":
+                predicates += self._ruleD41(d)
             if d.type == "perp":
                 predicates += self._ruleD09(d)
                 predicates += self._ruleD10perp(d)
@@ -81,6 +81,11 @@ class Prover:
             if d.type == "eqratio":
                 predicates += self._ruleD30(d)
                 predicates += self._ruleD75eqratio(d)
+
+            print(d)
+            print(self.newFactsList)
+            print(predicates)
+            print("\n\n")
 
             for predicate in predicates:
                 if predicate in self.newFactsList or predicate in usedFactsList:
@@ -179,36 +184,22 @@ class Prover:
                     return True
             return False
 
+        if predicate.type == "circle":
+            center, points = predicate.points[0], predicate.points[1:]
+            for circle in self.database.circles:
+                if center == circle.center and all(
+                    [p in circle.points for p in points]):
+                    return True
+
+            return False
+
+        if predicate.type == "cyclic":
+            for circle in self.database.circles:
+                if all([p in circle.points for p in predicate.points]):
+                    return True
+            return False
+
         raise ValueError("Invalid type of predicate ", predicate.type)
-
-    def _ruleD30(self, predicate: Predicate):
-        """
-        eqratio(A,B,C,D,P,Q,U,V) & eqratio(P,Q,U,V,E,F,G,H) => eqratio(A,B,C,D,E,F,G,H)
-        """
-        A, B, C, D, P, Q, U, V = predicate.points
-
-        cAB = self.database.matchCong([A, B])
-        cCD = self.database.matchCong([C, D])
-        cPQ = self.database.matchCong([P, Q])
-        cUV = self.database.matchCong([U, V])
-
-        predicates = []
-        for ratios in self.database.eqratioFacts:
-            if Ratio(cPQ, cUV) not in ratios:
-                continue
-
-            for ratio in ratios:
-                if ratio == Ratio(cPQ, cUV) or ratio == Ratio(cAB, cCD):
-                    continue
-
-                for sEF in self.database.congs[ratio.c1]:
-                    for sGH in self.database.congs[ratio.c2]:
-                        E, F = sEF.p1, sEF.p2
-                        G, H = sGH.p1, sGH.p2
-                        predicates.append(
-                            Predicate("eqratio", [A, B, C, D, E, F, G, H]))
-
-        return predicates
 
     def _ruleD09(self, predicate: Predicate):
         """
@@ -286,6 +277,56 @@ class Prover:
 
         return predicates
 
+    def _ruleD12(self, predicate: Predicate):
+        """
+        cong(O,A,O,B) & cong(O,A,O,C) => circle(O,A,B,C)
+        """
+        O1, A, O2, B = predicate.points
+        predicates = []
+        if O1 != O2 or A == B:
+            return predicates
+
+        cOA = self.database.matchCong([O1, A])
+        for segment in self.database.congs[cOA]:
+            if O1 not in [segment.p1, segment.p2]:
+                continue
+
+            C = segment.p1 if segment.p2 == O1 else segment.p2
+            if C == B or C == A:
+                continue
+            predicates.append(Predicate("circle", [O1, A, B, C]))
+
+        return predicates
+
+    def _ruleD30(self, predicate: Predicate):
+        """
+        eqratio(A,B,C,D,P,Q,U,V) & eqratio(P,Q,U,V,E,F,G,H) => eqratio(A,B,C,D,E,F,G,H)
+        """
+        A, B, C, D, P, Q, U, V = predicate.points
+
+        cAB = self.database.matchCong([A, B])
+        cCD = self.database.matchCong([C, D])
+        cPQ = self.database.matchCong([P, Q])
+        cUV = self.database.matchCong([U, V])
+
+        predicates = []
+        for ratios in self.database.eqratioFacts:
+            if Ratio(cPQ, cUV) not in ratios:
+                continue
+
+            for ratio in ratios:
+                if ratio == Ratio(cPQ, cUV) or ratio == Ratio(cAB, cCD):
+                    continue
+
+                for sEF in self.database.congs[ratio.c1]:
+                    for sGH in self.database.congs[ratio.c2]:
+                        E, F = sEF.p1, sEF.p2
+                        G, H = sGH.p1, sGH.p2
+                        predicates.append(
+                            Predicate("eqratio", [A, B, C, D, E, F, G, H]))
+
+        return predicates
+
     def _ruleD39(self, predicate: Predicate):
         """
         eqangle(A,B,P,Q,C,D,P,Q) => para(A,B,C,D)
@@ -326,6 +367,26 @@ class Prover:
 
         return predicates
 
+    def _ruleD41(self, predicate: Predicate):
+        """
+        cyclic(A,B,P,Q) => eqangle(P,A,P,B,Q,A,Q,B)
+        """
+        A, B, P, Q = predicate.points
+        return [Predicate("eqangle", [P, A, P, B, Q, A, Q, B])]
+
+    def _ruleD42a(self, predicate: Predicate):
+        """
+        eqangle(P,A,P,B,Q,A,Q,B) & not coll(P,Q,A) => cyclic(A,B,P,Q)
+        """
+        P1, A1, P2, B1, Q1, A2, Q2, B2 = predicate.points
+        if P1 != P2 or A1 != A2 or B1 != B2 or Q1 != Q2:
+            return []
+
+        if self.prove(Predicate("coll", [P1, Q1, A1])):
+            return []
+
+        return [Predicate("cyclic", [A1, B1, P1, Q1])]
+
     def _ruleD44(self, predicate: Predicate):
         """
         midp(E,A,B) & midp(F,A,C) => para(E,F,B,C)        
@@ -364,18 +425,13 @@ class Prover:
         """
         cong(O, A, O, B) => eqangle(O,A,A,B,A,B,O,B)
         """
-        p1, p2, p3, p4 = predicate.points
-        valid = all([
-            p1 == p3, p1 != p2, p1 != p4,
-            not self.prove(Predicate("coll", [p1, p2, p4]))
-        ])
-        if valid:
+        O1, A, O2, B = predicate.points
 
-            return [
-                Predicate("eqangle", [p1, p2, p2, p4, p2, p4, p1, p4]),
-                Predicate("eqangle", [p2, p4, p1, p2, p1, p4, p2, p4])
-            ]
-        return []
+        if O1 != O2 or A == B or O1 == A or self.prove(
+                Predicate("coll", [O1, A, B])):
+            return []
+
+        return [Predicate("eqangle", [O1, A, A, B, A, B, O1, B])]
 
     def _ruleD47(self, predicate: Predicate):
         """
@@ -396,16 +452,15 @@ class Prover:
         """
         perp(A,B,B,C) & midp(M,A,C) => cong(A,M,B,M)
         """
-        p1, p2, p3, p4 = predicate.points
-        valid_inputs = all([p1 != p2, p4 != p2, p2 == p3])
-        if not valid_inputs:
-            return []
-
+        A, B1, B2, C = predicate.points
         predicates = []
+        if B1 != B2 or A == C or A == B1:
+            return predicates
+
         for midfact in self.database.midpFacts:
-            if sorted([p1, p4]) == midfact[1:]:
-                predicate = Predicate("cong", [p1, midfact[0], p2, midfact[1]])
-                predicates.append(predicate)
+            if sorted([A, C]) == midfact[1:]:
+                M = midfact[0]
+                predicates.append(Predicate("cong", [A, M, B1, M]))
 
         return predicates
 
@@ -842,3 +897,14 @@ class Prover:
                             predicates.append(
                                 Predicate("cong",
                                           [s1.p1, s1.p2, s2.p1, s2.p2]))
+
+
+def test():
+    from src.util import parse_predicates_from_file
+    hypotheses = parse_predicates_from_file("problems/p7")
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    print(prover.database)
+
+
+test()

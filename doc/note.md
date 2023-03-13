@@ -8,6 +8,8 @@
 - cong(A,B,C,D)
 - eqratio(A,B,C,D,E,F,G,H)
 - simtri(contri)(A,B,C,E,F,G)
+- circle(O,A,B,C)
+- cyclic(A,B,C,D)
 
 ## A typical usage
 
