@@ -114,10 +114,6 @@ def test_rd11():
     assert prover.prove(quest)
 
 
-# skiping d12 to d17
-# cyclic is not implemented yet
-
-
 def test_rd12():
     hypotheses = [
         Predicate("cong", ["O", "A", "O", "B"]),
@@ -414,9 +410,6 @@ def test_rd40():
     assert prover.prove(quest)
 
 
-# skip d41 to d43
-
-
 def test_rd41():
     hypotheses = [Predicate("cyclic", ["A", "B", "P", "Q"])]
     quest = Predicate("eqangle", ["P", "A", "P", "B", "Q", "A", "Q", "B"])
@@ -449,6 +442,7 @@ def test_rd42b():
     prover = Prover(hypotheses=hypotheses)
     prover.fixedpoint()
     assert prover.prove(quest)
+
 
 @pytest.mark.skip()
 def test_rd43():
@@ -510,7 +504,6 @@ def test_rd47():
     assert prover.prove(quest)
 
 
-# skip 48, 49, 50, 51; involves circle
 def test_rd48():
     hypotheses = [
         Predicate("circle", ["O", "A", "B", "C"]),
@@ -578,9 +571,6 @@ def test_rd52midp():
     assert prover.prove(quest)
 
 
-# skip 53, 54; involves circle
-
-
 def test_rd53():
     hypotheses = [
         Predicate("circle", ["O", "A", "B", "C"]),
@@ -634,9 +624,6 @@ def test_rd56():
     prover = Prover(hypotheses=hypotheses)
     prover.fixedpoint()
     assert prover.prove(quest)
-
-
-# skip 57
 
 
 def test_rd57():
