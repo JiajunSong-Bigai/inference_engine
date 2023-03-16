@@ -27,24 +27,11 @@ class Prover:
             self.database.add(h)
             self.newFactsList.append(h)
 
-    def _eqangle(self, predicate: Predicate):
-        """
-        eqangle extends to all equality
-        eqangle(A,B,C,D,E,F,G,H)
-        """
-        A, B, C, D, E, F, G, H = predicate.points
-        lAB = self.database.matchLine([A, B])
-        lCD = self.database.matchLine([C, D])
-        lEF = self.database.matchLine([E, F])
-        lGH = self.database.matchLine([G, H])
-
     def fixedpoint(self):
-        usedFactsList = []
         while self.newFactsList:
             predicates = []
             d: Predicate = self.newFactsList.pop(0)
             self.database.add(d)
-            usedFactsList.append(d)
 
             if d.type == "coll":
                 predicates += self._ruleD01(d)
@@ -125,7 +112,6 @@ class Prover:
 
             print(d)
             print(len(self.newFactsList))
-            print(len(usedFactsList))
             print("\n\n")
             """
             We get new predicates, these are deducted from the rules
@@ -485,7 +471,10 @@ class Prover:
         eqangle(A,B,C,D,P,Q,U,V) => eqangle(A,B,P,Q,C,D,U,V)
         """
         A, B, C, D, P, Q, U, V = predicate.points
-        return [Predicate("eqangle", [A, B, P, Q, C, D, U, V])]
+        if sorted([A, B]) != sorted([P, Q]) and sorted([C, D]) != sorted(
+            [U, V]):
+            return [Predicate("eqangle", [A, B, P, Q, C, D, U, V])]
+        return []
 
     def _ruleD22(self, predicate: Predicate):
         """
