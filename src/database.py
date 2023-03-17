@@ -1,5 +1,6 @@
 from src.primitives import Point, Segment, Angle, LineKey, CongKey, Ratio, Triangle, Circle
 from src.predicate import Predicate
+from src.fact import Fact
 
 
 class Database:
@@ -26,10 +27,18 @@ class Database:
         self.simtriFacts = simtriFacts or []
         self.contriFacts = contriFacts or []
 
-    def add(self, predicate: Predicate) -> None:
+    def addFact(self, fact: Fact) -> None:
+        if fact.type == "coll":
+            pass
+        elif fact.type == "midp":
+            pass
+        elif fact.type == "para":
+            pass
+
+    def addPredicate(self, predicate: Predicate) -> None:
         if predicate.type == "coll":
             self.collHandler(predicate)
-        if predicate.type == "midp":
+        elif predicate.type == "midp":
             self.midpHandler(predicate)
         elif predicate.type == "para":
             self.paraHandler(predicate)

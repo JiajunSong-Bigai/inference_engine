@@ -28,7 +28,11 @@ class Prover:
             self.newFactsList.append(h)
 
     def fixedpoint(self):
-        while self.newFactsList:
+        iters = 10
+        while self.newFactsList and iters > 0:
+            print(self.newFactsList, "\n\n")
+            iters -= 1
+
             predicates = []
             d: Predicate = self.newFactsList.pop(0)
             self.database.add(d)
@@ -110,19 +114,46 @@ class Prover:
                 predicates += self._ruleD30(d)
                 predicates += self._ruleD75eqratio(d)
 
-            print(d)
-            print(len(self.newFactsList))
-            print("\n\n")
+            # print(d)
+            # print(len(self.newFactsList))
+            # print("\n\n")
             """
             We get new predicates, these are deducted from the rules
             """
 
             for predicate in predicates:
-                if predicate in self.newFactsList or self.prove(predicate):
-                    continue
-                self.newFactsList.append(predicate)
+                all_forms_predicates = self._predicate_all_forms(predicate)
+                for ppredicate in all_forms_predicates:
+                    if ppredicate in self.newFactsList or self.prove(
+                            ppredicate):
+                        continue
+                    self.newFactsList.append(ppredicate)
 
         return self.database
+
+    def _predicate_all_forms(self, predicate: Predicate):
+        if predicate.type == "eqangle":
+            # eqangle(A,B,C,D,P,Q,U,V)
+            A, B, C, D, P, Q, U, V = predicate.points
+            lAB = self.database.matchLine([A, B])
+            lCD = self.database.matchLine([C, D])
+            lPQ = self.database.matchLine([P, Q])
+            lUV = self.database.matchLine([U, V])
+
+            ptsAB = self.database.lines[lAB]
+            ptsCD = self.database.lines[lCD]
+            ptsPQ = self.database.lines[lPQ]
+            ptsUV = self.database.lines[lUV]
+            predicates = []
+            for [A, B] in itertools.combinations(ptsAB, 2):
+                for [C, D] in itertools.combinations(ptsCD, 2):
+                    for [P, Q] in itertools.combinations(ptsPQ, 2):
+                        for [U, V] in itertools.combinations(ptsUV, 2):
+                            predicates.append(
+                                Predicate("eqangle", [A, B, C, D, P, Q, U, V]))
+            return predicates
+
+        return [predicate]
 
     def prove(self, predicate: Predicate) -> bool:
         if predicate.type == "coll":
