@@ -1,8 +1,25 @@
+"""
+Step 1. Set the hypotheses of the statement to be initial new-fact-list
+and the initial database. While the new-fact-list is not empty, do Step 2.
+
+Step 2.Let d be the first new fact in the list. Delete it from the list,
+add it to the database, and do Step 3.
+
+Step 3.Let r be a rule whose body contains a predicate P0 of the fact d. 
+To apply the rule r, we need to instantiate other predicates in r.
+Since predicate P0 will be instantiated as the new fact d, other predicates
+in r need to be instantiated for all the facts in the database.
+For all the predicate forms of fact d (notice that a fact could have many
+predicate forms) and for all the facts of the other predicates in r, do Step 4.
+
+Step 4. Apply rule r to obtain a fact d0. If d0 is in the database, do nothing.
+Otherwise, add it to the end of the new-fact-list.
+"""
+
 from src.primitives import Angle, Triangle, Ratio, Segment
-from src.database import Database
 from src.predicate import Predicate
 from src.fact import Fact
-import itertools
+from src.newdatabase import Database
 
 
 class Prover:
@@ -12,74 +29,75 @@ class Prover:
         self.newFactsList = []
 
         for h in hypotheses:
-            self.database.add(h)
-            self.newFactsList.append(h)
+            self.database.addPredicate(h)
+
+        for h in hypotheses:
+            newFact = self.database._predicate_to_fact(h)
+            if newFact not in self.newFactsList:
+                self.newFactsList.append(newFact)
+
+    def prove(self, predicate: Predicate) -> bool:
+        fact = self.database._predicate_to_fact(predicate)
+        return self.database.containsFact(fact)
 
     def fixedpoint(self):
-        iters = 10
-        while self.newFactsList and iters > 0:
-            print(self.newFactsList, "\n\n")
-            iters -= 1
+        while self.newFactsList:
+            d: Fact = self.newFactsList.pop(0)
+            self.database.addFact(d)
 
-            predicates = []
-            d: Predicate = self.newFactsList.pop(0)
-            self.database.add(d)
+            newFacts = []
+            for predicate in self.database._predicate_all_forms(d):
+                newFacts += self._rules(predicate)
 
-            if d.type == "midp":
-                predicates += self._ruleD44(d)
-                predicates += self._ruleD63(d)
-                predicates += self._ruleD68(d)
-                predicates += self._ruleD70(d)
-            if d.type == "para":
-                predicates += self._ruleD40(d)
-                predicates += self._ruleD10para(d)
-                predicates += self._ruleD45para(d)
-                predicates += self._ruleD64(d)
-                predicates += self._ruleD65(d)
-            if d.type == "eqangle":
-                predicates += self._ruleD39(d)
-                predicates += self._ruleD47(d)
-                predicates += self._ruleD58(d)
-                predicates += self._ruleD71(d)
-                predicates += self._ruleD72(d)
-                predicates += self._ruleD73(d)
-                predicates += self._ruleD74(d)
-                predicates += self._ruleD42a(d)
-            if d.type == "cong":
-                predicates += self._ruleD12(d)
-                predicates += self._ruleD46(d)
-                predicates += self._ruleD75cong(d)
-            if d.type == "cyclic":
-                predicates += self._ruleD41(d)
-            if d.type == "perp":
-                predicates += self._ruleD09(d)
-                predicates += self._ruleD10perp(d)
-                predicates += self._ruleD52perp(d)
-            if d.type == "simtri":
-                predicates += self._ruleD59(d)
-                predicates += self._ruleD60(d)
-                predicates += self._ruleD61simtri(d)
-            if d.type == "contri":
-                predicates += self._ruleD62(d)
-            if d.type == "eqratio":
-                predicates += self._ruleD75eqratio(d)
-
-            # print(d)
-            # print(len(self.newFactsList))
-            # print("\n\n")
-            """
-            We get new predicates, these are deducted from the rules
-            """
-
-            for predicate in predicates:
-                all_forms_predicates = self._predicate_all_forms(predicate)
-                for ppredicate in all_forms_predicates:
-                    if ppredicate in self.newFactsList or self.prove(
-                            ppredicate):
-                        continue
-                    self.newFactsList.append(ppredicate)
+            for fact in newFacts:
+                if self.database.containsFact(fact):
+                    continue
+                self.newFactsList.append(fact)
 
         return self.database
+
+    def _rules(self, p: Predicate):
+        facts = []
+        if p.type == "midp":
+            facts += self._ruleD44(p)
+            facts += self._ruleD63(p)
+            facts += self._ruleD68(p)
+            facts += self._ruleD70(p)
+        if p.type == "para":
+            facts += self._ruleD40(p)
+            facts += self._ruleD10para(p)
+            facts += self._ruleD45para(p)
+            facts += self._ruleD64(p)
+            facts += self._ruleD65(p)
+        if p.type == "eqangle":
+            facts += self._ruleD39(p)
+            facts += self._ruleD47(p)
+            facts += self._ruleD58(p)
+            facts += self._ruleD71(p)
+            facts += self._ruleD72(p)
+            facts += self._ruleD73(p)
+            facts += self._ruleD74(p)
+            facts += self._ruleD42a(p)
+        if p.type == "cong":
+            facts += self._ruleD12(p)
+            facts += self._ruleD46(p)
+            facts += self._ruleD75cong(p)
+        if p.type == "cyclic":
+            facts += self._ruleD41(p)
+        if p.type == "perp":
+            facts += self._ruleD09(p)
+            facts += self._ruleD10perp(p)
+            facts += self._ruleD52perp(p)
+        if p.type == "simtri":
+            facts += self._ruleD59(p)
+            facts += self._ruleD60(p)
+            facts += self._ruleD61simtri(p)
+        if p.type == "contri":
+            facts += self._ruleD62(p)
+        if p.type == "eqratio":
+            facts += self._ruleD75eqratio(p)
+
+        return list(set(facts))
 
     def _ruleD09(self, predicate: Predicate) -> list[Fact]:
         """
@@ -190,7 +208,7 @@ class Prover:
         for lPQ in self.database.lines:
             if lPQ in [lAB, lCD]:
                 continue
-            facts.append(Fact("eqangle", points=[lAB, lPQ, lCD, lPQ]))
+            facts.append(Fact("eqangle", [lAB, lPQ, lCD, lPQ]))
         return facts
 
     def _ruleD41(self, predicate: Predicate):
@@ -282,7 +300,7 @@ class Prover:
             return []
         c1 = self.database.matchCong([O1, A1])
         c2 = self.database.matchCong([O1, B1])
-        return [Fact("cong", [c1, c2])]
+        return [Fact("cong", [Segment(O1, A1), Segment(O1, B1)])]
 
     def _ruleD52perp(self, predicate: Predicate):
         """
@@ -296,9 +314,8 @@ class Prover:
         for midfact in self.database.midpFacts:
             if sorted([A, C]) == midfact[1:]:
                 M = midfact[0]
-                c1 = self.database.matchCong([A, M])
-                c2 = self.database.matchCong([B1, M])
-                facts.append(Predicate("cong", [c1, c2]))
+                facts.append(Predicate(
+                    "cong", [Segment(A, M), Segment(B1, M)]))
 
         return facts
 
@@ -326,7 +343,7 @@ class Prover:
         cPQ = self.database.matchCong([P, Q])
         cPR = self.database.matchCong([P, R])
         return [
-            Fact("eqratio", [Ratio(cAB, cAC), Ratio(cPQ, cPR)]),
+            Fact("eqratio", [cAB, cAC, cPQ, cPR]),
         ]
 
     def _ruleD60(self, predicate: Predicate):
@@ -339,8 +356,7 @@ class Prover:
         lPQ = self.database.matchLine([P, Q])
         lPR = self.database.matchLine([P, R])
         return [
-            Predicate("eqangle",
-                      [Angle(lAB, lAC), Angle(lPQ, lPR)]),
+            Predicate("eqangle", [lAB, lAC, lPQ, lPR]),
         ]
 
     def _ruleD61simtri(self, predicate: Predicate):
@@ -358,9 +374,7 @@ class Prover:
         contri(A,B,C,P,Q,R) => cong(A,B,P,Q)
         """
         A, B, C, P, Q, R = predicate.points
-        cAB = self.database.matchCong([A, B])
-        cPQ = self.database.matchCong([P, Q])
-        return [Fact("cong", [cAB, cPQ])]
+        return [Fact("cong", [Segment(A, B), Segment(P, Q)])]
 
     def _ruleD63(self, predicate: Predicate):
         """
@@ -403,6 +417,7 @@ class Prover:
             A_, B_ = sorted([A, B])
             if [A_, B_] == midp[1:]:
                 M = midp[0]
+                C, D = sorted([C, D])
                 return [Fact("midp", [M, C, D])]
 
         return facts
@@ -425,7 +440,7 @@ class Prover:
             cAC = self.database.matchCong([A, C])
             cOB = self.database.matchCong([O, B])
             cBD = self.database.matchCong([B, D])
-            facts.append(Fact("eqratio", [Ratio(cOA, cAC), Ratio(cOB, cBD)]))
+            facts.append(Fact("eqratio", [cOA, cAC, cOB, cBD]))
         return facts
 
     def _ruleD68(self, predicate: Predicate):
@@ -433,9 +448,14 @@ class Prover:
         midp(A,B,C) => cong(A,B,A,C)
         """
         A, B, C = predicate.points
-        cAB = self.database.matchCong([A, B])
-        cAC = self.database.matchCong([A, C])
-        return [Fact("cong", [cAB, cAC])]
+        return [Fact("cong", [Segment(A, B), Segment(A, C)])]
+
+    def _ruleD69(self, predicate: Predicate):
+        """
+        midp(A,B,C) => coll(A,B,C)
+        """
+        A, B, C = predicate.points
+        return [Fact("coll", [A, B, C])]
 
     def _ruleD70(self, predicate: Predicate):
         """
@@ -451,9 +471,7 @@ class Prover:
                 cAB = self.database.matchCong([A, B])
                 cNC = self.database.matchCong([N, C])
                 cCD = self.database.matchCong([C, D])
-                facts.append(
-                    Fact("eqratio",
-                         [Ratio(cMA, cAB), Ratio(cNC, cCD)]))
+                facts.append(Fact("eqratio", [cMA, cAB, cNC, cCD]))
 
         return facts
 
@@ -522,7 +540,11 @@ class Prover:
             for ratio in ratios:
                 if ratio == Ratio(cPQ, cUV):
                     continue
-                facts.append(Fact("cong", [ratio.c1, ratio.c2]))
+                for [A, B] in self.database.congs[ratio.c1]:
+                    for [C, D] in self.database.congs[ratio.c2]:
+                        facts.append(
+                            Fact("cong",
+                                 [Segment(A, B), Segment(C, D)]))
         return facts
 
     def _ruleD75eqratio(self, predicate: Predicate):
@@ -532,10 +554,8 @@ class Prover:
         This is not geometry properties but numerically correct
         """
         A, B, C, D, P, Q, U, V = predicate.points
-        cAB = self.database.matchCong([A, B])
-        cCD = self.database.matchCong([C, D])
         facts = []
         for segments in self.database.congs.values():
             if Segment(P, Q) in segments and Segment(U, V) in segments:
-                facts.append(Fact("cong", [cAB, cCD]))
+                facts.append(Fact("cong", [Segment(A, B), Segment(C, D)]))
         return facts

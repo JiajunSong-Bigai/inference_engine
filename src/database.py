@@ -27,14 +27,6 @@ class Database:
         self.simtriFacts = simtriFacts or []
         self.contriFacts = contriFacts or []
 
-    def addFact(self, fact: Fact) -> None:
-        if fact.type == "coll":
-            pass
-        elif fact.type == "midp":
-            pass
-        elif fact.type == "para":
-            pass
-
     def addPredicate(self, predicate: Predicate) -> None:
         if predicate.type == "coll":
             self.collHandler(predicate)
