@@ -45,6 +45,8 @@ class Prover:
             d: Fact = self.newFactsList.pop(0)
             self.database.addFact(d)
 
+            print(d)
+
             newFacts = []
             for predicate in self.database._predicate_all_forms(d):
                 newFacts += self._rules(predicate)
@@ -62,6 +64,7 @@ class Prover:
             facts += self._ruleD44(p)
             facts += self._ruleD63(p)
             facts += self._ruleD68(p)
+            facts += self._ruleD69(p)
             facts += self._ruleD70(p)
         if p.type == "para":
             facts += self._ruleD40(p)
