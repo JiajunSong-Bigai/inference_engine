@@ -107,6 +107,7 @@ class Prover:
             facts += self._ruleD65(p)
         if p.type == "eqangle":
             facts += self._ruleX1(p)
+            facts += self._ruleD22(p)
             facts += self._ruleD39(p)
             facts += self._ruleD47(p)
             facts += self._ruleD58(p)

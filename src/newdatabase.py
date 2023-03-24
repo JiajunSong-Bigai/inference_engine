@@ -733,7 +733,7 @@ class Database:
     @property
     def newCenterName(self):
         for n in range(1, 50):
-            if f'O{n}' not in self.lines:
+            if f'O{n}' not in [c.center for c in self.circles]:
                 return f'O{n}'
         raise ValueError("Running out names for centers!")
 
