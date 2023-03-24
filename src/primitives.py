@@ -75,10 +75,10 @@ class Triangle:
         return False
 
     def __hash__(self) -> int:
-        return hash(str(self))
+        return hash("".join(sorted([self.p1, self.p2, self.p3])))
 
     def __repr__(self) -> str:
-        return "".join(sorted([self.p1, self.p2, self.p3]))
+        return "".join([self.p1, self.p2, self.p3])
 
 
 class Circle:

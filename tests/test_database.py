@@ -108,3 +108,18 @@ def test_p8():
     s += "\n".join(str(p) for p in predicates)
     s += "\n" + str(db)
     print(s)
+
+
+def test_p9():
+    predicates = [
+        Predicate("simtri", ["A", "B", "C", "P", "Q", "R"]),
+        Predicate("simtri", ["A", "C", "B", "P", "R", "Q"]),
+        Predicate("simtri", ["A", "B", "C", "D", "E", "F"]),
+    ]
+    db = Database()
+    for predicate in predicates:
+        db.addPredicate(predicate=predicate)
+    s = "\n"
+    s += "\n".join(str(p) for p in predicates)
+    s += "\n" + str(db)
+    print(s)

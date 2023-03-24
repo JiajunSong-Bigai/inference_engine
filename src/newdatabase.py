@@ -35,15 +35,30 @@ class Database:
         if fact.type == "para":
             lk1, lk2 = fact.objects
             predicates = []
-            for (A, B) in itertools.combinations(self.lines[lk1]):
-                for (C, D) in itertools.combinations(self.lines[lk2]):
+            for (A, B) in itertools.permutations(self.lines[lk1], 2):
+                for (C, D) in itertools.permutations(self.lines[lk2], 2):
                     predicates.append(Predicate("para", [A, B, C, D]))
+                    predicates.append(Predicate("para", [C, D, A, B]))
+            for lines in self.paraFacts:
+                if lk1 not in lines and lk2 not in lines:
+                    continue
+                for lk3 in lines:
+                    if lk3 in [lk1, lk2]:
+                        continue
+                    for l in [lk1, lk2]:
+                        for (A, B) in itertools.permutations(self.lines[l], 2):
+                            for (C, D) in itertools.permutations(
+                                    self.lines[lk3], 2):
+                                predicates.append(
+                                    Predicate("para", [A, B, C, D]))
+                                predicates.append(
+                                    Predicate("para", [C, D, A, B]))
             return predicates
         if fact.type == "perp":
             lk1, lk2 = fact.objects
             predicates = []
-            for (A, B) in itertools.combinations(self.lines[lk1]):
-                for (C, D) in itertools.combinations(self.lines[lk2]):
+            for (A, B) in itertools.permutations(self.lines[lk1], 2):
+                for (C, D) in itertools.permutations(self.lines[lk2], 2):
                     predicates.append(Predicate("perp", [A, B, C, D]))
             return predicates
         if fact.type == "midp":
@@ -71,17 +86,43 @@ class Database:
                 l1, l2 = self.lines[a1.lk1], self.lines[a1.lk2]
                 l3, l4 = self.lines[a2.lk1], self.lines[a2.lk2]
 
-                for (A, B) in itertools.combinations(l1, 2):
-                    for (C, D) in itertools.combinations(l2, 2):
-                        for (P, Q) in itertools.combinations(l3, 2):
-                            for (U, V) in itertools.combinations(l4, 2):
+                for (A, B) in itertools.permutations(l1, 2):
+                    for (C, D) in itertools.permutations(l2, 2):
+                        for (P, Q) in itertools.permutations(l3, 2):
+                            for (U, V) in itertools.permutations(l4, 2):
                                 predicates.append(
                                     Predicate("eqangle",
                                               [A, B, C, D, P, Q, U, V]))
+
+            # handle transitivity
+            for (a1, a2) in angle_pairs:
+                for angles in self.eqangleFacts:
+                    if a1 not in angles and a2 not in angles:
+                        continue
+                    for a3 in angles:
+                        if a3 in [a1, a2]:
+                            continue
+                        for a in [a1, a2]:
+                            l1, l2 = self.lines[a.lk1], self.lines[a.lk2]
+                            l3, l4 = self.lines[a3.lk1], self.lines[a3.lk2]
+                            for (A, B) in itertools.permutations(l1, 2):
+                                for (C, D) in itertools.permutations(l2, 2):
+                                    for (P,
+                                         Q) in itertools.permutations(l3, 2):
+                                        for (U, V) in itertools.permutations(
+                                                l4, 2):
+                                            predicates.append(
+                                                Predicate(
+                                                    "eqangle",
+                                                    [A, B, C, D, P, Q, U, V]))
             return predicates
 
         if fact.type == "eqratio":
-            ck1, ck2, ck3, ck4 = fact.objects
+            s1, s2, s3, s4 = fact.objects
+            ck1 = self.matchCong([s1.p1, s1.p2])
+            ck2 = self.matchCong([s2.p1, s2.p2])
+            ck3 = self.matchCong([s3.p1, s3.p2])
+            ck4 = self.matchCong([s4.p1, s4.p2])
             ratio_pairs = [
                 [Ratio(ck1, ck2), Ratio(ck3, ck4)],
                 [Ratio(ck2, ck1), Ratio(ck4, ck3)],
@@ -92,14 +133,52 @@ class Database:
             for (r1, r2) in ratio_pairs:
                 s1, s2 = self.congs[r1.c1], self.congs[r1.c2]
                 s3, s4 = self.congs[r2.c1], self.congs[r2.c2]
-                for (A, B) in s1:
-                    for (C, D) in s2:
-                        for (P, Q) in s3:
-                            for (U, V) in s4:
+                for sAB in s1:
+                    for sCD in s2:
+                        for sPQ in s3:
+                            for sUV in s4:
+                                A, B = sAB.p1, sAB.p2
+                                C, D = sCD.p1, sCD.p2
+                                P, Q = sPQ.p1, sPQ.p2
+                                U, V = sUV.p1, sUV.p2
                                 predicates.append(
                                     Predicate("eqratio",
                                               [A, B, C, D, P, Q, U, V]))
             return predicates
+        if fact.type == "simtri":
+            t1, t2 = fact.objects
+            A, B, C = t1.p1, t1.p2, t1.p3
+            P, Q, R = t2.p1, t2.p2, t2.p3
+            return [
+                Predicate("simtri", [A, B, C, P, Q, R]),
+                Predicate("simtri", [A, C, B, P, R, Q]),
+                Predicate("simtri", [B, A, C, Q, P, R]),
+                Predicate("simtri", [B, C, A, Q, R, P]),
+                Predicate("simtri", [C, A, B, R, P, Q]),
+                Predicate("simtri", [C, B, A, R, Q, P])
+            ]
+        if fact.type == "contri":
+            t1, t2 = fact.objects
+            A, B, C = t1.p1, t1.p2, t1.p3
+            P, Q, R = t2.p1, t2.p2, t2.p3
+            return [
+                Predicate("contri", [A, B, C, P, Q, R]),
+                Predicate("contri", [A, C, B, P, R, Q]),
+                Predicate("contri", [B, A, C, Q, P, R]),
+                Predicate("contri", [B, C, A, Q, R, P]),
+                Predicate("contri", [C, A, B, R, P, Q]),
+                Predicate("contri", [C, B, A, R, Q, P])
+            ]
+        if fact.type == "circle":
+            return [Predicate("circle", fact.objects)]
+        if fact.type == "cyclic":
+            A, B, C, D = fact.objects
+            predicates = []
+            for [AA, BB, CC, DD] in itertools.permutations([A, B, C, D], 4):
+                predicates.append(Predicate("cyclic", [AA, BB, CC, DD]))
+            return predicates
+
+        raise ValueError(f"{fact.type} not supported")
 
     def _predicate_to_fact(self, predicate: Predicate) -> Fact:
         if predicate.type == "coll":
@@ -255,6 +334,8 @@ class Database:
         lk1, lk2, lk3, lk4 = fact.objects
         found = False
         i = 0
+
+        # find the order
         while i < len(self.eqangleFacts) and not found:
             factsi = self.eqangleFacts[i]
             angle_pairs = [
@@ -265,18 +346,46 @@ class Database:
             ]
             for (a1, a2) in angle_pairs:
                 if a1 in factsi or a2 in factsi:
-                    self.eqangleFacts[i] = factsi.union({a1, a2})
+                    angle = (a1, a2)
                     found = True
                     break
+            i += 1
 
         if not found:
             self.eqangleFacts.append({Angle(lk1, lk2), Angle(lk3, lk4)})
+        else:
+            # find the overlap
+            a1, a2 = angle
+            overlapsMap = [
+                i for i in range(len(self.eqangleFacts))
+                if a1 in self.eqangleFacts[i] or a2 in self.eqangleFacts[i]
+            ]
+            if len(overlapsMap) == 1:
+                pos = overlapsMap[0]
+                self.eqangleFacts[pos] = self.eqangleFacts[pos].union({a1, a2})
+            elif len(overlapsMap) >= 2:
+                keep, drops = overlapsMap[0], overlapsMap[1:]
+                angles = self.eqangleFacts[keep].union({a1, a2})
+                for drop in drops:
+                    angles = angles.union(self.eqangleFacts[drop])
+
+                self.eqangleFacts[keep] = angles
+                self.eqangleFacts = [
+                    self.eqangleFacts[i] for i in range(len(self.eqangleFacts))
+                    if i not in drops
+                ]
 
     def eqratioHandler(self, fact: Fact):
-        """Add Fact(eqratio, [CK1, CK2, CK3, CK4])
+        """Add Fact(eqratio, [S1, S2, S3, S4])
         """
-        ck1, ck2, ck3, ck4 = fact.objects
-        found = False
+        s1, s2, s3, s4 = fact.objects
+        ck1 = self.matchCong([s1.p1, s1.p2])
+        ck2 = self.matchCong([s2.p1, s2.p2])
+        ck3 = self.matchCong([s3.p1, s3.p2])
+        ck4 = self.matchCong([s4.p1, s4.p2])
+
+        found = ck1 == ck3 and ck2 == ck4
+        # found = False
         i = 0
         while i < len(self.eqratioFacts) and not found:
             factsi = self.eqratioFacts[i]
@@ -291,6 +400,7 @@ class Database:
                     self.eqratioFacts[i] = factsi.union({r1, r2})
                     found = True
                     break
+            i += 1
 
         if not found:
             self.eqratioFacts.append({Ratio(ck1, ck2), Ratio(ck3, ck4)})
@@ -312,15 +422,15 @@ class Database:
             pos = overlapsMap[0]
             tris = self.simtriFacts[pos]
             t: Triangle = t1 if t1 in tris else t2
-            tt: Triangle = [tri for tri in tris if tri == t]
+            tt: Triangle = [tri for tri in tris if tri == t][0]
             # get the order of vertices
             ords = [[t.p1, t.p2, t.p3].index(v) for v in [tt.p1, tt.p2, tt.p3]]
             v1s = [t1.p1, t1.p2, t1.p3]
             v2s = [t2.p1, t2.p2, t2.p3]
-            t1p = Triangle([v1s[o] for o in ords])
-            t2p = Triangle([v2s[o] for o in ords])
+            t1p = Triangle(*[v1s[o] for o in ords])
+            t2p = Triangle(*[v2s[o] for o in ords])
             self.simtriFacts[pos] = tris.union({t1p, t2p})
-        elif len(overlapsMap) == 2:
+        elif len(overlapsMap) >= 2:
             keep, drop = overlapsMap
             tris = self.simtriFacts[keep]
             t: Triangle = t1 if t1 in tris else t2
@@ -404,7 +514,7 @@ class Database:
             # case 1 and case 3
             self.lines[overlapsMap[0]] = self.lines[overlapsMap[0]].union(
                 set(fact.objects))
-        elif len(overlapsMap) == 2:
+        elif len(overlapsMap) >= 2:
             # case 2
             keep, drop = overlapsMap
             self.lines[keep] = self.lines[keep].union(self.lines[drop].union(
@@ -445,11 +555,11 @@ class Database:
             # case 4
             self.congs[self.newCongName] = {s1, s2}
         elif len(overlapsMap) == 1:
-            # case 1 and case 3
+            # case 1 and case 2
             self.congs[overlapsMap[0]] = self.congs[overlapsMap[0]].union(
                 {s1, s2})
-        elif len(overlapsMap) == 2:
-            # case 2
+        elif len(overlapsMap) >= 2:
+            # case 3
             keep, drop = overlapsMap
             self.congs[keep] = self.congs[keep].union(self.congs[drop])
             del self.congs[drop]
@@ -461,6 +571,14 @@ class Database:
                         ratio.c1 = keep
                     if ratio.c2 == drop:
                         ratio.c2 = keep
+
+            # check eqratioFacts
+            # the key changes may make some eqratio fact
+            # obvious and should be removed
+            self.eqratioFacts = [
+                ratios for ratios in self.eqratioFacts
+                if len(set(list(ratios))) > 1
+            ]
 
     def midpHandler(self, fact: Fact):
         """Add Fact(midp, [M,A,B])
@@ -481,6 +599,7 @@ class Database:
             if lk1 in self.paraFacts[i] or lk2 in self.paraFacts[i]:
                 self.paraFacts[i] = self.paraFacts[i].union({lk1, lk2})
                 found = True
+            i += 1
 
         if not found:
             self.paraFacts.append({lk1, lk2})
@@ -540,8 +659,12 @@ class Database:
             return False
 
         if fact.type == "eqratio":
-            # Fact(eqratio, [CK1, CK2, CK3, CK4])
-            ck1, ck2, ck3, ck4 = fact.objects
+            # Fact(eqratio, [S1, S2, S3, S4])
+            s1, s2, s3, s4 = fact.objects
+            ck1 = self.matchCong([s1.p1, s1.p2])
+            ck2 = self.matchCong([s2.p1, s2.p2])
+            ck3 = self.matchCong([s3.p1, s3.p2])
+            ck4 = self.matchCong([s4.p1, s4.p2])
             for ratios in self.eqratioFacts:
                 if Ratio(ck1, ck2) in ratios and Ratio(ck3, ck4) in ratios:
                     return True
@@ -634,10 +757,11 @@ class Database:
         return the new name
         """
         assert len(points) == 2
+        p1, p2 = points
         for name, cong in self.congs.items():
             # cong is a list of segments
             for segment in cong:
-                if str(segment) == "".join(sorted(points)):
+                if str(segment) in [f"{p1}{p2}", f"{p2}{p1}"]:
                     return name
 
         newName = self.newCongName
