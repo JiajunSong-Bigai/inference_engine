@@ -63,3 +63,36 @@ def test_04():
     ]
     for quest in quests:
         assert prover.prove(quest), f"{quest} not proved"
+
+
+@pytest.mark.skip()
+def test_05():
+    hypotheses = parse_predicates_from_file("problems/p5")
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    print(prover.database)
+
+
+def test_06():
+    hypotheses = parse_predicates_from_file("problems/p6")
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    quests = [
+        Predicate("cong", ["A", "D", "C", "D"]),
+        Predicate("circle", ["D", "A", "B", "C"])
+    ]
+    for quest in quests:
+        assert prover.prove(quest), f"{quest} not proved"
+
+
+def test_07():
+    hypotheses = parse_predicates_from_file("problems/p7")
+    prover = Prover(hypotheses=hypotheses)
+    prover.fixedpoint()
+    # quests = [
+    #     Predicate("cong", ["A", "D", "C", "D"]),
+    #     Predicate("circle", ["D", "A", "B", "C"])
+    # ]
+    # for quest in quests:
+    #     assert prover.prove(quest), f"{quest} not proved
+    print(prover.database)

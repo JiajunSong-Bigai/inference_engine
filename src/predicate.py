@@ -5,8 +5,6 @@
 class Predicate:
     '''Predicate is simple fact, such as coll(A,B,C) or para(A,B,C,D)
     where A,B,C,D are concrete points.
-
-    Predicate will mostly be used when parsing the input hypotheses.
     '''
 
     def __init__(self, type: str, points: list[str]) -> None:
