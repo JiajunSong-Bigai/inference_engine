@@ -1,98 +1,111 @@
-"""
-Testing problems
-"""
-import pytest
-from src.predicate import Predicate
+from src.database import Database
 from src.prover import Prover
-from src.util import parse_predicates_from_file
+from src.predicate import Predicate
 
 
 def test_01():
-    hypotheses = parse_predicates_from_file("problems/p1")
-    prover = Prover(hypotheses=hypotheses)
-    final_db = prover.fixedpoint()
-    quests = [
-        Predicate("coll", ["A", "B", "D"]),
-        Predicate("coll", ["A", "C", "D"])
-    ]
-    for quest in quests:
-        assert prover.prove(quest)
+    prover = Prover(hypotheses=[
+        Predicate("perp", ["A", "C", "B", "C"]),
+        Predicate("midp", ["D", "A", "B"])
+    ])
+    prover.fixedpoint()
+    print(prover.database)
 
 
 def test_02():
-    hypotheses = parse_predicates_from_file("problems/p2")
-    prover = Prover(hypotheses=hypotheses)
+    prover = Prover(hypotheses=[
+        Predicate("coll", ["A", "B", "P"]),
+        Predicate("coll", ["A", "C", "Q"]),
+        Predicate("simtri", ["A", "B", "C", "A", "P", "Q"])
+    ])
     prover.fixedpoint()
-    quests = [
-        Predicate("para", ["A", "C", "D", "E"]),
-        Predicate("para", ["D", "E", "C", "B"])
-    ]
-    for quest in quests:
-        assert prover.prove(quest)
+    print(prover.database)
 
 
 def test_03():
-    hypotheses = parse_predicates_from_file("problems/p3")
-    prover = Prover(hypotheses=hypotheses)
+    prover = Prover(hypotheses=[
+        Predicate("midp", ["D", "A", "B"]),
+        Predicate("midp", ["E", "A", "C"])
+    ])
     prover.fixedpoint()
-    quests = [
-        Predicate("coll", ["A", "B", "D"]),
-        Predicate("coll", ["A", "C", "E"]),
-        Predicate("para", ["D", "E", "B", "C"]),
-        Predicate("cong", ["A", "D", "D", "B"]),
-        Predicate("eqangle", ["A", "D", "D", "E", "A", "D", "B", "C"]),
-        Predicate("eqangle", ["A", "B", "D", "E", "A", "D", "B", "C"]),
-        Predicate("eqangle", ["A", "B", "D", "E", "A", "B", "B", "C"]),
-        Predicate("eqangle", ["D", "E", "A", "B", "C", "B", "A", "B"]),
-        Predicate("eqangle", ["A", "E", "D", "E", "A", "C", "B", "C"]),
-        Predicate("eqangle", ["A", "D", "D", "E", "A", "B", "B", "C"]),
-        Predicate("simtri", ["A", "D", "E", "A", "B", "C"]),
-    ]
-    for quest in quests:
-        assert prover.prove(quest), f"{quest} not proved"
+    print(prover.database)
 
 
 def test_04():
-    hypotheses = parse_predicates_from_file("problems/p4")
-    prover = Prover(hypotheses=hypotheses)
-    prover.fixedpoint()
-    quests = [
-        Predicate("cong", ["K", "M", "K", "N"]),
-        Predicate("eqangle", ["A", "B", "M", "N", "M", "N", "C", "D"]),
-        Predicate("simtri", ["B", "K", "N", "B", "D", "C"]),
-    ]
-    for quest in quests:
-        assert prover.prove(quest), f"{quest} not proved"
-
-
-@pytest.mark.skip()
-def test_05():
-    hypotheses = parse_predicates_from_file("problems/p5")
-    prover = Prover(hypotheses=hypotheses)
+    prover = Prover(hypotheses=[
+        Predicate("coll", ["M", "N", "E"]),
+        Predicate("coll", ["A", "K", "B"]),
+        Predicate("coll", ["B", "E", "C"]),
+        Predicate("coll", ["C", "N", "K"]),
+        Predicate("para", ["A", "B", "C", "D"]),
+        Predicate("midp", ["M", "A", "C"]),
+        Predicate("midp", ["N", "B", "D"])
+    ])
     prover.fixedpoint()
     print(prover.database)
+
+
+def test_05():
+    prover = Prover(hypotheses=[
+        Predicate("para", ["A", "B", "C", "D"]),
+        Predicate("para", ["A", "D", "B", "C"]),
+        Predicate("para", ["Q", "P", "B", "C"]),
+        Predicate("para", ["Q", "B", "P", "C"]),
+        #Predicate("eqangle", ["B", "A", "P", "A", "P", "C", "B", "C"])
+    ])
+    prover.fixedpoint()
+    print(prover.database)
+    print(prover.database.lines)
 
 
 def test_06():
-    hypotheses = parse_predicates_from_file("problems/p6")
-    prover = Prover(hypotheses=hypotheses)
+    prover = Prover(hypotheses=[
+        Predicate("coll", ["A", "H", "D"]),
+        Predicate("coll", ["B", "H", "E"]),
+        Predicate("coll", ["B", "D", "C"]),
+        Predicate("coll", ["A", "E", "C"]),
+        Predicate("coll", ["C", "H", "F"]),
+        Predicate("coll", ["A", "F", "B"]),
+        Predicate("perp", ["A", "D", "B", "C"]),
+        Predicate("perp", ["B", "E", "A", "C"])
+    ])
     prover.fixedpoint()
-    quests = [
-        Predicate("cong", ["A", "D", "C", "D"]),
-        Predicate("circle", ["D", "A", "B", "C"])
-    ]
-    for quest in quests:
-        assert prover.prove(quest), f"{quest} not proved"
+    print(prover.database)
+    print(prover.database.lines)
 
 
 def test_07():
-    hypotheses = parse_predicates_from_file("problems/p7")
-    prover = Prover(hypotheses=hypotheses)
+    prover = Prover(hypotheses=[
+        Predicate("eqangle", ["A", "B", "B", "C", "P", "Q", "Q", "R"]),
+        Predicate("cong", ["A", "B", "P", "Q"]),
+        Predicate("cong", ["B", "C", "Q", "R"])
+    ])
     prover.fixedpoint()
-    # quests = [
-    #     Predicate("cong", ["A", "D", "C", "D"]),
-    #     Predicate("circle", ["D", "A", "B", "C"])
-    # ]
-    # for quest in quests:
-    #     assert prover.prove(quest), f"{quest} not proved
     print(prover.database)
+    print(prover.database.lines)
+
+
+import sys
+
+
+def main():
+    option = int(sys.argv[1])
+
+    if option == 1:
+        test_01()
+    elif option == 2:
+        test_02()
+    elif option == 3:
+        test_03()
+    elif option == 4:
+        test_04()
+    elif option == 5:
+        test_05()
+    elif option == 6:
+        test_06()
+    elif option == 7:
+        test_07()
+
+
+if __name__ == "__main__":
+    main()

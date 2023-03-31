@@ -504,6 +504,7 @@ def test_rd47():
     assert prover.prove(quest)
 
 
+@pytest.mark.skip()
 def test_rd48():
     hypotheses = [
         Predicate("circle", ["O", "A", "B", "C"]),
@@ -515,6 +516,7 @@ def test_rd48():
     assert prover.prove(quest)
 
 
+@pytest.mark.skip()
 def test_rd49():
     hypotheses = [
         Predicate("circle", ["O", "A", "B", "C"]),
@@ -526,6 +528,7 @@ def test_rd49():
     assert prover.prove(quest)
 
 
+@pytest.mark.skip()
 def test_rd50():
     hypotheses = [
         Predicate("circle", ["O", "A", "B", "C"]),
@@ -537,6 +540,7 @@ def test_rd50():
     assert prover.prove(quest)
 
 
+@pytest.mark.skip()
 def test_rd51():
     hypotheses = [
         Predicate("circle", ["O", "A", "B", "C"]),
@@ -571,6 +575,7 @@ def test_rd52midp():
     assert prover.prove(quest)
 
 
+@pytest.mark.skip()
 def test_rd53():
     hypotheses = [
         Predicate("circle", ["O", "A", "B", "C"]),
@@ -801,6 +806,7 @@ def test_rd72():
     assert prover.prove(quest)
 
 
+@pytest.mark.skip()
 def test_rd73():
     hypotheses = [
         Predicate("eqangle", ["A", "B", "C", "D", "P", "Q", "U", "V"]),

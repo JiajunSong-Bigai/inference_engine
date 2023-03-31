@@ -1,7 +1,7 @@
 import pytest
 from src.predicate import Predicate
 from src.fact import Fact
-from src.newdatabase import Database
+from src.database import Database
 
 
 def test_p1():
