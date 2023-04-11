@@ -58,7 +58,7 @@ class Prover:
         return self.database.containsFact(fact)
 
     def fixedpoint(self):
-        i = UPPER = 10
+        i = UPPER = 20000
         used = {}
         while self.newFactsList and i > 0:
             i -= 1
@@ -730,7 +730,7 @@ class Prover:
         """
         if len(predicate.lines) == 4:
             l1, l2, l3, l4 = predicate.lines
-            if self.database.containsFact(Fact("para", [l3, l4])):
+            if self.database.containsFact(Fact("para", [l3, l4])) and l1 != l2:
                 return [Fact("para", [l1, l2])]
             return []
 
