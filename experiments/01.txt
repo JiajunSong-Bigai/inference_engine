@@ -1,0 +1,845 @@
+POP FACT: coll (['A', 'H', 'D'])
+{coll (['A', 'H', 'D']): 0}
+NEW FACTS: []
+NEW_FACT_LIST: [coll (['B', 'H', 'E']), coll (['B', 'D', 'C']), coll (['A', 'E', 'C']), coll (['C', 'H', 'F']), coll (['A', 'F', 'B']), perp (['line1', 'line3']), perp (['line2', 'line4'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: coll (['B', 'H', 'E'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0}
+NEW FACTS: []
+NEW_FACT_LIST: [coll (['B', 'D', 'C']), coll (['A', 'E', 'C']), coll (['C', 'H', 'F']), coll (['A', 'F', 'B']), perp (['line1', 'line3']), perp (['line2', 'line4'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: coll (['B', 'D', 'C'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0}
+NEW FACTS: []
+NEW_FACT_LIST: [coll (['A', 'E', 'C']), coll (['C', 'H', 'F']), coll (['A', 'F', 'B']), perp (['line1', 'line3']), perp (['line2', 'line4'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: coll (['A', 'E', 'C'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0}
+NEW FACTS: []
+NEW_FACT_LIST: [coll (['C', 'H', 'F']), coll (['A', 'F', 'B']), perp (['line1', 'line3']), perp (['line2', 'line4'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: coll (['C', 'H', 'F'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0}
+NEW FACTS: []
+NEW_FACT_LIST: [coll (['A', 'F', 'B']), perp (['line1', 'line3']), perp (['line2', 'line4'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: coll (['A', 'F', 'B'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0}
+NEW FACTS: []
+NEW_FACT_LIST: [perp (['line1', 'line3']), perp (['line2', 'line4'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: perp (['line1', 'line3'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0}
+NEW FACTS: [eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4'])]
+NEW_FACT_LIST: [perp (['line2', 'line4']), eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: perp (['line2', 'line4'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0}
+NEW FACTS: [eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line2', 'line4', 'line3', 'line1'])]
+NEW_FACT_LIST: [eqangle (['line1', 'line3', 'line3', 'line1']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line2', 'line4', 'line3', 'line1'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: eqangle (['line1', 'line3', 'line3', 'line1'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0}
+
+Candidates FOR CYCLIC D D D D 
+
+
+Candidates FOR CYCLIC D D D D 
+
+
+Candidates FOR CYCLIC D D D D 
+
+
+Candidates FOR CYCLIC D D D D 
+
+NEW FACTS: [perp (['line1', 'line3']), perp (['line3', 'line1']), perp (['line1', 'line3']), perp (['line3', 'line1'])]
+eqangle (['line1', 'line3', 'line3', 'line1'])
+NEW_FACT_LIST: [eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line2', 'line4', 'line3', 'line1'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: eqangle (['line1', 'line3', 'line2', 'line4'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1}
+
+Candidates FOR CYCLIC D E H C 
+
+
+Candidates FOR CYCLIC D E C H 
+
+
+Candidates FOR CYCLIC H C D E 
+
+
+Candidates FOR CYCLIC H C E D 
+
+NEW FACTS: [perp (['line1', 'line3']), cyclic (['D', 'E', 'H', 'C']), cyclic (['D', 'E', 'C', 'H']), perp (['line3', 'line1']), cyclic (['H', 'C', 'D', 'E']), cyclic (['H', 'C', 'E', 'D']), simtri ([BHD, ACD])]
+eqangle (['line1', 'line3', 'line2', 'line4'])
+NEW_FACT_LIST: [eqangle (['line2', 'line4', 'line3', 'line1']), simtri ([BHD, ACD]), cyclic (['D', 'E', 'C', 'H']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: eqangle (['line2', 'line4', 'line3', 'line1'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2}
+
+Candidates FOR CYCLIC E D B A 
+
+
+Candidates FOR CYCLIC E D A B 
+
+
+Candidates FOR CYCLIC B A E D 
+
+
+Candidates FOR CYCLIC B A D E 
+
+NEW FACTS: [perp (['line2', 'line4']), cyclic (['E', 'D', 'B', 'A']), eqangle (['line2', 'line4', 'line2', 'line4']), eqangle (['line2', 'line4', 'line1', 'line3']), cyclic (['E', 'D', 'A', 'B']), eqangle (['line4', 'line2', 'line2', 'line4']), perp (['line4', 'line2']), eqangle (['line4', 'line2', 'line3', 'line1']), simtri ([HBD, CAD]), cyclic (['B', 'A', 'E', 'D']), cyclic (['B', 'A', 'D', 'E'])]
+NEW_FACT_LIST: [eqangle (['line4', 'line2', 'line2', 'line4']), simtri ([BHD, ACD]), simtri ([HBD, CAD]), cyclic (['D', 'E', 'C', 'H']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: eqangle (['line4', 'line2', 'line2', 'line4'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2}
+
+Candidates FOR CYCLIC E E E E 
+
+
+Candidates FOR CYCLIC E E E E 
+
+
+Candidates FOR CYCLIC E E E E 
+
+
+Candidates FOR CYCLIC E E E E 
+
+NEW FACTS: [eqangle (['line4', 'line2', 'line1', 'line3']), perp (['line4', 'line2']), eqangle (['line4', 'line2', 'line3', 'line1']), perp (['line2', 'line4']), eqangle (['line4', 'line2', 'line1', 'line3']), perp (['line4', 'line2']), eqangle (['line4', 'line2', 'line3', 'line1']), perp (['line2', 'line4'])]
+eqangle (['line4', 'line2', 'line2', 'line4'])
+NEW_FACT_LIST: [simtri ([BHD, ACD]), simtri ([HBD, CAD]), cyclic (['D', 'E', 'C', 'H']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: simtri ([BHD, ACD])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3}
+NEW FACTS: [eqangle (['line2', 'line3', 'line4', 'line1']), eqratio ([BH, BD, AC, AD]), eqratio ([BD, BH, AD, AC]), eqangle (['line3', 'line2', 'line1', 'line4']), eqangle (['line2', 'line1', 'line4', 'line3']), eqratio ([BH, DH, AC, CD]), eqratio ([DH, BH, CD, AC]), eqangle (['line1', 'line2', 'line3', 'line4']), eqratio ([BD, DH, AD, CD]), eqangle (['line3', 'line1', 'line1', 'line3']), eqratio ([DH, BD, CD, AD]), eqangle (['line1', 'line3', 'line3', 'line1'])]
+simtri ([BHD, ACD])
+NEW_FACT_LIST: [eqratio ([BD, BH, AD, AC]), eqratio ([BH, BD, AC, AD]), eqratio ([DH, BD, CD, AD]), eqratio ([DH, BH, CD, AC]), eqratio ([BH, DH, AC, CD]), eqratio ([BD, DH, AD, CD]), simtri ([HBD, CAD]), cyclic (['D', 'E', 'C', 'H']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: eqratio ([BD, BH, AD, AC])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4}
+NEW FACTS: []
+eqratio ([BD, BH, AD, AC])
+NEW_FACT_LIST: [eqratio ([BH, BD, AC, AD]), eqratio ([DH, BD, CD, AD]), eqratio ([DH, BH, CD, AC]), eqratio ([BH, DH, AC, CD]), eqratio ([BD, DH, AD, CD]), simtri ([HBD, CAD]), cyclic (['D', 'E', 'C', 'H']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: eqratio ([BH, BD, AC, AD])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5}
+NEW FACTS: []
+NEW_FACT_LIST: [eqratio ([DH, BD, CD, AD]), eqratio ([DH, BH, CD, AC]), eqratio ([BH, DH, AC, CD]), eqratio ([BD, DH, AD, CD]), simtri ([HBD, CAD]), cyclic (['D', 'E', 'C', 'H']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: eqratio ([DH, BD, CD, AD])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5}
+NEW FACTS: []
+eqratio ([DH, BD, CD, AD])
+NEW_FACT_LIST: [eqratio ([DH, BH, CD, AC]), eqratio ([BH, DH, AC, CD]), eqratio ([BD, DH, AD, CD]), simtri ([HBD, CAD]), cyclic (['D', 'E', 'C', 'H']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: eqratio ([DH, BH, CD, AC])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6}
+NEW FACTS: []
+eqratio ([DH, BH, CD, AC])
+NEW_FACT_LIST: [eqratio ([BH, DH, AC, CD]), eqratio ([BD, DH, AD, CD]), simtri ([HBD, CAD]), cyclic (['D', 'E', 'C', 'H']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: eqratio ([BH, DH, AC, CD])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7}
+NEW FACTS: []
+NEW_FACT_LIST: [eqratio ([BD, DH, AD, CD]), simtri ([HBD, CAD]), cyclic (['D', 'E', 'C', 'H']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: eqratio ([BD, DH, AD, CD])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7}
+NEW FACTS: []
+NEW_FACT_LIST: [simtri ([HBD, CAD]), cyclic (['D', 'E', 'C', 'H']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: simtri ([HBD, CAD])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7}
+NEW FACTS: [eqangle (['line2', 'line1', 'line4', 'line3']), eqratio ([BH, DH, AC, CD]), eqratio ([DH, BH, CD, AC]), eqangle (['line1', 'line2', 'line3', 'line4']), eqangle (['line2', 'line3', 'line4', 'line1']), eqratio ([BH, BD, AC, AD]), eqratio ([BD, BH, AD, AC]), eqangle (['line3', 'line2', 'line1', 'line4']), eqratio ([DH, BD, CD, AD]), eqangle (['line1', 'line3', 'line3', 'line1']), eqratio ([BD, DH, AD, CD]), eqangle (['line3', 'line1', 'line1', 'line3'])]
+NEW_FACT_LIST: [cyclic (['D', 'E', 'C', 'H']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}}
+================================================================================
+POP FACT: cyclic (['D', 'E', 'C', 'H'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7}
+NEW FACTS: [eqangle (['line3', 'line4', 'line1', 'line2']), eqangle (['line1', 'line2', 'line3', 'line4']), eqangle (['line7', 'line4', 'line1', 'line5']), eqangle (['line1', 'line5', 'line7', 'line4']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line3', 'line5', 'line7', 'line2']), eqangle (['line4', 'line3', 'line2', 'line1']), eqangle (['line2', 'line1', 'line4', 'line3']), eqangle (['line7', 'line3', 'line2', 'line5']), eqangle (['line2', 'line5', 'line7', 'line3']), eqangle (['line7', 'line1', 'line4', 'line5']), eqangle (['line4', 'line5', 'line7', 'line1']), eqangle (['line4', 'line7', 'line5', 'line1']), eqangle (['line5', 'line1', 'line4', 'line7']), eqangle (['line3', 'line7', 'line5', 'line2']), eqangle (['line5', 'line2', 'line3', 'line7']), eqangle (['line3', 'line1', 'line4', 'line2']), eqangle (['line4', 'line2', 'line3', 'line1']), eqangle (['line2', 'line7', 'line5', 'line3']), eqangle (['line5', 'line3', 'line2', 'line7']), eqangle (['line1', 'line7', 'line5', 'line4']), eqangle (['line5', 'line4', 'line1', 'line7']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line2', 'line4', 'line1', 'line3'])]
+cyclic (['D', 'E', 'C', 'H'])
+NEW_FACT_LIST: [eqangle (['line3', 'line5', 'line7', 'line2']), eqangle (['line5', 'line3', 'line2', 'line7']), eqangle (['line5', 'line2', 'line3', 'line7']), eqangle (['line4', 'line7', 'line5', 'line1']), eqangle (['line1', 'line7', 'line5', 'line4']), eqangle (['line1', 'line5', 'line7', 'line4']), eqangle (['line7', 'line3', 'line2', 'line5']), eqangle (['line7', 'line1', 'line4', 'line5']), eqangle (['line2', 'line5', 'line7', 'line3']), eqangle (['line3', 'line7', 'line5', 'line2']), eqangle (['line2', 'line7', 'line5', 'line3']), eqangle (['line7', 'line4', 'line1', 'line5']), eqangle (['line4', 'line5', 'line7', 'line1']), eqangle (['line5', 'line4', 'line1', 'line7']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line5', 'line1', 'line4', 'line7']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line3', 'line5', 'line7', 'line2'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8}
+
+Candidates FOR CYCLIC C E D H 
+
+
+Candidates FOR CYCLIC C E H D 
+
+
+Candidates FOR CYCLIC D H C E 
+
+
+Candidates FOR CYCLIC D H E C 
+
+NEW FACTS: [cyclic (['C', 'E', 'D', 'H']), cyclic (['C', 'E', 'H', 'D']), cyclic (['D', 'H', 'C', 'E']), cyclic (['D', 'H', 'E', 'C'])]
+eqangle (['line3', 'line5', 'line7', 'line2'])
+NEW_FACT_LIST: [eqangle (['line5', 'line3', 'line2', 'line7']), eqangle (['line5', 'line2', 'line3', 'line7']), eqangle (['line4', 'line7', 'line5', 'line1']), eqangle (['line1', 'line7', 'line5', 'line4']), eqangle (['line1', 'line5', 'line7', 'line4']), eqangle (['line7', 'line3', 'line2', 'line5']), eqangle (['line7', 'line1', 'line4', 'line5']), eqangle (['line2', 'line5', 'line7', 'line3']), eqangle (['line3', 'line7', 'line5', 'line2']), eqangle (['line2', 'line7', 'line5', 'line3']), eqangle (['line7', 'line4', 'line1', 'line5']), eqangle (['line4', 'line5', 'line7', 'line1']), eqangle (['line5', 'line4', 'line1', 'line7']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line5', 'line1', 'line4', 'line7']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line5', 'line3', 'line2', 'line7'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9}
+
+Candidates FOR CYCLIC C E H D 
+
+
+Candidates FOR CYCLIC C E D H 
+
+
+Candidates FOR CYCLIC H D C E 
+
+
+Candidates FOR CYCLIC H D E C 
+
+NEW FACTS: [cyclic (['C', 'E', 'H', 'D']), cyclic (['C', 'E', 'D', 'H']), eqangle (['line3', 'line5', 'line3', 'line5']), cyclic (['H', 'D', 'C', 'E']), cyclic (['H', 'D', 'E', 'C'])]
+NEW_FACT_LIST: [eqangle (['line5', 'line2', 'line3', 'line7']), eqangle (['line4', 'line7', 'line5', 'line1']), eqangle (['line1', 'line7', 'line5', 'line4']), eqangle (['line1', 'line5', 'line7', 'line4']), eqangle (['line7', 'line3', 'line2', 'line5']), eqangle (['line7', 'line1', 'line4', 'line5']), eqangle (['line2', 'line5', 'line7', 'line3']), eqangle (['line3', 'line7', 'line5', 'line2']), eqangle (['line2', 'line7', 'line5', 'line3']), eqangle (['line7', 'line4', 'line1', 'line5']), eqangle (['line4', 'line5', 'line7', 'line1']), eqangle (['line5', 'line4', 'line1', 'line7']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line5', 'line1', 'line4', 'line7']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line5', 'line2', 'line3', 'line7'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9}
+
+Candidates FOR CYCLIC H D C E 
+
+
+Candidates FOR CYCLIC H D E C 
+
+
+Candidates FOR CYCLIC C E H D 
+
+
+Candidates FOR CYCLIC C E D H 
+
+NEW FACTS: [cyclic (['H', 'D', 'C', 'E']), cyclic (['H', 'D', 'E', 'C']), cyclic (['C', 'E', 'H', 'D']), cyclic (['C', 'E', 'D', 'H']), eqangle (['line3', 'line5', 'line3', 'line5'])]
+NEW_FACT_LIST: [eqangle (['line4', 'line7', 'line5', 'line1']), eqangle (['line1', 'line7', 'line5', 'line4']), eqangle (['line1', 'line5', 'line7', 'line4']), eqangle (['line7', 'line3', 'line2', 'line5']), eqangle (['line7', 'line1', 'line4', 'line5']), eqangle (['line2', 'line5', 'line7', 'line3']), eqangle (['line3', 'line7', 'line5', 'line2']), eqangle (['line2', 'line7', 'line5', 'line3']), eqangle (['line7', 'line4', 'line1', 'line5']), eqangle (['line4', 'line5', 'line7', 'line1']), eqangle (['line5', 'line4', 'line1', 'line7']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line5', 'line1', 'line4', 'line7']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line4', 'line7', 'line5', 'line1'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9}
+
+Candidates FOR CYCLIC E H C D 
+
+
+Candidates FOR CYCLIC E H D C 
+
+
+Candidates FOR CYCLIC C D E H 
+
+
+Candidates FOR CYCLIC C D H E 
+
+NEW FACTS: [cyclic (['E', 'H', 'C', 'D']), cyclic (['E', 'H', 'D', 'C']), cyclic (['C', 'D', 'E', 'H']), cyclic (['C', 'D', 'H', 'E'])]
+eqangle (['line4', 'line7', 'line5', 'line1'])
+NEW_FACT_LIST: [eqangle (['line1', 'line7', 'line5', 'line4']), eqangle (['line1', 'line5', 'line7', 'line4']), eqangle (['line7', 'line3', 'line2', 'line5']), eqangle (['line7', 'line1', 'line4', 'line5']), eqangle (['line2', 'line5', 'line7', 'line3']), eqangle (['line3', 'line7', 'line5', 'line2']), eqangle (['line2', 'line7', 'line5', 'line3']), eqangle (['line7', 'line4', 'line1', 'line5']), eqangle (['line4', 'line5', 'line7', 'line1']), eqangle (['line5', 'line4', 'line1', 'line7']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line5', 'line1', 'line4', 'line7']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line1', 'line7', 'line5', 'line4'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10}
+
+Candidates FOR CYCLIC D C H E 
+
+
+Candidates FOR CYCLIC D C E H 
+
+
+Candidates FOR CYCLIC H E D C 
+
+
+Candidates FOR CYCLIC H E C D 
+
+NEW FACTS: [cyclic (['D', 'C', 'H', 'E']), cyclic (['D', 'C', 'E', 'H']), cyclic (['H', 'E', 'D', 'C']), eqangle (['line5', 'line1', 'line5', 'line1']), cyclic (['H', 'E', 'C', 'D'])]
+NEW_FACT_LIST: [eqangle (['line1', 'line5', 'line7', 'line4']), eqangle (['line7', 'line3', 'line2', 'line5']), eqangle (['line7', 'line1', 'line4', 'line5']), eqangle (['line2', 'line5', 'line7', 'line3']), eqangle (['line3', 'line7', 'line5', 'line2']), eqangle (['line2', 'line7', 'line5', 'line3']), eqangle (['line7', 'line4', 'line1', 'line5']), eqangle (['line4', 'line5', 'line7', 'line1']), eqangle (['line5', 'line4', 'line1', 'line7']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line5', 'line1', 'line4', 'line7']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line1', 'line5', 'line7', 'line4'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10}
+
+Candidates FOR CYCLIC H E D C 
+
+
+Candidates FOR CYCLIC H E C D 
+
+
+Candidates FOR CYCLIC D C H E 
+
+
+Candidates FOR CYCLIC D C E H 
+
+NEW FACTS: [cyclic (['H', 'E', 'D', 'C']), eqangle (['line5', 'line1', 'line5', 'line1']), cyclic (['H', 'E', 'C', 'D']), cyclic (['D', 'C', 'H', 'E']), cyclic (['D', 'C', 'E', 'H'])]
+NEW_FACT_LIST: [eqangle (['line7', 'line3', 'line2', 'line5']), eqangle (['line7', 'line1', 'line4', 'line5']), eqangle (['line2', 'line5', 'line7', 'line3']), eqangle (['line3', 'line7', 'line5', 'line2']), eqangle (['line2', 'line7', 'line5', 'line3']), eqangle (['line7', 'line4', 'line1', 'line5']), eqangle (['line4', 'line5', 'line7', 'line1']), eqangle (['line5', 'line4', 'line1', 'line7']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line5', 'line1', 'line4', 'line7']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line7', 'line3', 'line2', 'line5'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10}
+
+Candidates FOR CYCLIC D H E C 
+
+
+Candidates FOR CYCLIC D H C E 
+
+
+Candidates FOR CYCLIC E C D H 
+
+
+Candidates FOR CYCLIC E C H D 
+
+NEW FACTS: [cyclic (['D', 'H', 'E', 'C']), cyclic (['D', 'H', 'C', 'E']), cyclic (['E', 'C', 'D', 'H']), eqangle (['line7', 'line2', 'line7', 'line2']), cyclic (['E', 'C', 'H', 'D'])]
+NEW_FACT_LIST: [eqangle (['line7', 'line1', 'line4', 'line5']), eqangle (['line2', 'line5', 'line7', 'line3']), eqangle (['line3', 'line7', 'line5', 'line2']), eqangle (['line2', 'line7', 'line5', 'line3']), eqangle (['line7', 'line4', 'line1', 'line5']), eqangle (['line4', 'line5', 'line7', 'line1']), eqangle (['line5', 'line4', 'line1', 'line7']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line5', 'line1', 'line4', 'line7']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line7', 'line1', 'line4', 'line5'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10}
+
+Candidates FOR CYCLIC D C E H 
+
+
+Candidates FOR CYCLIC D C H E 
+
+
+Candidates FOR CYCLIC E H D C 
+
+
+Candidates FOR CYCLIC E H C D 
+
+NEW FACTS: [cyclic (['D', 'C', 'E', 'H']), cyclic (['D', 'C', 'H', 'E']), cyclic (['E', 'H', 'D', 'C']), cyclic (['E', 'H', 'C', 'D']), eqangle (['line4', 'line7', 'line4', 'line7'])]
+NEW_FACT_LIST: [eqangle (['line2', 'line5', 'line7', 'line3']), eqangle (['line3', 'line7', 'line5', 'line2']), eqangle (['line2', 'line7', 'line5', 'line3']), eqangle (['line7', 'line4', 'line1', 'line5']), eqangle (['line4', 'line5', 'line7', 'line1']), eqangle (['line5', 'line4', 'line1', 'line7']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line5', 'line1', 'line4', 'line7']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line2', 'line5', 'line7', 'line3'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10}
+
+Candidates FOR CYCLIC H D E C 
+
+
+Candidates FOR CYCLIC H D C E 
+
+
+Candidates FOR CYCLIC E C H D 
+
+
+Candidates FOR CYCLIC E C D H 
+
+NEW FACTS: [cyclic (['H', 'D', 'E', 'C']), cyclic (['H', 'D', 'C', 'E']), cyclic (['E', 'C', 'H', 'D']), cyclic (['E', 'C', 'D', 'H']), eqangle (['line7', 'line2', 'line7', 'line2'])]
+NEW_FACT_LIST: [eqangle (['line3', 'line7', 'line5', 'line2']), eqangle (['line2', 'line7', 'line5', 'line3']), eqangle (['line7', 'line4', 'line1', 'line5']), eqangle (['line4', 'line5', 'line7', 'line1']), eqangle (['line5', 'line4', 'line1', 'line7']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line5', 'line1', 'line4', 'line7']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line3', 'line7', 'line5', 'line2'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10}
+
+Candidates FOR CYCLIC D H C E 
+
+
+Candidates FOR CYCLIC D H E C 
+
+
+Candidates FOR CYCLIC C E D H 
+
+
+Candidates FOR CYCLIC C E H D 
+
+NEW FACTS: [cyclic (['D', 'H', 'C', 'E']), cyclic (['D', 'H', 'E', 'C']), cyclic (['C', 'E', 'D', 'H']), eqangle (['line3', 'line5', 'line3', 'line5']), cyclic (['C', 'E', 'H', 'D'])]
+NEW_FACT_LIST: [eqangle (['line2', 'line7', 'line5', 'line3']), eqangle (['line7', 'line4', 'line1', 'line5']), eqangle (['line4', 'line5', 'line7', 'line1']), eqangle (['line5', 'line4', 'line1', 'line7']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line5', 'line1', 'line4', 'line7']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line2', 'line7', 'line5', 'line3'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10}
+
+Candidates FOR CYCLIC E C H D 
+
+
+Candidates FOR CYCLIC E C D H 
+
+
+Candidates FOR CYCLIC H D E C 
+
+
+Candidates FOR CYCLIC H D C E 
+
+NEW FACTS: [cyclic (['E', 'C', 'H', 'D']), cyclic (['E', 'C', 'D', 'H']), eqangle (['line7', 'line2', 'line7', 'line2']), cyclic (['H', 'D', 'E', 'C']), cyclic (['H', 'D', 'C', 'E'])]
+NEW_FACT_LIST: [eqangle (['line7', 'line4', 'line1', 'line5']), eqangle (['line4', 'line5', 'line7', 'line1']), eqangle (['line5', 'line4', 'line1', 'line7']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line5', 'line1', 'line4', 'line7']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line7', 'line4', 'line1', 'line5'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10}
+
+Candidates FOR CYCLIC E H D C 
+
+
+Candidates FOR CYCLIC E H C D 
+
+
+Candidates FOR CYCLIC D C E H 
+
+
+Candidates FOR CYCLIC D C H E 
+
+NEW FACTS: [cyclic (['E', 'H', 'D', 'C']), cyclic (['E', 'H', 'C', 'D']), eqangle (['line4', 'line7', 'line4', 'line7']), cyclic (['D', 'C', 'E', 'H']), cyclic (['D', 'C', 'H', 'E'])]
+NEW_FACT_LIST: [eqangle (['line4', 'line5', 'line7', 'line1']), eqangle (['line5', 'line4', 'line1', 'line7']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line5', 'line1', 'line4', 'line7']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line4', 'line5', 'line7', 'line1'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10}
+
+Candidates FOR CYCLIC C D E H 
+
+
+Candidates FOR CYCLIC C D H E 
+
+
+Candidates FOR CYCLIC E H C D 
+
+
+Candidates FOR CYCLIC E H D C 
+
+NEW FACTS: [cyclic (['C', 'D', 'E', 'H']), cyclic (['C', 'D', 'H', 'E']), cyclic (['E', 'H', 'C', 'D']), eqangle (['line4', 'line7', 'line4', 'line7']), cyclic (['E', 'H', 'D', 'C'])]
+NEW_FACT_LIST: [eqangle (['line5', 'line4', 'line1', 'line7']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line5', 'line1', 'line4', 'line7']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line5', 'line4', 'line1', 'line7'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10}
+
+Candidates FOR CYCLIC C D H E 
+
+
+Candidates FOR CYCLIC C D E H 
+
+
+Candidates FOR CYCLIC H E C D 
+
+
+Candidates FOR CYCLIC H E D C 
+
+NEW FACTS: [cyclic (['C', 'D', 'H', 'E']), cyclic (['C', 'D', 'E', 'H']), eqangle (['line5', 'line1', 'line5', 'line1']), cyclic (['H', 'E', 'C', 'D']), cyclic (['H', 'E', 'D', 'C'])]
+NEW_FACT_LIST: [eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line5', 'line1', 'line4', 'line7']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line7', 'line2', 'line3', 'line5'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10}
+
+Candidates FOR CYCLIC E C D H 
+
+
+Candidates FOR CYCLIC E C H D 
+
+
+Candidates FOR CYCLIC D H E C 
+
+
+Candidates FOR CYCLIC D H C E 
+
+NEW FACTS: [cyclic (['E', 'C', 'D', 'H']), eqangle (['line7', 'line2', 'line7', 'line2']), cyclic (['E', 'C', 'H', 'D']), cyclic (['D', 'H', 'E', 'C']), cyclic (['D', 'H', 'C', 'E'])]
+NEW_FACT_LIST: [eqangle (['line5', 'line1', 'line4', 'line7']), cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line5', 'line1', 'line4', 'line7'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10}
+
+Candidates FOR CYCLIC H E C D 
+
+
+Candidates FOR CYCLIC H E D C 
+
+
+Candidates FOR CYCLIC C D H E 
+
+
+Candidates FOR CYCLIC C D E H 
+
+NEW FACTS: [eqangle (['line5', 'line1', 'line5', 'line1']), cyclic (['H', 'E', 'C', 'D']), cyclic (['H', 'E', 'D', 'C']), cyclic (['C', 'D', 'H', 'E']), cyclic (['C', 'D', 'E', 'H'])]
+NEW_FACT_LIST: [cyclic (['H', 'C', 'D', 'E']), cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: cyclic (['H', 'C', 'D', 'E'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10}
+NEW FACTS: [eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line2', 'line4', 'line1', 'line3']), eqangle (['line5', 'line3', 'line2', 'line7']), eqangle (['line2', 'line7', 'line5', 'line3']), eqangle (['line5', 'line4', 'line1', 'line7']), eqangle (['line1', 'line7', 'line5', 'line4']), eqangle (['line3', 'line1', 'line4', 'line2']), eqangle (['line4', 'line2', 'line3', 'line1']), eqangle (['line5', 'line1', 'line4', 'line7']), eqangle (['line4', 'line7', 'line5', 'line1']), eqangle (['line5', 'line2', 'line3', 'line7']), eqangle (['line3', 'line7', 'line5', 'line2']), eqangle (['line3', 'line5', 'line7', 'line2']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line1', 'line5', 'line7', 'line4']), eqangle (['line7', 'line4', 'line1', 'line5']), eqangle (['line1', 'line2', 'line3', 'line4']), eqangle (['line3', 'line4', 'line1', 'line2']), eqangle (['line4', 'line5', 'line7', 'line1']), eqangle (['line7', 'line1', 'line4', 'line5']), eqangle (['line2', 'line5', 'line7', 'line3']), eqangle (['line7', 'line3', 'line2', 'line5']), eqangle (['line2', 'line1', 'line4', 'line3']), eqangle (['line4', 'line3', 'line2', 'line1'])]
+NEW_FACT_LIST: [cyclic (['D', 'E', 'H', 'C']), cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: cyclic (['D', 'E', 'H', 'C'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10}
+NEW FACTS: [eqangle (['line1', 'line2', 'line3', 'line4']), eqangle (['line3', 'line4', 'line1', 'line2']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line3', 'line5', 'line7', 'line2']), eqangle (['line7', 'line4', 'line1', 'line5']), eqangle (['line1', 'line5', 'line7', 'line4']), eqangle (['line2', 'line1', 'line4', 'line3']), eqangle (['line4', 'line3', 'line2', 'line1']), eqangle (['line7', 'line1', 'line4', 'line5']), eqangle (['line4', 'line5', 'line7', 'line1']), eqangle (['line7', 'line3', 'line2', 'line5']), eqangle (['line2', 'line5', 'line7', 'line3']), eqangle (['line2', 'line7', 'line5', 'line3']), eqangle (['line5', 'line3', 'line2', 'line7']), eqangle (['line1', 'line7', 'line5', 'line4']), eqangle (['line5', 'line4', 'line1', 'line7']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line2', 'line4', 'line1', 'line3']), eqangle (['line4', 'line7', 'line5', 'line1']), eqangle (['line5', 'line1', 'line4', 'line7']), eqangle (['line3', 'line7', 'line5', 'line2']), eqangle (['line5', 'line2', 'line3', 'line7']), eqangle (['line3', 'line1', 'line4', 'line2']), eqangle (['line4', 'line2', 'line3', 'line1'])]
+NEW_FACT_LIST: [cyclic (['H', 'C', 'E', 'D']), cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: cyclic (['H', 'C', 'E', 'D'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10}
+NEW FACTS: [eqangle (['line2', 'line4', 'line1', 'line3']), eqangle (['line1', 'line3', 'line2', 'line4']), eqangle (['line5', 'line4', 'line1', 'line7']), eqangle (['line1', 'line7', 'line5', 'line4']), eqangle (['line5', 'line3', 'line2', 'line7']), eqangle (['line2', 'line7', 'line5', 'line3']), eqangle (['line4', 'line2', 'line3', 'line1']), eqangle (['line3', 'line1', 'line4', 'line2']), eqangle (['line5', 'line2', 'line3', 'line7']), eqangle (['line3', 'line7', 'line5', 'line2']), eqangle (['line5', 'line1', 'line4', 'line7']), eqangle (['line4', 'line7', 'line5', 'line1']), eqangle (['line4', 'line5', 'line7', 'line1']), eqangle (['line7', 'line1', 'line4', 'line5']), eqangle (['line2', 'line5', 'line7', 'line3']), eqangle (['line7', 'line3', 'line2', 'line5']), eqangle (['line2', 'line1', 'line4', 'line3']), eqangle (['line4', 'line3', 'line2', 'line1']), eqangle (['line3', 'line5', 'line7', 'line2']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line1', 'line5', 'line7', 'line4']), eqangle (['line7', 'line4', 'line1', 'line5']), eqangle (['line1', 'line2', 'line3', 'line4']), eqangle (['line3', 'line4', 'line1', 'line2'])]
+NEW_FACT_LIST: [cyclic (['E', 'D', 'B', 'A']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: cyclic (['E', 'D', 'B', 'A'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10}
+NEW FACTS: [eqangle (['line2', 'line3', 'line4', 'line1']), eqangle (['line4', 'line1', 'line2', 'line3']), eqangle (['line7', 'line3', 'line4', 'line6']), eqangle (['line4', 'line6', 'line7', 'line3']), eqangle (['line7', 'line1', 'line2', 'line6']), eqangle (['line2', 'line6', 'line7', 'line1']), eqangle (['line3', 'line2', 'line1', 'line4']), eqangle (['line1', 'line4', 'line3', 'line2']), eqangle (['line7', 'line2', 'line1', 'line6']), eqangle (['line1', 'line6', 'line7', 'line2']), eqangle (['line7', 'line4', 'line3', 'line6']), eqangle (['line3', 'line6', 'line7', 'line4']), eqangle (['line3', 'line7', 'line6', 'line4']), eqangle (['line6', 'line4', 'line3', 'line7']), eqangle (['line2', 'line7', 'line6', 'line1']), eqangle (['line6', 'line1', 'line2', 'line7']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line3', 'line1', 'line2', 'line4']), eqangle (['line1', 'line7', 'line6', 'line2']), eqangle (['line6', 'line2', 'line1', 'line7']), eqangle (['line4', 'line7', 'line6', 'line3']), eqangle (['line6', 'line3', 'line4', 'line7']), eqangle (['line4', 'line2', 'line1', 'line3']), eqangle (['line1', 'line3', 'line4', 'line2'])]
+cyclic (['E', 'D', 'B', 'A'])
+NEW_FACT_LIST: [eqangle (['line2', 'line6', 'line7', 'line1']), eqangle (['line7', 'line1', 'line2', 'line6']), eqangle (['line4', 'line6', 'line7', 'line3']), eqangle (['line6', 'line1', 'line2', 'line7']), eqangle (['line2', 'line7', 'line6', 'line1']), eqangle (['line7', 'line3', 'line4', 'line6']), eqangle (['line1', 'line6', 'line7', 'line2']), eqangle (['line3', 'line7', 'line6', 'line4']), eqangle (['line1', 'line7', 'line6', 'line2']), eqangle (['line4', 'line7', 'line6', 'line3']), eqangle (['line3', 'line6', 'line7', 'line4']), eqangle (['line7', 'line4', 'line3', 'line6']), eqangle (['line6', 'line4', 'line3', 'line7']), eqangle (['line6', 'line3', 'line4', 'line7']), eqangle (['line7', 'line2', 'line1', 'line6']), eqangle (['line6', 'line2', 'line1', 'line7']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line2', 'line6', 'line7', 'line1'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10, eqangle (['line2', 'line6', 'line7', 'line1']): 11}
+
+Candidates FOR CYCLIC B D E A 
+
+
+Candidates FOR CYCLIC B D A E 
+
+
+Candidates FOR CYCLIC E A B D 
+
+
+Candidates FOR CYCLIC E A D B 
+
+NEW FACTS: [cyclic (['B', 'D', 'E', 'A']), cyclic (['B', 'D', 'A', 'E']), cyclic (['E', 'A', 'B', 'D']), cyclic (['E', 'A', 'D', 'B'])]
+eqangle (['line2', 'line6', 'line7', 'line1'])
+NEW_FACT_LIST: [eqangle (['line7', 'line1', 'line2', 'line6']), eqangle (['line4', 'line6', 'line7', 'line3']), eqangle (['line6', 'line1', 'line2', 'line7']), eqangle (['line2', 'line7', 'line6', 'line1']), eqangle (['line7', 'line3', 'line4', 'line6']), eqangle (['line1', 'line6', 'line7', 'line2']), eqangle (['line3', 'line7', 'line6', 'line4']), eqangle (['line1', 'line7', 'line6', 'line2']), eqangle (['line4', 'line7', 'line6', 'line3']), eqangle (['line3', 'line6', 'line7', 'line4']), eqangle (['line7', 'line4', 'line3', 'line6']), eqangle (['line6', 'line4', 'line3', 'line7']), eqangle (['line6', 'line3', 'line4', 'line7']), eqangle (['line7', 'line2', 'line1', 'line6']), eqangle (['line6', 'line2', 'line1', 'line7']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line7', 'line1', 'line2', 'line6'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10, eqangle (['line2', 'line6', 'line7', 'line1']): 11, eqangle (['line7', 'line1', 'line2', 'line6']): 12}
+
+Candidates FOR CYCLIC D B E A 
+
+
+Candidates FOR CYCLIC D B A E 
+
+
+Candidates FOR CYCLIC E A D B 
+
+
+Candidates FOR CYCLIC E A B D 
+
+NEW FACTS: [cyclic (['D', 'B', 'E', 'A']), cyclic (['D', 'B', 'A', 'E']), cyclic (['E', 'A', 'D', 'B']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line7', 'line2', 'line7', 'line2']), cyclic (['E', 'A', 'B', 'D'])]
+NEW_FACT_LIST: [eqangle (['line4', 'line6', 'line7', 'line3']), eqangle (['line6', 'line1', 'line2', 'line7']), eqangle (['line2', 'line7', 'line6', 'line1']), eqangle (['line7', 'line3', 'line4', 'line6']), eqangle (['line1', 'line6', 'line7', 'line2']), eqangle (['line3', 'line7', 'line6', 'line4']), eqangle (['line1', 'line7', 'line6', 'line2']), eqangle (['line4', 'line7', 'line6', 'line3']), eqangle (['line3', 'line6', 'line7', 'line4']), eqangle (['line7', 'line4', 'line3', 'line6']), eqangle (['line6', 'line4', 'line3', 'line7']), eqangle (['line6', 'line3', 'line4', 'line7']), eqangle (['line7', 'line2', 'line1', 'line6']), eqangle (['line6', 'line2', 'line1', 'line7']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line4', 'line6', 'line7', 'line3'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10, eqangle (['line2', 'line6', 'line7', 'line1']): 11, eqangle (['line7', 'line1', 'line2', 'line6']): 12, eqangle (['line4', 'line6', 'line7', 'line3']): 12}
+
+Candidates FOR CYCLIC A D E B 
+
+
+Candidates FOR CYCLIC A D B E 
+
+
+Candidates FOR CYCLIC E B A D 
+
+
+Candidates FOR CYCLIC E B D A 
+
+NEW FACTS: [cyclic (['A', 'D', 'E', 'B']), cyclic (['A', 'D', 'B', 'E']), cyclic (['E', 'B', 'A', 'D']), cyclic (['E', 'B', 'D', 'A'])]
+eqangle (['line4', 'line6', 'line7', 'line3'])
+NEW_FACT_LIST: [eqangle (['line6', 'line1', 'line2', 'line7']), eqangle (['line2', 'line7', 'line6', 'line1']), eqangle (['line7', 'line3', 'line4', 'line6']), eqangle (['line1', 'line6', 'line7', 'line2']), eqangle (['line3', 'line7', 'line6', 'line4']), eqangle (['line1', 'line7', 'line6', 'line2']), eqangle (['line4', 'line7', 'line6', 'line3']), eqangle (['line3', 'line6', 'line7', 'line4']), eqangle (['line7', 'line4', 'line3', 'line6']), eqangle (['line6', 'line4', 'line3', 'line7']), eqangle (['line6', 'line3', 'line4', 'line7']), eqangle (['line7', 'line2', 'line1', 'line6']), eqangle (['line6', 'line2', 'line1', 'line7']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line6', 'line1', 'line2', 'line7'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10, eqangle (['line2', 'line6', 'line7', 'line1']): 11, eqangle (['line7', 'line1', 'line2', 'line6']): 12, eqangle (['line4', 'line6', 'line7', 'line3']): 12, eqangle (['line6', 'line1', 'line2', 'line7']): 13}
+
+Candidates FOR CYCLIC A E B D 
+
+
+Candidates FOR CYCLIC A E D B 
+
+
+Candidates FOR CYCLIC B D A E 
+
+
+Candidates FOR CYCLIC B D E A 
+
+NEW FACTS: [cyclic (['A', 'E', 'B', 'D']), cyclic (['A', 'E', 'D', 'B']), eqangle (['line1', 'line6', 'line3', 'line5']), eqangle (['line1', 'line6', 'line1', 'line6']), cyclic (['B', 'D', 'A', 'E']), cyclic (['B', 'D', 'E', 'A'])]
+NEW_FACT_LIST: [eqangle (['line2', 'line7', 'line6', 'line1']), eqangle (['line7', 'line3', 'line4', 'line6']), eqangle (['line1', 'line6', 'line7', 'line2']), eqangle (['line3', 'line7', 'line6', 'line4']), eqangle (['line1', 'line7', 'line6', 'line2']), eqangle (['line4', 'line7', 'line6', 'line3']), eqangle (['line3', 'line6', 'line7', 'line4']), eqangle (['line7', 'line4', 'line3', 'line6']), eqangle (['line6', 'line4', 'line3', 'line7']), eqangle (['line6', 'line3', 'line4', 'line7']), eqangle (['line7', 'line2', 'line1', 'line6']), eqangle (['line6', 'line2', 'line1', 'line7']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line2', 'line7', 'line6', 'line1'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10, eqangle (['line2', 'line6', 'line7', 'line1']): 11, eqangle (['line7', 'line1', 'line2', 'line6']): 12, eqangle (['line4', 'line6', 'line7', 'line3']): 12, eqangle (['line6', 'line1', 'line2', 'line7']): 13, eqangle (['line2', 'line7', 'line6', 'line1']): 13}
+
+Candidates FOR CYCLIC E A B D 
+
+
+Candidates FOR CYCLIC E A D B 
+
+
+Candidates FOR CYCLIC B D E A 
+
+
+Candidates FOR CYCLIC B D A E 
+
+NEW FACTS: [cyclic (['E', 'A', 'B', 'D']), cyclic (['E', 'A', 'D', 'B']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line7', 'line2', 'line7', 'line2']), cyclic (['B', 'D', 'E', 'A']), cyclic (['B', 'D', 'A', 'E'])]
+NEW_FACT_LIST: [eqangle (['line7', 'line3', 'line4', 'line6']), eqangle (['line1', 'line6', 'line7', 'line2']), eqangle (['line3', 'line7', 'line6', 'line4']), eqangle (['line1', 'line7', 'line6', 'line2']), eqangle (['line4', 'line7', 'line6', 'line3']), eqangle (['line3', 'line6', 'line7', 'line4']), eqangle (['line7', 'line4', 'line3', 'line6']), eqangle (['line6', 'line4', 'line3', 'line7']), eqangle (['line6', 'line3', 'line4', 'line7']), eqangle (['line7', 'line2', 'line1', 'line6']), eqangle (['line6', 'line2', 'line1', 'line7']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line7', 'line3', 'line4', 'line6'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10, eqangle (['line2', 'line6', 'line7', 'line1']): 11, eqangle (['line7', 'line1', 'line2', 'line6']): 12, eqangle (['line4', 'line6', 'line7', 'line3']): 12, eqangle (['line6', 'line1', 'line2', 'line7']): 13, eqangle (['line2', 'line7', 'line6', 'line1']): 13, eqangle (['line7', 'line3', 'line4', 'line6']): 13}
+
+Candidates FOR CYCLIC D A E B 
+
+
+Candidates FOR CYCLIC D A B E 
+
+
+Candidates FOR CYCLIC E B D A 
+
+
+Candidates FOR CYCLIC E B A D 
+
+NEW FACTS: [cyclic (['D', 'A', 'E', 'B']), cyclic (['D', 'A', 'B', 'E']), cyclic (['E', 'B', 'D', 'A']), cyclic (['E', 'B', 'A', 'D']), eqangle (['line4', 'line7', 'line5', 'line1']), eqangle (['line4', 'line7', 'line4', 'line7'])]
+NEW_FACT_LIST: [eqangle (['line1', 'line6', 'line7', 'line2']), eqangle (['line3', 'line7', 'line6', 'line4']), eqangle (['line1', 'line7', 'line6', 'line2']), eqangle (['line4', 'line7', 'line6', 'line3']), eqangle (['line3', 'line6', 'line7', 'line4']), eqangle (['line7', 'line4', 'line3', 'line6']), eqangle (['line6', 'line4', 'line3', 'line7']), eqangle (['line6', 'line3', 'line4', 'line7']), eqangle (['line7', 'line2', 'line1', 'line6']), eqangle (['line6', 'line2', 'line1', 'line7']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line1', 'line6', 'line7', 'line2'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10, eqangle (['line2', 'line6', 'line7', 'line1']): 11, eqangle (['line7', 'line1', 'line2', 'line6']): 12, eqangle (['line4', 'line6', 'line7', 'line3']): 12, eqangle (['line6', 'line1', 'line2', 'line7']): 13, eqangle (['line2', 'line7', 'line6', 'line1']): 13, eqangle (['line7', 'line3', 'line4', 'line6']): 13, eqangle (['line1', 'line6', 'line7', 'line2']): 13}
+
+Candidates FOR CYCLIC A E D B 
+
+
+Candidates FOR CYCLIC A E B D 
+
+
+Candidates FOR CYCLIC D B A E 
+
+
+Candidates FOR CYCLIC D B E A 
+
+NEW FACTS: [cyclic (['A', 'E', 'D', 'B']), eqangle (['line1', 'line6', 'line3', 'line5']), eqangle (['line1', 'line6', 'line1', 'line6']), cyclic (['A', 'E', 'B', 'D']), cyclic (['D', 'B', 'A', 'E']), cyclic (['D', 'B', 'E', 'A'])]
+NEW_FACT_LIST: [eqangle (['line3', 'line7', 'line6', 'line4']), eqangle (['line1', 'line7', 'line6', 'line2']), eqangle (['line4', 'line7', 'line6', 'line3']), eqangle (['line3', 'line6', 'line7', 'line4']), eqangle (['line7', 'line4', 'line3', 'line6']), eqangle (['line6', 'line4', 'line3', 'line7']), eqangle (['line6', 'line3', 'line4', 'line7']), eqangle (['line7', 'line2', 'line1', 'line6']), eqangle (['line6', 'line2', 'line1', 'line7']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line3', 'line7', 'line6', 'line4'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10, eqangle (['line2', 'line6', 'line7', 'line1']): 11, eqangle (['line7', 'line1', 'line2', 'line6']): 12, eqangle (['line4', 'line6', 'line7', 'line3']): 12, eqangle (['line6', 'line1', 'line2', 'line7']): 13, eqangle (['line2', 'line7', 'line6', 'line1']): 13, eqangle (['line7', 'line3', 'line4', 'line6']): 13, eqangle (['line1', 'line6', 'line7', 'line2']): 13, eqangle (['line3', 'line7', 'line6', 'line4']): 13}
+
+Candidates FOR CYCLIC D A B E 
+
+
+Candidates FOR CYCLIC D A E B 
+
+
+Candidates FOR CYCLIC B E D A 
+
+
+Candidates FOR CYCLIC B E A D 
+
+NEW FACTS: [cyclic (['D', 'A', 'B', 'E']), cyclic (['D', 'A', 'E', 'B']), cyclic (['B', 'E', 'D', 'A']), cyclic (['B', 'E', 'A', 'D']), eqangle (['line6', 'line3', 'line5', 'line1']), eqangle (['line6', 'line3', 'line6', 'line3'])]
+NEW_FACT_LIST: [eqangle (['line1', 'line7', 'line6', 'line2']), eqangle (['line4', 'line7', 'line6', 'line3']), eqangle (['line3', 'line6', 'line7', 'line4']), eqangle (['line7', 'line4', 'line3', 'line6']), eqangle (['line6', 'line4', 'line3', 'line7']), eqangle (['line6', 'line3', 'line4', 'line7']), eqangle (['line7', 'line2', 'line1', 'line6']), eqangle (['line6', 'line2', 'line1', 'line7']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line1', 'line7', 'line6', 'line2'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10, eqangle (['line2', 'line6', 'line7', 'line1']): 11, eqangle (['line7', 'line1', 'line2', 'line6']): 12, eqangle (['line4', 'line6', 'line7', 'line3']): 12, eqangle (['line6', 'line1', 'line2', 'line7']): 13, eqangle (['line2', 'line7', 'line6', 'line1']): 13, eqangle (['line7', 'line3', 'line4', 'line6']): 13, eqangle (['line1', 'line6', 'line7', 'line2']): 13, eqangle (['line3', 'line7', 'line6', 'line4']): 13, eqangle (['line1', 'line7', 'line6', 'line2']): 13}
+
+Candidates FOR CYCLIC D B A E 
+
+
+Candidates FOR CYCLIC D B E A 
+
+
+Candidates FOR CYCLIC A E D B 
+
+
+Candidates FOR CYCLIC A E B D 
+
+NEW FACTS: [cyclic (['D', 'B', 'A', 'E']), cyclic (['D', 'B', 'E', 'A']), cyclic (['A', 'E', 'D', 'B']), eqangle (['line1', 'line6', 'line3', 'line5']), eqangle (['line1', 'line6', 'line1', 'line6']), cyclic (['A', 'E', 'B', 'D'])]
+NEW_FACT_LIST: [eqangle (['line4', 'line7', 'line6', 'line3']), eqangle (['line3', 'line6', 'line7', 'line4']), eqangle (['line7', 'line4', 'line3', 'line6']), eqangle (['line6', 'line4', 'line3', 'line7']), eqangle (['line6', 'line3', 'line4', 'line7']), eqangle (['line7', 'line2', 'line1', 'line6']), eqangle (['line6', 'line2', 'line1', 'line7']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line4', 'line7', 'line6', 'line3'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10, eqangle (['line2', 'line6', 'line7', 'line1']): 11, eqangle (['line7', 'line1', 'line2', 'line6']): 12, eqangle (['line4', 'line6', 'line7', 'line3']): 12, eqangle (['line6', 'line1', 'line2', 'line7']): 13, eqangle (['line2', 'line7', 'line6', 'line1']): 13, eqangle (['line7', 'line3', 'line4', 'line6']): 13, eqangle (['line1', 'line6', 'line7', 'line2']): 13, eqangle (['line3', 'line7', 'line6', 'line4']): 13, eqangle (['line1', 'line7', 'line6', 'line2']): 13, eqangle (['line4', 'line7', 'line6', 'line3']): 13}
+
+Candidates FOR CYCLIC E B A D 
+
+
+Candidates FOR CYCLIC E B D A 
+
+
+Candidates FOR CYCLIC A D E B 
+
+
+Candidates FOR CYCLIC A D B E 
+
+NEW FACTS: [cyclic (['E', 'B', 'A', 'D']), eqangle (['line4', 'line7', 'line5', 'line1']), eqangle (['line4', 'line7', 'line4', 'line7']), cyclic (['E', 'B', 'D', 'A']), cyclic (['A', 'D', 'E', 'B']), cyclic (['A', 'D', 'B', 'E'])]
+NEW_FACT_LIST: [eqangle (['line3', 'line6', 'line7', 'line4']), eqangle (['line7', 'line4', 'line3', 'line6']), eqangle (['line6', 'line4', 'line3', 'line7']), eqangle (['line6', 'line3', 'line4', 'line7']), eqangle (['line7', 'line2', 'line1', 'line6']), eqangle (['line6', 'line2', 'line1', 'line7']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line3', 'line6', 'line7', 'line4'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10, eqangle (['line2', 'line6', 'line7', 'line1']): 11, eqangle (['line7', 'line1', 'line2', 'line6']): 12, eqangle (['line4', 'line6', 'line7', 'line3']): 12, eqangle (['line6', 'line1', 'line2', 'line7']): 13, eqangle (['line2', 'line7', 'line6', 'line1']): 13, eqangle (['line7', 'line3', 'line4', 'line6']): 13, eqangle (['line1', 'line6', 'line7', 'line2']): 13, eqangle (['line3', 'line7', 'line6', 'line4']): 13, eqangle (['line1', 'line7', 'line6', 'line2']): 13, eqangle (['line4', 'line7', 'line6', 'line3']): 13, eqangle (['line3', 'line6', 'line7', 'line4']): 13}
+
+Candidates FOR CYCLIC B E D A 
+
+
+Candidates FOR CYCLIC B E A D 
+
+
+Candidates FOR CYCLIC D A B E 
+
+
+Candidates FOR CYCLIC D A E B 
+
+NEW FACTS: [cyclic (['B', 'E', 'D', 'A']), cyclic (['B', 'E', 'A', 'D']), eqangle (['line6', 'line3', 'line5', 'line1']), eqangle (['line6', 'line3', 'line6', 'line3']), cyclic (['D', 'A', 'B', 'E']), cyclic (['D', 'A', 'E', 'B'])]
+NEW_FACT_LIST: [eqangle (['line7', 'line4', 'line3', 'line6']), eqangle (['line6', 'line4', 'line3', 'line7']), eqangle (['line6', 'line3', 'line4', 'line7']), eqangle (['line7', 'line2', 'line1', 'line6']), eqangle (['line6', 'line2', 'line1', 'line7']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line7', 'line4', 'line3', 'line6'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10, eqangle (['line2', 'line6', 'line7', 'line1']): 11, eqangle (['line7', 'line1', 'line2', 'line6']): 12, eqangle (['line4', 'line6', 'line7', 'line3']): 12, eqangle (['line6', 'line1', 'line2', 'line7']): 13, eqangle (['line2', 'line7', 'line6', 'line1']): 13, eqangle (['line7', 'line3', 'line4', 'line6']): 13, eqangle (['line1', 'line6', 'line7', 'line2']): 13, eqangle (['line3', 'line7', 'line6', 'line4']): 13, eqangle (['line1', 'line7', 'line6', 'line2']): 13, eqangle (['line4', 'line7', 'line6', 'line3']): 13, eqangle (['line3', 'line6', 'line7', 'line4']): 13, eqangle (['line7', 'line4', 'line3', 'line6']): 13}
+
+Candidates FOR CYCLIC E B D A 
+
+
+Candidates FOR CYCLIC E B A D 
+
+
+Candidates FOR CYCLIC D A E B 
+
+
+Candidates FOR CYCLIC D A B E 
+
+NEW FACTS: [cyclic (['E', 'B', 'D', 'A']), cyclic (['E', 'B', 'A', 'D']), eqangle (['line4', 'line7', 'line5', 'line1']), eqangle (['line4', 'line7', 'line4', 'line7']), cyclic (['D', 'A', 'E', 'B']), cyclic (['D', 'A', 'B', 'E'])]
+NEW_FACT_LIST: [eqangle (['line6', 'line4', 'line3', 'line7']), eqangle (['line6', 'line3', 'line4', 'line7']), eqangle (['line7', 'line2', 'line1', 'line6']), eqangle (['line6', 'line2', 'line1', 'line7']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line6', 'line4', 'line3', 'line7'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10, eqangle (['line2', 'line6', 'line7', 'line1']): 11, eqangle (['line7', 'line1', 'line2', 'line6']): 12, eqangle (['line4', 'line6', 'line7', 'line3']): 12, eqangle (['line6', 'line1', 'line2', 'line7']): 13, eqangle (['line2', 'line7', 'line6', 'line1']): 13, eqangle (['line7', 'line3', 'line4', 'line6']): 13, eqangle (['line1', 'line6', 'line7', 'line2']): 13, eqangle (['line3', 'line7', 'line6', 'line4']): 13, eqangle (['line1', 'line7', 'line6', 'line2']): 13, eqangle (['line4', 'line7', 'line6', 'line3']): 13, eqangle (['line3', 'line6', 'line7', 'line4']): 13, eqangle (['line7', 'line4', 'line3', 'line6']): 13, eqangle (['line6', 'line4', 'line3', 'line7']): 13}
+
+Candidates FOR CYCLIC A D B E 
+
+
+Candidates FOR CYCLIC A D E B 
+
+
+Candidates FOR CYCLIC B E A D 
+
+
+Candidates FOR CYCLIC B E D A 
+
+NEW FACTS: [cyclic (['A', 'D', 'B', 'E']), cyclic (['A', 'D', 'E', 'B']), cyclic (['B', 'E', 'A', 'D']), eqangle (['line6', 'line3', 'line5', 'line1']), eqangle (['line6', 'line3', 'line6', 'line3']), cyclic (['B', 'E', 'D', 'A'])]
+NEW_FACT_LIST: [eqangle (['line6', 'line3', 'line4', 'line7']), eqangle (['line7', 'line2', 'line1', 'line6']), eqangle (['line6', 'line2', 'line1', 'line7']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line6', 'line3', 'line4', 'line7'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10, eqangle (['line2', 'line6', 'line7', 'line1']): 11, eqangle (['line7', 'line1', 'line2', 'line6']): 12, eqangle (['line4', 'line6', 'line7', 'line3']): 12, eqangle (['line6', 'line1', 'line2', 'line7']): 13, eqangle (['line2', 'line7', 'line6', 'line1']): 13, eqangle (['line7', 'line3', 'line4', 'line6']): 13, eqangle (['line1', 'line6', 'line7', 'line2']): 13, eqangle (['line3', 'line7', 'line6', 'line4']): 13, eqangle (['line1', 'line7', 'line6', 'line2']): 13, eqangle (['line4', 'line7', 'line6', 'line3']): 13, eqangle (['line3', 'line6', 'line7', 'line4']): 13, eqangle (['line7', 'line4', 'line3', 'line6']): 13, eqangle (['line6', 'line4', 'line3', 'line7']): 13, eqangle (['line6', 'line3', 'line4', 'line7']): 13}
+
+Candidates FOR CYCLIC B E A D 
+
+
+Candidates FOR CYCLIC B E D A 
+
+
+Candidates FOR CYCLIC A D B E 
+
+
+Candidates FOR CYCLIC A D E B 
+
+NEW FACTS: [cyclic (['B', 'E', 'A', 'D']), eqangle (['line6', 'line3', 'line5', 'line1']), eqangle (['line6', 'line3', 'line6', 'line3']), cyclic (['B', 'E', 'D', 'A']), cyclic (['A', 'D', 'B', 'E']), cyclic (['A', 'D', 'E', 'B'])]
+NEW_FACT_LIST: [eqangle (['line7', 'line2', 'line1', 'line6']), eqangle (['line6', 'line2', 'line1', 'line7']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line7', 'line2', 'line1', 'line6'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10, eqangle (['line2', 'line6', 'line7', 'line1']): 11, eqangle (['line7', 'line1', 'line2', 'line6']): 12, eqangle (['line4', 'line6', 'line7', 'line3']): 12, eqangle (['line6', 'line1', 'line2', 'line7']): 13, eqangle (['line2', 'line7', 'line6', 'line1']): 13, eqangle (['line7', 'line3', 'line4', 'line6']): 13, eqangle (['line1', 'line6', 'line7', 'line2']): 13, eqangle (['line3', 'line7', 'line6', 'line4']): 13, eqangle (['line1', 'line7', 'line6', 'line2']): 13, eqangle (['line4', 'line7', 'line6', 'line3']): 13, eqangle (['line3', 'line6', 'line7', 'line4']): 13, eqangle (['line7', 'line4', 'line3', 'line6']): 13, eqangle (['line6', 'line4', 'line3', 'line7']): 13, eqangle (['line6', 'line3', 'line4', 'line7']): 13, eqangle (['line7', 'line2', 'line1', 'line6']): 13}
+
+Candidates FOR CYCLIC E A D B 
+
+
+Candidates FOR CYCLIC E A B D 
+
+
+Candidates FOR CYCLIC D B E A 
+
+
+Candidates FOR CYCLIC D B A E 
+
+NEW FACTS: [cyclic (['E', 'A', 'D', 'B']), eqangle (['line7', 'line2', 'line3', 'line5']), eqangle (['line7', 'line2', 'line7', 'line2']), cyclic (['E', 'A', 'B', 'D']), cyclic (['D', 'B', 'E', 'A']), cyclic (['D', 'B', 'A', 'E'])]
+NEW_FACT_LIST: [eqangle (['line6', 'line2', 'line1', 'line7']), cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: eqangle (['line6', 'line2', 'line1', 'line7'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10, eqangle (['line2', 'line6', 'line7', 'line1']): 11, eqangle (['line7', 'line1', 'line2', 'line6']): 12, eqangle (['line4', 'line6', 'line7', 'line3']): 12, eqangle (['line6', 'line1', 'line2', 'line7']): 13, eqangle (['line2', 'line7', 'line6', 'line1']): 13, eqangle (['line7', 'line3', 'line4', 'line6']): 13, eqangle (['line1', 'line6', 'line7', 'line2']): 13, eqangle (['line3', 'line7', 'line6', 'line4']): 13, eqangle (['line1', 'line7', 'line6', 'line2']): 13, eqangle (['line4', 'line7', 'line6', 'line3']): 13, eqangle (['line3', 'line6', 'line7', 'line4']): 13, eqangle (['line7', 'line4', 'line3', 'line6']): 13, eqangle (['line6', 'line4', 'line3', 'line7']): 13, eqangle (['line6', 'line3', 'line4', 'line7']): 13, eqangle (['line7', 'line2', 'line1', 'line6']): 13, eqangle (['line6', 'line2', 'line1', 'line7']): 13}
+
+Candidates FOR CYCLIC B D A E 
+
+
+Candidates FOR CYCLIC B D E A 
+
+
+Candidates FOR CYCLIC A E B D 
+
+
+Candidates FOR CYCLIC A E D B 
+
+NEW FACTS: [cyclic (['B', 'D', 'A', 'E']), cyclic (['B', 'D', 'E', 'A']), cyclic (['A', 'E', 'B', 'D']), cyclic (['A', 'E', 'D', 'B']), eqangle (['line1', 'line6', 'line3', 'line5']), eqangle (['line1', 'line6', 'line1', 'line6'])]
+NEW_FACT_LIST: [cyclic (['B', 'A', 'E', 'D']), cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: cyclic (['B', 'A', 'E', 'D'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10, eqangle (['line2', 'line6', 'line7', 'line1']): 11, eqangle (['line7', 'line1', 'line2', 'line6']): 12, eqangle (['line4', 'line6', 'line7', 'line3']): 12, eqangle (['line6', 'line1', 'line2', 'line7']): 13, eqangle (['line2', 'line7', 'line6', 'line1']): 13, eqangle (['line7', 'line3', 'line4', 'line6']): 13, eqangle (['line1', 'line6', 'line7', 'line2']): 13, eqangle (['line3', 'line7', 'line6', 'line4']): 13, eqangle (['line1', 'line7', 'line6', 'line2']): 13, eqangle (['line4', 'line7', 'line6', 'line3']): 13, eqangle (['line3', 'line6', 'line7', 'line4']): 13, eqangle (['line7', 'line4', 'line3', 'line6']): 13, eqangle (['line6', 'line4', 'line3', 'line7']): 13, eqangle (['line6', 'line3', 'line4', 'line7']): 13, eqangle (['line7', 'line2', 'line1', 'line6']): 13, eqangle (['line6', 'line2', 'line1', 'line7']): 13, cyclic (['B', 'A', 'E', 'D']): 13}
+NEW FACTS: [eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line3', 'line1', 'line2', 'line4']), eqangle (['line6', 'line4', 'line3', 'line7']), eqangle (['line3', 'line7', 'line6', 'line4']), eqangle (['line6', 'line1', 'line2', 'line7']), eqangle (['line2', 'line7', 'line6', 'line1']), eqangle (['line4', 'line2', 'line1', 'line3']), eqangle (['line1', 'line3', 'line4', 'line2']), eqangle (['line6', 'line2', 'line1', 'line7']), eqangle (['line1', 'line7', 'line6', 'line2']), eqangle (['line6', 'line3', 'line4', 'line7']), eqangle (['line4', 'line7', 'line6', 'line3']), eqangle (['line4', 'line6', 'line7', 'line3']), eqangle (['line7', 'line3', 'line4', 'line6']), eqangle (['line2', 'line6', 'line7', 'line1']), eqangle (['line7', 'line1', 'line2', 'line6']), eqangle (['line2', 'line3', 'line4', 'line1']), eqangle (['line4', 'line1', 'line2', 'line3']), eqangle (['line1', 'line6', 'line7', 'line2']), eqangle (['line7', 'line2', 'line1', 'line6']), eqangle (['line3', 'line6', 'line7', 'line4']), eqangle (['line7', 'line4', 'line3', 'line6']), eqangle (['line3', 'line2', 'line1', 'line4']), eqangle (['line1', 'line4', 'line3', 'line2'])]
+NEW_FACT_LIST: [cyclic (['E', 'D', 'A', 'B']), cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: cyclic (['E', 'D', 'A', 'B'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10, eqangle (['line2', 'line6', 'line7', 'line1']): 11, eqangle (['line7', 'line1', 'line2', 'line6']): 12, eqangle (['line4', 'line6', 'line7', 'line3']): 12, eqangle (['line6', 'line1', 'line2', 'line7']): 13, eqangle (['line2', 'line7', 'line6', 'line1']): 13, eqangle (['line7', 'line3', 'line4', 'line6']): 13, eqangle (['line1', 'line6', 'line7', 'line2']): 13, eqangle (['line3', 'line7', 'line6', 'line4']): 13, eqangle (['line1', 'line7', 'line6', 'line2']): 13, eqangle (['line4', 'line7', 'line6', 'line3']): 13, eqangle (['line3', 'line6', 'line7', 'line4']): 13, eqangle (['line7', 'line4', 'line3', 'line6']): 13, eqangle (['line6', 'line4', 'line3', 'line7']): 13, eqangle (['line6', 'line3', 'line4', 'line7']): 13, eqangle (['line7', 'line2', 'line1', 'line6']): 13, eqangle (['line6', 'line2', 'line1', 'line7']): 13, cyclic (['B', 'A', 'E', 'D']): 13, cyclic (['E', 'D', 'A', 'B']): 13}
+NEW FACTS: [eqangle (['line4', 'line1', 'line2', 'line3']), eqangle (['line2', 'line3', 'line4', 'line1']), eqangle (['line7', 'line1', 'line2', 'line6']), eqangle (['line2', 'line6', 'line7', 'line1']), eqangle (['line7', 'line3', 'line4', 'line6']), eqangle (['line4', 'line6', 'line7', 'line3']), eqangle (['line1', 'line4', 'line3', 'line2']), eqangle (['line3', 'line2', 'line1', 'line4']), eqangle (['line7', 'line4', 'line3', 'line6']), eqangle (['line3', 'line6', 'line7', 'line4']), eqangle (['line7', 'line2', 'line1', 'line6']), eqangle (['line1', 'line6', 'line7', 'line2']), eqangle (['line1', 'line7', 'line6', 'line2']), eqangle (['line6', 'line2', 'line1', 'line7']), eqangle (['line4', 'line7', 'line6', 'line3']), eqangle (['line6', 'line3', 'line4', 'line7']), eqangle (['line4', 'line2', 'line1', 'line3']), eqangle (['line1', 'line3', 'line4', 'line2']), eqangle (['line3', 'line7', 'line6', 'line4']), eqangle (['line6', 'line4', 'line3', 'line7']), eqangle (['line2', 'line7', 'line6', 'line1']), eqangle (['line6', 'line1', 'line2', 'line7']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line3', 'line1', 'line2', 'line4'])]
+NEW_FACT_LIST: [cyclic (['B', 'A', 'D', 'E'])]
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+POP FACT: cyclic (['B', 'A', 'D', 'E'])
+{coll (['A', 'H', 'D']): 0, coll (['B', 'H', 'E']): 0, coll (['B', 'D', 'C']): 0, coll (['A', 'E', 'C']): 0, coll (['C', 'H', 'F']): 0, coll (['A', 'F', 'B']): 0, perp (['line1', 'line3']): 0, perp (['line2', 'line4']): 0, eqangle (['line1', 'line3', 'line3', 'line1']): 0, eqangle (['line1', 'line3', 'line2', 'line4']): 1, eqangle (['line2', 'line4', 'line3', 'line1']): 2, eqangle (['line4', 'line2', 'line2', 'line4']): 2, simtri ([BHD, ACD]): 3, eqratio ([BD, BH, AD, AC]): 4, eqratio ([BH, BD, AC, AD]): 5, eqratio ([DH, BD, CD, AD]): 5, eqratio ([DH, BH, CD, AC]): 6, eqratio ([BH, DH, AC, CD]): 7, eqratio ([BD, DH, AD, CD]): 7, simtri ([HBD, CAD]): 7, cyclic (['D', 'E', 'C', 'H']): 7, eqangle (['line3', 'line5', 'line7', 'line2']): 8, eqangle (['line5', 'line3', 'line2', 'line7']): 9, eqangle (['line5', 'line2', 'line3', 'line7']): 9, eqangle (['line4', 'line7', 'line5', 'line1']): 9, eqangle (['line1', 'line7', 'line5', 'line4']): 10, eqangle (['line1', 'line5', 'line7', 'line4']): 10, eqangle (['line7', 'line3', 'line2', 'line5']): 10, eqangle (['line7', 'line1', 'line4', 'line5']): 10, eqangle (['line2', 'line5', 'line7', 'line3']): 10, eqangle (['line3', 'line7', 'line5', 'line2']): 10, eqangle (['line2', 'line7', 'line5', 'line3']): 10, eqangle (['line7', 'line4', 'line1', 'line5']): 10, eqangle (['line4', 'line5', 'line7', 'line1']): 10, eqangle (['line5', 'line4', 'line1', 'line7']): 10, eqangle (['line7', 'line2', 'line3', 'line5']): 10, eqangle (['line5', 'line1', 'line4', 'line7']): 10, cyclic (['H', 'C', 'D', 'E']): 10, cyclic (['D', 'E', 'H', 'C']): 10, cyclic (['H', 'C', 'E', 'D']): 10, cyclic (['E', 'D', 'B', 'A']): 10, eqangle (['line2', 'line6', 'line7', 'line1']): 11, eqangle (['line7', 'line1', 'line2', 'line6']): 12, eqangle (['line4', 'line6', 'line7', 'line3']): 12, eqangle (['line6', 'line1', 'line2', 'line7']): 13, eqangle (['line2', 'line7', 'line6', 'line1']): 13, eqangle (['line7', 'line3', 'line4', 'line6']): 13, eqangle (['line1', 'line6', 'line7', 'line2']): 13, eqangle (['line3', 'line7', 'line6', 'line4']): 13, eqangle (['line1', 'line7', 'line6', 'line2']): 13, eqangle (['line4', 'line7', 'line6', 'line3']): 13, eqangle (['line3', 'line6', 'line7', 'line4']): 13, eqangle (['line7', 'line4', 'line3', 'line6']): 13, eqangle (['line6', 'line4', 'line3', 'line7']): 13, eqangle (['line6', 'line3', 'line4', 'line7']): 13, eqangle (['line7', 'line2', 'line1', 'line6']): 13, eqangle (['line6', 'line2', 'line1', 'line7']): 13, cyclic (['B', 'A', 'E', 'D']): 13, cyclic (['E', 'D', 'A', 'B']): 13, cyclic (['B', 'A', 'D', 'E']): 13}
+NEW FACTS: [eqangle (['line3', 'line1', 'line2', 'line4']), eqangle (['line2', 'line4', 'line3', 'line1']), eqangle (['line6', 'line1', 'line2', 'line7']), eqangle (['line2', 'line7', 'line6', 'line1']), eqangle (['line6', 'line4', 'line3', 'line7']), eqangle (['line3', 'line7', 'line6', 'line4']), eqangle (['line1', 'line3', 'line4', 'line2']), eqangle (['line4', 'line2', 'line1', 'line3']), eqangle (['line6', 'line3', 'line4', 'line7']), eqangle (['line4', 'line7', 'line6', 'line3']), eqangle (['line6', 'line2', 'line1', 'line7']), eqangle (['line1', 'line7', 'line6', 'line2']), eqangle (['line1', 'line6', 'line7', 'line2']), eqangle (['line7', 'line2', 'line1', 'line6']), eqangle (['line3', 'line6', 'line7', 'line4']), eqangle (['line7', 'line4', 'line3', 'line6']), eqangle (['line3', 'line2', 'line1', 'line4']), eqangle (['line1', 'line4', 'line3', 'line2']), eqangle (['line4', 'line6', 'line7', 'line3']), eqangle (['line7', 'line3', 'line4', 'line6']), eqangle (['line2', 'line6', 'line7', 'line1']), eqangle (['line7', 'line1', 'line2', 'line6']), eqangle (['line2', 'line3', 'line4', 'line1']), eqangle (['line4', 'line1', 'line2', 'line3'])]
+NEW_FACT_LIST: []
+LINES: {'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+================================================================================
+60 13
+
+Database
+
+> Coll Facts
+  coll(A,D,H)
+  coll(B,E,H)
+  coll(B,C,D)
+  coll(A,C,E)
+  coll(C,F,H)
+  coll(A,B,F)
+
+> Perp Facts
+  perp( [B,C,D] [A,D,H] )
+  perp( [B,E,H] [A,C,E] )
+
+> Eqangle Facts
+  eqangle( Angle([A,C,E],[B,E,H]), Angle([A,D,H],[B,C,D]), Angle([B,E,H],[A,C,E]), Angle([B,C,D],[A,D,H]) )
+  eqangle( Angle([B,C,D],[C,F,H]), Angle([D,E],[B,E,H]), Angle([A,D,H],[A,B,F]) )
+  eqangle( Angle([A,B,F],[B,C,D]), Angle([C,F,H],[A,D,H]), Angle([A,C,E],[D,E]) )
+
+> Cong Facts
+
+> Eqratio Facts
+  eqratio( Ratio([BD],[BH]), Ratio([AD],[AC]) )
+  eqratio( Ratio([DH],[BD]), Ratio([CD],[AD]) )
+  eqratio( Ratio([DH],[BH]), Ratio([CD],[AC]) )
+
+> Simtri Facts
+  simtri( ACD, BHD)
+
+> Circle Facts
+circle(O1, C,D,E,H)
+circle(O2, A,B,D,E)
+
+########################################
+
+
+{'line1': {'D', 'H', 'A'}, 'line2': {'B', 'H', 'E'}, 'line3': {'B', 'C', 'D'}, 'line4': {'C', 'E', 'A'}, 'line5': {'H', 'C', 'F'}, 'line6': {'B', 'F', 'A'}, 'line7': {'D', 'E'}}
+0.008616209030151367
