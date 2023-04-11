@@ -340,6 +340,7 @@ class Prover:
             B = self.database.lineIntersection(l3, l4)[0]
             P = self.database.lineIntersection(l3, l1)[0]
             Q = self.database.lineIntersection(l2, l4)[0]
+            print("\nCandidates FOR CYCLIC", A, B, P, Q, "\n")
             if len(set([A, B, P, Q])) < 4:
                 return []
             return [Fact("cyclic", [A, B, P, Q])]
