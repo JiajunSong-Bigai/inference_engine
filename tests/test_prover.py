@@ -1,6 +1,7 @@
 from src.database import Database
 from src.prover import Prover
 from src.predicate import Predicate
+import pytest
 
 
 def test_01():

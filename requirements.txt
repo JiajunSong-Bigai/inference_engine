@@ -1,0 +1,6 @@
+ipython==8.10.0
+pip-chill==1.0.1
+pytest==7.2.1
+snakeviz==2.1.1
+src==1.0
+yapf==0.32.0
