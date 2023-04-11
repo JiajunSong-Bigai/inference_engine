@@ -7,9 +7,14 @@ class Predicate:
     where A,B,C,D are concrete points.
     '''
 
-    def __init__(self, type: str, points: list[str]) -> None:
+    def __init__(self,
+                 type: str,
+                 points: list[str] = [],
+                 lines: list[str] = []) -> None:
+        """Initialize."""
         self.type = type
         self.points = points
+        self.lines = lines
 
     @classmethod
     def from_line(cls, line: str) -> 'Predicate':
@@ -22,7 +27,8 @@ class Predicate:
         return Predicate(type=type, points=points)
 
     def __repr__(self) -> str:
-        return f"({self.type}, points({','.join(self.points)}))"
+        return (f"({self.type}, points({','.join(self.points)})," +
+                f"lines({self.lines.__repr__()}))")
 
     def __eq__(self, other: 'Predicate') -> bool:
         return str(self) == str(other)

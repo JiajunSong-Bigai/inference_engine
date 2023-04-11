@@ -31,6 +31,7 @@ class Database:
         self.contriFacts = contriFacts or []
 
         self.version = version
+        self.num_temp_key = 0
 
     def version_update(self):
         self.version += 1
@@ -81,6 +82,16 @@ class Database:
             ]
         if fact.type == "eqangle":
             lk1, lk2, lk3, lk4 = fact.objects
+            # Give a test generating lines directly instead of to points.
+            if True:
+                predicates = [Predicate("eqangle", lines=list(obj))
+                              for obj in [[lk1, lk2, lk3, lk4],
+                                          [lk2, lk1, lk4, lk3],
+                                          [lk1, lk3, lk2, lk4],
+                                          [lk3, lk1, lk4, lk2]]]
+                # print("DATABASE::_PREDICATE_ALL_FORM::PREDICATES", predicates)
+                return predicates
+
             angle_pairs = [
                 [Angle(lk1, lk2), Angle(lk3, lk4)],
                 [Angle(lk2, lk1), Angle(lk4, lk3)],
@@ -98,7 +109,9 @@ class Database:
                             for (U, V) in itertools.permutations(l4, 2):
                                 predicates.append(
                                     Predicate("eqangle",
-                                              [A, B, C, D, P, Q, U, V]))
+                                              [A, B, C, D, P, Q, U, V],
+                                              lines=[a1.lk1, a1.lk2,
+                                                     a2.lk1, a2.lk2]))
 
             # handle transitivity
             for (a1, a2) in angle_pairs:
@@ -120,7 +133,11 @@ class Database:
                                             predicates.append(
                                                 Predicate(
                                                     "eqangle",
-                                                    [A, B, C, D, P, Q, U, V]))
+                                                    [A, B, C, D, P, Q, U, V],
+                                                    lines=[a1.lk1, a1.lk2,
+                                                           a2.lk1, a2.lk2]
+                                                ))
+            # print("DATABASE::_PREDICATE_ALL_FORMS", predicates)
             return predicates
 
         if fact.type == "eqratio":
@@ -711,7 +728,7 @@ class Database:
             center, points = fact.objects[0], fact.objects[1:]
             for circle in self.circles:
                 if center == circle.center and all(
-                    [p in circle.points for p in points]):
+                        [p in circle.points for p in points]):
                     return True
 
             return False
@@ -876,3 +893,27 @@ class Database:
         c1str = ",".join([str(s) for s in self.congs[c1]])
         c2str = ",".join([str(s) for s in self.congs[c2]])
         return f"Ratio([{c1str}],[{c2str}])"
+
+    def lineIntersection(self, lineA: LineKey, lineB: LineKey) -> list[Point]:
+        """Find intersection of two lines."""
+        # TODO: return an adhoc point if no intersection are found,
+        #       combine all resulting points when multiple points are found.
+        # print("DATABASE::LINE_INTERSECTION",
+        #       self.lines[lineA].intersection(self.lines[lineB]))
+        inter = list(self.lines[lineA].intersection(self.lines[lineB]))
+        if not inter:
+            # SHOULD CHECK parallelness, otherwise the temp point is infinity.
+            print("Warning: DATABASE::LINE_INTERSECTION",
+                  f"intersection of {lineA} and {lineB} is empty.")
+            return []
+
+            point = self.next_temp_point_key()
+            self.lines[lineA].add(point)
+            self.lines[lineB].add(point)
+            return [point]
+        return inter
+
+    def next_temp_point_key(self):
+        """Generate a new key for a point."""
+        self.num_temp_key += 1
+        return f"__TEMPORARY_KEY_{self.num_temp_key}"
