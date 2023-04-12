@@ -101,6 +101,20 @@ def test_08():
     print(prover.database.lines)
 
 
+def test_09():
+    prover = Prover(hypotheses=[
+        Predicate("coll", ["A", "H", "D"]),
+        Predicate("coll", ["B", "H", "E"]),
+        Predicate("coll", ["A", "F", "B"]),
+        Predicate("perp", ["A", "D", "B", "D"]),
+        Predicate("perp", ["B", "E", "A", "E"])
+    ])
+    prover.fixedpoint()
+    print(prover.database)
+    print(prover.database.lines)
+
+
+import sys
 import sys
 
 

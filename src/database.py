@@ -45,7 +45,7 @@ class Database:
             for (A, B) in itertools.permutations(self.lines[lk1], 2):
                 for (C, D) in itertools.permutations(self.lines[lk2], 2):
                     predicates.append(Predicate("para", [A, B, C, D]))
-                    predicates.append(Predicate("para", [C, D, A, B]))
+                    # predicates.append(Predicate("para", [C, D, A, B]))
             for lines in self.paraFacts:
                 if lk1 not in lines and lk2 not in lines:
                     continue
@@ -66,7 +66,8 @@ class Database:
             predicates = []
             for (A, B) in itertools.permutations(self.lines[lk1], 2):
                 for (C, D) in itertools.permutations(self.lines[lk2], 2):
-                    predicates.append(Predicate("perp", [A, B, C, D]))
+                    predicates.append(Predicate("perp", [A, B, C, D], [lk1, lk2]))
+                    predicates.append(Predicate("perp", [C, D, A, B], [lk2, lk1]))
             return predicates
         if fact.type == "midp":
             M, A, B = fact.objects
@@ -88,8 +89,8 @@ class Database:
                               for obj in [[lk1, lk2, lk3, lk4],
                                           [lk2, lk1, lk4, lk3],
                                           [lk1, lk3, lk2, lk4],
-                                          [lk3, lk1, lk4, lk2]]]
-                # print("DATABASE::_PREDICATE_ALL_FORM::PREDICATES", predicates)
+                                          [lk3, lk1, lk4, lk2],
+                                          ]]
                 return predicates
 
             angle_pairs = [
@@ -137,7 +138,6 @@ class Database:
                                                     lines=[a1.lk1, a1.lk2,
                                                            a2.lk1, a2.lk2]
                                                 ))
-            # print("DATABASE::_PREDICATE_ALL_FORMS", predicates)
             return predicates
 
         if fact.type == "eqratio":
@@ -221,6 +221,8 @@ class Database:
             lCD = self.matchLine([C, D])
             return Fact("perp", [lAB, lCD])
         if predicate.type == "eqangle":
+            if len(predicate.lines) == 4:
+                return Fact("eqangle", predicate.lines)
             A, B, C, D, P, Q, U, V = predicate.points
             lAB = self.matchLine([A, B])
             lCD = self.matchLine([C, D])

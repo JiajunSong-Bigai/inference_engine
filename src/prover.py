@@ -73,12 +73,12 @@ class Prover:
             print(used)
 
             newFacts = []
-            all_predicate_forms = self.database._predicate_all_forms(d)
+            self.all_predicate_forms = set(self.database._predicate_all_forms(d))
 
-            for predicate in all_predicate_forms:
+            for predicate in self.all_predicate_forms:
                 newFacts += self._rules(predicate)
 
-            print("NEW FACTS:", newFacts)
+            # print("NEW FACTS:", newFacts)
 
             for fact in set(newFacts):
                 if self.database.containsFact(fact):
@@ -119,6 +119,7 @@ class Prover:
             facts += self._ruleD22(p)
             facts += self._ruleD39(p)
             facts += self._ruleD47(p)
+            # facts += self._ruleD58auto(p)
             facts += self._ruleD58(p)
             facts += self._ruleD71(p)
             facts += self._ruleD72(p)
@@ -151,11 +152,15 @@ class Prover:
         """
         perp(A,B,C,D) & perp(P,Q,U,V) => eqangle(A,B,C,D,P,Q,U,V)
         """
-        A, B, C, D = predicate.points
-        lAB = self.database.matchLine([A, B])
-        lCD = self.database.matchLine([C, D])
+        if len(predicate.lines) == 2:
+            lAB, lCD = predicate.lines
+        else:
+            A, B, C, D = predicate.points
+            lAB = self.database.matchLine([A, B])
+            lCD = self.database.matchLine([C, D])
         facts = []
         for [lPQ, lUV] in self.database.perpFacts:
+            # print(lPQ, lUV, A, B, C, D)
             if lAB == lPQ and lCD == lUV:
                 continue
             facts.append(Fact("eqangle", [lAB, lCD, lPQ, lUV]))
@@ -340,7 +345,7 @@ class Prover:
             B = self.database.lineIntersection(l3, l4)[0]
             P = self.database.lineIntersection(l3, l1)[0]
             Q = self.database.lineIntersection(l2, l4)[0]
-            print("\nCandidates FOR CYCLIC", A, B, P, Q, "\n")
+            # print("\nCandidates FOR CYCLIC", A, B, P, Q, "\n")
             if len(set([A, B, P, Q])) < 4:
                 return []
             return [Fact("cyclic", [A, B, P, Q])]
@@ -458,6 +463,38 @@ class Prover:
 
         return facts
 
+    def _ruleD58auto(self, predicate: Predicate):
+        """
+        eqangle(A,B,B,D,A,C,C,D) & intersect(E,A,C,B,D)
+        => simtri(A,B,E,D,C,E)
+        """
+        ret = []
+        if len(predicate.lines) == 4:
+            l1, l2, l3, l4 = predicate.lines
+            if len(set([l1, l2, l3, l4])) < 4:
+                return []
+
+            A = self.database.lineIntersection(l1, l3)
+            B = self.database.lineIntersection(l1, l2)
+            C = self.database.lineIntersection(l3, l4)
+            D = self.database.lineIntersection(l2, l4)
+            E = self.database.lineIntersection(l2, l3)
+            F = self.database.lineIntersection(l1, l4)
+            if not (A and B and C and D):
+                return []
+            A, B, C, D = A[0], B[0], C[0], D[0]
+            if E:
+                E = E[0]
+                ret += [Fact("simtri", [Triangle(A, B, E),
+                                        Triangle(D, C, E)])]
+            if F:
+                F = F[0]
+                ret += [Fact("simtri", [Triangle(A, C, F),
+                                        Triangle(D, B, F)])]
+
+        return ret
+
+
     def _ruleD58(self, predicate: Predicate):
         """
         eqangle(A,B,B,C,P,Q,Q,R) & eqangle(A,C,B,C,P,R,Q,R) & ~ coll(A,B,C)
@@ -482,6 +519,7 @@ class Prover:
             Q = self.database.lineIntersection(l3, l4)[0]
             # MARK next we should call `self.prove`, but we do not need, just
             # check for all existing lines, whether admit any existing eqangle.
+            ret = []
             for e in self.database.eqangleFacts:
                 if (Angle(l1, l2) in e or Angle(l2, l1) in e or
                         Angle(l3, l4) in e or Angle(l4, l3) in e):
@@ -514,14 +552,14 @@ class Prover:
                                 P = self.database.lineIntersection(angle2.lk1,
                                                                    l3)
                             if not (A and P and C and R):
-                                return []
+                                continue
 
                             A, P, C, R = A[0], P[0], C[0], R[0]
                             if ((B != Q or C != R or A != P) and
                                     len(set([A, B, C])) + len(set([P, Q, R])) == 6):
-                                return [Fact("simtri", [Triangle(A, B, C),
+                                ret += [Fact("simtri", [Triangle(A, B, C),
                                                         Triangle(P, Q, R)])]
-            return []
+            return ret
 
         A, B1, B2, C, P, Q1, Q2, R = predicate.points
         if B1 != B2 or Q1 != Q2 or self.prove(Predicate("coll", [A, B1, C])):
