@@ -3,13 +3,14 @@ from src.fact import Fact
 from src.predicate import Predicate
 
 import itertools
+from collections import OrderedDict
 
 
 class Database:
 
     def __init__(self,
-                 lines: dict[LineKey, set[Point]] = None,
-                 congs: dict[CongKey, set[Segment]] = None,
+                 lines: OrderedDict[LineKey, list[Point]] = None,
+                 congs: OrderedDict[CongKey, list[Segment]] = None,
                  circles: list[Circle] = None,
                  midpFacts: list[list[Point]] = None,
                  paraFacts: list[set[LineKey]] = None,
@@ -83,61 +84,12 @@ class Database:
         if fact.type == "eqangle":
             lk1, lk2, lk3, lk4 = fact.objects
             # Give a test generating lines directly instead of to points.
-            if True:
-                predicates = [Predicate("eqangle", lines=list(obj))
-                              for obj in [[lk1, lk2, lk3, lk4],
-                                          [lk2, lk1, lk4, lk3],
-                                          [lk1, lk3, lk2, lk4],
-                                          [lk3, lk1, lk4, lk2]]]
-                # print("DATABASE::_PREDICATE_ALL_FORM::PREDICATES", predicates)
-                return predicates
-
-            angle_pairs = [
-                [Angle(lk1, lk2), Angle(lk3, lk4)],
-                [Angle(lk2, lk1), Angle(lk4, lk3)],
-                [Angle(lk1, lk3), Angle(lk2, lk4)],
-                [Angle(lk3, lk1), Angle(lk4, lk2)],
+            predicates = [
+                Predicate("eqangle", lines=list(obj))
+                for obj in [[lk1, lk2, lk3, lk4], [lk2, lk1, lk4, lk3],
+                            [lk1, lk3, lk2, lk4], [lk3, lk1, lk4, lk2]]
             ]
-            predicates = []
-            for (a1, a2) in angle_pairs:
-                l1, l2 = self.lines[a1.lk1], self.lines[a1.lk2]
-                l3, l4 = self.lines[a2.lk1], self.lines[a2.lk2]
-
-                for (A, B) in itertools.permutations(l1, 2):
-                    for (C, D) in itertools.permutations(l2, 2):
-                        for (P, Q) in itertools.permutations(l3, 2):
-                            for (U, V) in itertools.permutations(l4, 2):
-                                predicates.append(
-                                    Predicate("eqangle",
-                                              [A, B, C, D, P, Q, U, V],
-                                              lines=[a1.lk1, a1.lk2,
-                                                     a2.lk1, a2.lk2]))
-
-            # handle transitivity
-            for (a1, a2) in angle_pairs:
-                for angles in self.eqangleFacts:
-                    if a1 not in angles and a2 not in angles:
-                        continue
-                    for a3 in angles:
-                        if a3 in [a1, a2]:
-                            continue
-                        for a in [a1, a2]:
-                            l1, l2 = self.lines[a.lk1], self.lines[a.lk2]
-                            l3, l4 = self.lines[a3.lk1], self.lines[a3.lk2]
-                            for (A, B) in itertools.permutations(l1, 2):
-                                for (C, D) in itertools.permutations(l2, 2):
-                                    for (P,
-                                         Q) in itertools.permutations(l3, 2):
-                                        for (U, V) in itertools.permutations(
-                                                l4, 2):
-                                            predicates.append(
-                                                Predicate(
-                                                    "eqangle",
-                                                    [A, B, C, D, P, Q, U, V],
-                                                    lines=[a1.lk1, a1.lk2,
-                                                           a2.lk1, a2.lk2]
-                                                ))
-            # print("DATABASE::_PREDICATE_ALL_FORMS", predicates)
+            # print("DATABASE::_PREDICATE_ALL_FORM::PREDICATES", predicates)
             return predicates
 
         if fact.type == "eqratio":
@@ -530,21 +482,21 @@ class Database:
 
         overlapsMap = [
             lk for lk, points in self.lines.items()
-            if overlaps(points, fact.objects)
+            if overlaps(set(points), set(fact.objects))
         ]
 
         if len(overlapsMap) == 0:
             # case 4
-            self.lines[self.newLineName] = set(fact.objects)
+            self.lines[self.newLineName] = sorted(set(fact.objects))
         elif len(overlapsMap) == 1:
             # case 1 and case 3
-            self.lines[overlapsMap[0]] = self.lines[overlapsMap[0]].union(
-                set(fact.objects))
+            self.lines[overlapsMap[0]] = sorted(
+                self.lines[overlapsMap[0]].union(set(fact.objects)))
         elif len(overlapsMap) >= 2:
             # case 2
             keep, drop = overlapsMap
-            self.lines[keep] = self.lines[keep].union(self.lines[drop].union(
-                set(fact.objects)))
+            self.lines[keep] = sorted(self.lines[keep].union(
+                self.lines[drop].union(set(fact.objects))))
             del self.lines[drop]
 
             # key changes in eqangleFacts
@@ -579,15 +531,15 @@ class Database:
 
         if len(overlapsMap) == 0:
             # case 4
-            self.congs[self.newCongName] = {s1, s2}
+            self.congs[self.newCongName] = sorted({s1, s2})
         elif len(overlapsMap) == 1:
             # case 1 and case 2
-            self.congs[overlapsMap[0]] = self.congs[overlapsMap[0]].union(
-                {s1, s2})
+            self.congs[overlapsMap[0]] = sorted(
+                self.congs[overlapsMap[0]].union({s1, s2}))
         elif len(overlapsMap) >= 2:
             # case 3
             keep, drop = overlapsMap
-            self.congs[keep] = self.congs[keep].union(self.congs[drop])
+            self.congs[keep] = sorted(self.congs[keep].union(self.congs[drop]))
             del self.congs[drop]
 
             # handle key changes in eqratioFacts
@@ -728,7 +680,7 @@ class Database:
             center, points = fact.objects[0], fact.objects[1:]
             for circle in self.circles:
                 if center == circle.center and all(
-                        [p in circle.points for p in points]):
+                    [p in circle.points for p in points]):
                     return True
 
             return False
@@ -900,7 +852,8 @@ class Database:
         #       combine all resulting points when multiple points are found.
         # print("DATABASE::LINE_INTERSECTION",
         #       self.lines[lineA].intersection(self.lines[lineB]))
-        inter = list(self.lines[lineA].intersection(self.lines[lineB]))
+        inter = list(
+            set(self.lines[lineA]).intersection(set(self.lines[lineB])))
         if not inter:
             # SHOULD CHECK parallelness, otherwise the temp point is infinity.
             print("Warning: DATABASE::LINE_INTERSECTION",

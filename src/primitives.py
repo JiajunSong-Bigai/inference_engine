@@ -80,6 +80,9 @@ class Triangle:
     def __repr__(self) -> str:
         return "".join([self.p1, self.p2, self.p3])
 
+    def __lt__(self, other) -> bool:
+        return str(self) < str(other)
+
 
 class Circle:
 
