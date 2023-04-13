@@ -55,7 +55,7 @@ DB structure
 
 The process of reaching the fixed point
 
-- Input: DB with existing facts, A list of new facts waited to be added
+- Input: DB with existing facts, A list of new facts waited to be added 
 - Output: New DB with updated facts, which has reached the fixed points
 
 

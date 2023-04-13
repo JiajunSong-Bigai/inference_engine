@@ -1,6 +1,6 @@
 from src.predicate import Predicate
 from src.database import Database
-# from src.rules import FC
+from src.rules import FC
 from src.fact import Fact
 from typing import Tuple
 import time
