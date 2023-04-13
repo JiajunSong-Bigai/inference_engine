@@ -46,7 +46,7 @@ class Database:
             for (A, B) in itertools.permutations(self.lines[lk1], 2):
                 for (C, D) in itertools.permutations(self.lines[lk2], 2):
                     predicates.append(Predicate("para", [A, B, C, D]))
-                    predicates.append(Predicate("para", [C, D, A, B]))
+                    # predicates.append(Predicate("para", [C, D, A, B]))
             for lines in self.paraFacts:
                 if lk1 not in lines and lk2 not in lines:
                     continue
@@ -67,7 +67,10 @@ class Database:
             predicates = []
             for (A, B) in itertools.permutations(self.lines[lk1], 2):
                 for (C, D) in itertools.permutations(self.lines[lk2], 2):
-                    predicates.append(Predicate("perp", [A, B, C, D]))
+                    predicates.append(
+                        Predicate("perp", [A, B, C, D], [lk1, lk2]))
+                    predicates.append(
+                        Predicate("perp", [C, D, A, B], [lk2, lk1]))
             return predicates
         if fact.type == "midp":
             M, A, B = fact.objects
@@ -173,6 +176,8 @@ class Database:
             lCD = self.matchLine([C, D])
             return Fact("perp", [lAB, lCD])
         if predicate.type == "eqangle":
+            if len(predicate.lines) == 4:
+                return Fact("eqangle", predicate.lines)
             A, B, C, D, P, Q, U, V = predicate.points
             lAB = self.matchLine([A, B])
             lCD = self.matchLine([C, D])
