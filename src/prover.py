@@ -76,15 +76,18 @@ class Prover:
             for predicate in self.all_predicate_forms:
                 newFacts += self._rules(predicate)
 
-            print("\nEQANGLES: \n", self.database.eqangleFacts)
+            print("\nEQANGLES:")
+            for eqangles in self.database.eqangleFacts:
+                print(eqangles)
 
             print("\nNEW FACTS:")
-            print("\n".join(str(f) for f in set(newFacts)))
 
             for fact in set(newFacts):
-                if self.database.containsFact(fact):
+                if self.database.containsFact(
+                        fact) or fact in self.newFactsList:
                     continue
                 self.newFactsList.append(fact)
+                print(fact)
 
             self.newFactsList = sorted(set(self.newFactsList))
 
@@ -267,25 +270,29 @@ class Prover:
         eqangle(A,B,C,D,P,Q,U,V) & eqangle(P,Q,U,V,E,F,G,H)
         => eqangle(A,B,C,D,E,F,G,H)
         """
-        if len(predicate.lines) == 4:
-            lAB, lCD, lPQ, lUV = predicate.lines
-        else:
-            A, B, C, D, P, Q, U, V = predicate.points
-            lAB = self.database.matchLine([A, B])
-            lCD = self.database.matchLine([C, D])
-            lPQ = self.database.matchLine([P, Q])
-            lUV = self.database.matchLine([U, V])
+        lAB, lCD, lPQ, lUV = predicate.lines
 
         facts = []
         # TODO: check the S_2 symmetric form.
         for angles in self.database.eqangleFacts:
-            if Angle(lPQ, lUV) not in angles:
-                continue
-            for angle in angles:
-                if angle == Angle(lPQ, lUV):
-                    continue
-                lEF, lGH = angle.lk1, angle.lk2
-                facts.append(Fact("eqangle", [lAB, lCD, lEF, lGH]))
+            if Angle(lAB, lCD) in angles:
+                angles = [
+                    angle for angle in angles
+                    if angle not in [Angle(lAB, lCD),
+                                     Angle(lPQ, lUV)]
+                ]
+                for angle in angles:
+                    lEF, lGH = angle.lk1, angle.lk2
+                    facts.append(Fact("eqangle", [lPQ, lUV, lEF, lGH]))
+            elif Angle(lPQ, lUV) in angles:
+                angles = [
+                    angle for angle in angles
+                    if angle not in [Angle(lAB, lCD),
+                                     Angle(lPQ, lUV)]
+                ]
+                for angle in angles:
+                    lEF, lGH = angle.lk1, angle.lk2
+                    facts.append(Fact("eqangle", [lAB, lCD, lEF, lGH]))
         return facts
 
     def _ruleD39(self, predicate: Predicate):
@@ -366,17 +373,6 @@ class Prover:
             if len(set([A, B, P, Q])) < 4:
                 return []
             return [Fact("cyclic", [A, B, P, Q])]
-
-        P1, A1, P2, B1, Q1, A2, Q2, B2 = predicate.points
-        if P1 != P2 or A1 != A2 or B1 != B2 or Q1 != Q2:
-            return []
-
-        if self.prove(Predicate("coll", [P1, Q1, A1])):
-            return []
-
-        # print("Reaching here", predicate.points)
-
-        return [Fact("cyclic", [A1, B1, P1, Q1])]
 
     def _ruleD44(self, predicate: Predicate):
         """

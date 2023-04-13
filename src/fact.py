@@ -12,6 +12,11 @@ class Fact:
     def __repr__(self):
         if self.type in ["cyclic", "simtri", "contri", "perp", "para"]:
             return f"{self.type} ({sorted(self.objects)})"
+        if self.type == "eqangle":
+            l1, l2, l3, l4 = self.objects
+            if f"{l1,l2}" < f"{l3,l4}":
+                return f"{self.type} {l1, l2, l3, l4}"
+            return f"{self.type} {l3,l4,l1,l2}"
         return f"{self.type} ({self.objects})"
 
     def __hash__(self) -> int:
@@ -41,6 +46,9 @@ class Fact:
 
         if self.type != other.type:
             return types.index(self.type) < types.index(other.type)
+
+        if self.type == "eqangle":
+            return str(self) < str(other)
 
         return ",".join(str(o) for o in self.objects) < ",".join(
             str(o) for o in other.objects)

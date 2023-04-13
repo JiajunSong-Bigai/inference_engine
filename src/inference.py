@@ -3,6 +3,7 @@ from src.database import Database
 # from src.rules import FC
 from src.fact import Fact
 from typing import Tuple
+import time
 
 
 def sort(facts: list[Fact]) -> list[Fact]:
@@ -20,9 +21,6 @@ def sort(facts: list[Fact]) -> list[Fact]:
         "circle",
     ]
     return sorted(facts, key=lambda x: types.index(x.type))
-
-
-import time
 
 
 def inference_update(
