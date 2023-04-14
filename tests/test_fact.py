@@ -23,3 +23,14 @@ def test_02():
     print(sorted((set([f1, f2, f3, f4, f5]))))
 
     print(sorted(set([f6, f6])))
+
+
+def test_03():
+    from src.primitives import Triangle
+    f1 = Fact("simtri", [Triangle("E", "A", "D"), Triangle("H", "F", "D")])
+    f2 = Fact("simtri", [Triangle("B", "F", "D"), Triangle("E", "C", "D")])
+    f3 = Fact("cyclic", ['B', 'D', 'F', 'H'])
+    f4 = Fact("cyclic", ['A', 'E', 'F', 'H'])
+    f5 = Fact("cyclic", ['B', 'C', 'E', 'F'])
+
+    print(sorted((set([f1, f2, f3, f4, f5]))))

@@ -43,6 +43,7 @@ class FC:
             facts += self._ruleD12(p)
             facts += self._ruleD46(p)
             facts += self._ruleD75cong(p)
+            facts += self._ruleX4(p)
         if p.type == "cyclic":
             facts += self._ruleD41(p)
         if p.type == "perp":
@@ -94,6 +95,17 @@ class FC:
         lCD = self.database.matchLine([C, D])
 
         return [Fact("eqangle", [lAB, lCD, lCD, lAB])]
+
+    def _ruleX4(self, predicate: Predicate) -> list[Fact]:
+        """
+        cong(M,A,M,B) & coll(M,A,B) => midp(M,A,B)
+        """
+        M1, A, M2, B = predicate.points
+        if M1 != M2:
+            return []
+        if self.database.containsFact(Fact("coll", [M1, A, B])):
+            return [Fact("midp", [M1, A, B])]
+        return []
 
     def _ruleD09(self, predicate: Predicate) -> list[Fact]:
         """
@@ -301,7 +313,7 @@ class FC:
             A = As[0]
             B = B if A == A1 else A1
             C = C if A == A2 else A2
-            if self.prove(Predicate("coll", [A, B, C])):
+            if self.database.containsFact(Fact("coll", [A, B, C])):
                 continue
 
             lEF = self.database.matchLine([E, F])
@@ -326,8 +338,8 @@ class FC:
         """
         O1, A, O2, B = predicate.points
 
-        if O1 != O2 or A == B or O1 == A or self.prove(
-                Predicate("coll", [O1, A, B])):
+        if O1 != O2 or A == B or O1 == A or self.database.containsFact(
+                Fact("coll", [O1, A, B])):
             return []
 
         lOA = self.database.matchLine([O1, A])
@@ -362,7 +374,7 @@ class FC:
         O1, A1, A2, B1, A3, B2, O2, B3 = predicate.points
         valid = all([
             A1 == A2, A1 == A3, B1 == B2, B1 == B3, O1 == O2,
-            not self.prove(Predicate("coll", [O1, A1, B1]))
+            not self.database.containsFact(Predicate("coll", [O1, A1, B1]))
         ])
         if not valid:
             return []
@@ -494,18 +506,7 @@ class FC:
                                         [Triangle(A, B, C),
                                          Triangle(P, Q, R)])
                                 ]
-            return ret
-
-        A, B1, B2, C, P, Q1, Q2, R = predicate.points
-        if B1 != B2 or Q1 != Q2 or self.prove(Predicate("coll", [A, B1, C])):
-            return []
-
-        if self.prove(Predicate(
-                "eqangle", [A, C, B1, C, P, R, Q1, R
-                            ])) and Triangle(A, B1, C) != Triangle(P, Q1, R):
-            return [Fact("simtri", [Triangle(A, B1, C), Triangle(P, Q1, R)])]
-
-        return []
+        return ret
 
     def _ruleD59(self, predicate: Predicate):
         """

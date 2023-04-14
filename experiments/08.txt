@@ -1,0 +1,913 @@
+
+Database
+
+> Coll Facts
+  coll(A,B,K)
+  coll(B,C,E)
+  coll(C,K,N)
+  coll(E,M,N)
+
+> Para Facts
+  para( [A,B,K] [C,D] )
+
+########################################
+
+
+USING: coll (['A', 'B', 'K'])
+
+EQANGLES:
+
+NEW FACTS:
+eqangle ('line1', 'line6', 'line2', 'line6')
+eqangle ('line1', 'line9', 'line2', 'line9')
+eqangle ('line1', 'line7', 'line2', 'line7')
+eqangle ('line1', 'line4', 'line2', 'line4')
+eqangle ('line1', 'line5', 'line2', 'line5')
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line3', 'line2', 'line3')
+
+TOADD_FACT_LIST:
+coll (['B', 'C', 'E'])
+coll (['C', 'K', 'N'])
+coll (['E', 'M', 'N'])
+midp ('M', ['A', 'C'])
+midp ('N', ['B', 'D'])
+para (['line1', 'line2'])
+eqangle ('line1', 'line3', 'line2', 'line3')
+eqangle ('line1', 'line4', 'line2', 'line4')
+eqangle ('line1', 'line5', 'line2', 'line5')
+eqangle ('line1', 'line6', 'line2', 'line6')
+eqangle ('line1', 'line7', 'line2', 'line7')
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line9', 'line2', 'line9')
+================================================================================ 
+
+USING: coll (['B', 'C', 'E'])
+
+EQANGLES:
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+coll (['C', 'K', 'N'])
+coll (['E', 'M', 'N'])
+midp ('M', ['A', 'C'])
+midp ('N', ['B', 'D'])
+para (['line1', 'line2'])
+eqangle ('line1', 'line3', 'line2', 'line3')
+eqangle ('line1', 'line4', 'line2', 'line4')
+eqangle ('line1', 'line5', 'line2', 'line5')
+eqangle ('line1', 'line6', 'line2', 'line6')
+eqangle ('line1', 'line7', 'line2', 'line7')
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line9', 'line2', 'line9')
+================================================================================ 
+
+USING: coll (['C', 'K', 'N'])
+
+EQANGLES:
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+coll (['E', 'M', 'N'])
+midp ('M', ['A', 'C'])
+midp ('N', ['B', 'D'])
+para (['line1', 'line2'])
+eqangle ('line1', 'line3', 'line2', 'line3')
+eqangle ('line1', 'line4', 'line2', 'line4')
+eqangle ('line1', 'line5', 'line2', 'line5')
+eqangle ('line1', 'line6', 'line2', 'line6')
+eqangle ('line1', 'line7', 'line2', 'line7')
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line9', 'line2', 'line9')
+================================================================================ 
+
+USING: coll (['E', 'M', 'N'])
+
+EQANGLES:
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+midp ('M', ['A', 'C'])
+midp ('N', ['B', 'D'])
+para (['line1', 'line2'])
+eqangle ('line1', 'line3', 'line2', 'line3')
+eqangle ('line1', 'line4', 'line2', 'line4')
+eqangle ('line1', 'line5', 'line2', 'line5')
+eqangle ('line1', 'line6', 'line2', 'line6')
+eqangle ('line1', 'line7', 'line2', 'line7')
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line9', 'line2', 'line9')
+================================================================================ 
+
+USING: midp ('M', ['A', 'C'])
+
+EQANGLES:
+
+NEW FACTS:
+coll (['A', 'C', 'M'])
+eqratio ([AM, AC, BN, BD])
+eqratio ([CM, AC, BN, BD])
+cong ([AM, CM])
+cong ([CM, AM])
+
+TOADD_FACT_LIST:
+coll (['A', 'C', 'M'])
+cong ([AM, CM])
+cong ([CM, AM])
+midp ('N', ['B', 'D'])
+para (['line1', 'line2'])
+eqangle ('line1', 'line3', 'line2', 'line3')
+eqangle ('line1', 'line4', 'line2', 'line4')
+eqangle ('line1', 'line5', 'line2', 'line5')
+eqangle ('line1', 'line6', 'line2', 'line6')
+eqangle ('line1', 'line7', 'line2', 'line7')
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line9', 'line2', 'line9')
+eqratio ([AM, AC, BN, BD])
+eqratio ([CM, AC, BN, BD])
+================================================================================ 
+
+USING: coll (['A', 'C', 'M'])
+
+EQANGLES:
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+cong ([AM, CM])
+cong ([CM, AM])
+midp ('N', ['B', 'D'])
+para (['line1', 'line2'])
+eqangle ('line1', 'line3', 'line2', 'line3')
+eqangle ('line1', 'line4', 'line2', 'line4')
+eqangle ('line1', 'line5', 'line2', 'line5')
+eqangle ('line1', 'line6', 'line2', 'line6')
+eqangle ('line1', 'line7', 'line2', 'line7')
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line9', 'line2', 'line9')
+eqratio ([AM, AC, BN, BD])
+eqratio ([CM, AC, BN, BD])
+================================================================================ 
+
+USING: cong ([AM, CM])
+
+EQANGLES:
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+cong ([CM, AM])
+midp ('N', ['B', 'D'])
+para (['line1', 'line2'])
+eqangle ('line1', 'line3', 'line2', 'line3')
+eqangle ('line1', 'line4', 'line2', 'line4')
+eqangle ('line1', 'line5', 'line2', 'line5')
+eqangle ('line1', 'line6', 'line2', 'line6')
+eqangle ('line1', 'line7', 'line2', 'line7')
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line9', 'line2', 'line9')
+eqratio ([AM, AC, BN, BD])
+eqratio ([CM, AC, BN, BD])
+================================================================================ 
+
+USING: cong ([CM, AM])
+
+EQANGLES:
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+midp ('N', ['B', 'D'])
+para (['line1', 'line2'])
+eqangle ('line1', 'line3', 'line2', 'line3')
+eqangle ('line1', 'line4', 'line2', 'line4')
+eqangle ('line1', 'line5', 'line2', 'line5')
+eqangle ('line1', 'line6', 'line2', 'line6')
+eqangle ('line1', 'line7', 'line2', 'line7')
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line9', 'line2', 'line9')
+eqratio ([AM, AC, BN, BD])
+eqratio ([CM, AC, BN, BD])
+================================================================================ 
+
+USING: midp ('N', ['B', 'D'])
+
+EQANGLES:
+
+NEW FACTS:
+cong ([DN, BN])
+eqratio ([DN, BD, AM, AC])
+eqratio ([BN, BD, AM, AC])
+cong ([BN, DN])
+coll (['B', 'D', 'N'])
+
+TOADD_FACT_LIST:
+coll (['B', 'D', 'N'])
+cong ([BN, DN])
+cong ([DN, BN])
+para (['line1', 'line2'])
+eqangle ('line1', 'line3', 'line2', 'line3')
+eqangle ('line1', 'line4', 'line2', 'line4')
+eqangle ('line1', 'line5', 'line2', 'line5')
+eqangle ('line1', 'line6', 'line2', 'line6')
+eqangle ('line1', 'line7', 'line2', 'line7')
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line9', 'line2', 'line9')
+eqratio ([AM, AC, BN, BD])
+eqratio ([BN, BD, AM, AC])
+eqratio ([CM, AC, BN, BD])
+eqratio ([DN, BD, AM, AC])
+================================================================================ 
+
+USING: coll (['B', 'D', 'N'])
+
+EQANGLES:
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+cong ([BN, DN])
+cong ([DN, BN])
+para (['line1', 'line2'])
+eqangle ('line1', 'line3', 'line2', 'line3')
+eqangle ('line1', 'line4', 'line2', 'line4')
+eqangle ('line1', 'line5', 'line2', 'line5')
+eqangle ('line1', 'line6', 'line2', 'line6')
+eqangle ('line1', 'line7', 'line2', 'line7')
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line9', 'line2', 'line9')
+eqratio ([AM, AC, BN, BD])
+eqratio ([BN, BD, AM, AC])
+eqratio ([CM, AC, BN, BD])
+eqratio ([DN, BD, AM, AC])
+================================================================================ 
+
+USING: cong ([BN, DN])
+
+EQANGLES:
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+cong ([DN, BN])
+para (['line1', 'line2'])
+eqangle ('line1', 'line3', 'line2', 'line3')
+eqangle ('line1', 'line4', 'line2', 'line4')
+eqangle ('line1', 'line5', 'line2', 'line5')
+eqangle ('line1', 'line6', 'line2', 'line6')
+eqangle ('line1', 'line7', 'line2', 'line7')
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line9', 'line2', 'line9')
+eqratio ([AM, AC, BN, BD])
+eqratio ([BN, BD, AM, AC])
+eqratio ([CM, AC, BN, BD])
+eqratio ([DN, BD, AM, AC])
+================================================================================ 
+
+USING: cong ([DN, BN])
+
+EQANGLES:
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+para (['line1', 'line2'])
+eqangle ('line1', 'line3', 'line2', 'line3')
+eqangle ('line1', 'line4', 'line2', 'line4')
+eqangle ('line1', 'line5', 'line2', 'line5')
+eqangle ('line1', 'line6', 'line2', 'line6')
+eqangle ('line1', 'line7', 'line2', 'line7')
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line9', 'line2', 'line9')
+eqratio ([AM, AC, BN, BD])
+eqratio ([BN, BD, AM, AC])
+eqratio ([CM, AC, BN, BD])
+eqratio ([DN, BD, AM, AC])
+================================================================================ 
+
+USING: para (['line1', 'line2'])
+
+EQANGLES:
+
+NEW FACTS:
+eqratio ([BN, BD, KN, CK])
+eqangle ('line1', 'line6', 'line2', 'line6')
+eqangle ('line1', 'line9', 'line2', 'line9')
+eqangle ('line1', 'line7', 'line2', 'line7')
+eqangle ('line1', 'line4', 'line2', 'line4')
+eqangle ('line1', 'line5', 'line2', 'line5')
+eqratio ([KN, CK, BN, BD])
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line3', 'line2', 'line3')
+
+TOADD_FACT_LIST:
+eqangle ('line1', 'line3', 'line2', 'line3')
+eqangle ('line1', 'line4', 'line2', 'line4')
+eqangle ('line1', 'line5', 'line2', 'line5')
+eqangle ('line1', 'line6', 'line2', 'line6')
+eqangle ('line1', 'line7', 'line2', 'line7')
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line9', 'line2', 'line9')
+eqratio ([AM, AC, BN, BD])
+eqratio ([BN, BD, AM, AC])
+eqratio ([BN, BD, KN, CK])
+eqratio ([CM, AC, BN, BD])
+eqratio ([DN, BD, AM, AC])
+eqratio ([KN, CK, BN, BD])
+================================================================================ 
+
+USING: eqangle ('line1', 'line3', 'line2', 'line3')
+
+EQANGLES:
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+eqangle ('line1', 'line4', 'line2', 'line4')
+eqangle ('line1', 'line5', 'line2', 'line5')
+eqangle ('line1', 'line6', 'line2', 'line6')
+eqangle ('line1', 'line7', 'line2', 'line7')
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line9', 'line2', 'line9')
+eqratio ([AM, AC, BN, BD])
+eqratio ([BN, BD, AM, AC])
+eqratio ([BN, BD, KN, CK])
+eqratio ([CM, AC, BN, BD])
+eqratio ([DN, BD, AM, AC])
+eqratio ([KN, CK, BN, BD])
+================================================================================ 
+
+USING: eqangle ('line1', 'line4', 'line2', 'line4')
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+eqangle ('line1', 'line5', 'line2', 'line5')
+eqangle ('line1', 'line6', 'line2', 'line6')
+eqangle ('line1', 'line7', 'line2', 'line7')
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line9', 'line2', 'line9')
+eqratio ([AM, AC, BN, BD])
+eqratio ([BN, BD, AM, AC])
+eqratio ([BN, BD, KN, CK])
+eqratio ([CM, AC, BN, BD])
+eqratio ([DN, BD, AM, AC])
+eqratio ([KN, CK, BN, BD])
+================================================================================ 
+
+USING: eqangle ('line1', 'line5', 'line2', 'line5')
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+eqangle ('line1', 'line6', 'line2', 'line6')
+eqangle ('line1', 'line7', 'line2', 'line7')
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line9', 'line2', 'line9')
+eqratio ([AM, AC, BN, BD])
+eqratio ([BN, BD, AM, AC])
+eqratio ([BN, BD, KN, CK])
+eqratio ([CM, AC, BN, BD])
+eqratio ([DN, BD, AM, AC])
+eqratio ([KN, CK, BN, BD])
+================================================================================ 
+
+USING: eqangle ('line1', 'line6', 'line2', 'line6')
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+eqangle ('line1', 'line7', 'line2', 'line7')
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line9', 'line2', 'line9')
+eqratio ([AM, AC, BN, BD])
+eqratio ([BN, BD, AM, AC])
+eqratio ([BN, BD, KN, CK])
+eqratio ([CM, AC, BN, BD])
+eqratio ([DN, BD, AM, AC])
+eqratio ([KN, CK, BN, BD])
+================================================================================ 
+
+USING: eqangle ('line1', 'line7', 'line2', 'line7')
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+eqangle ('line1', 'line8', 'line2', 'line8')
+eqangle ('line1', 'line9', 'line2', 'line9')
+eqratio ([AM, AC, BN, BD])
+eqratio ([BN, BD, AM, AC])
+eqratio ([BN, BD, KN, CK])
+eqratio ([CM, AC, BN, BD])
+eqratio ([DN, BD, AM, AC])
+eqratio ([KN, CK, BN, BD])
+================================================================================ 
+
+USING: eqangle ('line1', 'line8', 'line2', 'line8')
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+
+NEW FACTS:
+simtri ([NBK, NDC])
+
+TOADD_FACT_LIST:
+eqangle ('line1', 'line9', 'line2', 'line9')
+eqratio ([AM, AC, BN, BD])
+eqratio ([BN, BD, AM, AC])
+eqratio ([BN, BD, KN, CK])
+eqratio ([CM, AC, BN, BD])
+eqratio ([DN, BD, AM, AC])
+eqratio ([KN, CK, BN, BD])
+simtri ([NBK, NDC])
+================================================================================ 
+
+USING: eqangle ('line1', 'line9', 'line2', 'line9')
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+eqratio ([AM, AC, BN, BD])
+eqratio ([BN, BD, AM, AC])
+eqratio ([BN, BD, KN, CK])
+eqratio ([CM, AC, BN, BD])
+eqratio ([DN, BD, AM, AC])
+eqratio ([KN, CK, BN, BD])
+simtri ([NBK, NDC])
+================================================================================ 
+
+USING: eqratio ([AM, AC, BN, BD])
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+{[ line1, line9 ], [ line2, line9 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+eqratio ([BN, BD, AM, AC])
+eqratio ([BN, BD, KN, CK])
+eqratio ([CM, AC, BN, BD])
+eqratio ([DN, BD, AM, AC])
+eqratio ([KN, CK, BN, BD])
+simtri ([NBK, NDC])
+================================================================================ 
+
+USING: eqratio ([BN, BD, AM, AC])
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+{[ line1, line9 ], [ line2, line9 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+eqratio ([BN, BD, KN, CK])
+eqratio ([CM, AC, BN, BD])
+eqratio ([DN, BD, AM, AC])
+eqratio ([KN, CK, BN, BD])
+simtri ([NBK, NDC])
+================================================================================ 
+
+USING: eqratio ([BN, BD, KN, CK])
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+{[ line1, line9 ], [ line2, line9 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+eqratio ([CM, AC, BN, BD])
+eqratio ([DN, BD, AM, AC])
+eqratio ([KN, CK, BN, BD])
+simtri ([NBK, NDC])
+================================================================================ 
+
+USING: eqratio ([CM, AC, BN, BD])
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+{[ line1, line9 ], [ line2, line9 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+eqratio ([DN, BD, AM, AC])
+eqratio ([KN, CK, BN, BD])
+simtri ([NBK, NDC])
+================================================================================ 
+
+USING: eqratio ([DN, BD, AM, AC])
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+{[ line1, line9 ], [ line2, line9 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+eqratio ([KN, CK, BN, BD])
+simtri ([NBK, NDC])
+================================================================================ 
+
+USING: eqratio ([KN, CK, BN, BD])
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+{[ line1, line9 ], [ line2, line9 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+simtri ([NBK, NDC])
+================================================================================ 
+
+USING: simtri ([NBK, NDC])
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+{[ line1, line9 ], [ line2, line9 ]}
+
+NEW FACTS:
+eqratio ([BK, BN, CD, DN])
+eqratio ([BK, KN, CD, CN])
+eqratio ([BN, BK, DN, CD])
+eqratio ([KN, BK, CN, CD])
+eqratio ([KN, BN, CN, DN])
+eqratio ([BN, KN, DN, CN])
+contri ([BNK, DNC])
+contri ([NBK, NDC])
+
+TOADD_FACT_LIST:
+eqratio ([BK, BN, CD, DN])
+eqratio ([BK, KN, CD, CN])
+eqratio ([BN, BK, DN, CD])
+eqratio ([BN, KN, DN, CN])
+eqratio ([KN, BK, CN, CD])
+eqratio ([KN, BN, CN, DN])
+contri ([BNK, DNC])
+contri ([NBK, NDC])
+================================================================================ 
+
+USING: eqratio ([BK, BN, CD, DN])
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+{[ line1, line9 ], [ line2, line9 ]}
+
+NEW FACTS:
+cong ([CD, BK])
+cong ([BK, CD])
+
+TOADD_FACT_LIST:
+cong ([BK, CD])
+cong ([CD, BK])
+eqratio ([BK, KN, CD, CN])
+eqratio ([BN, BK, DN, CD])
+eqratio ([BN, KN, DN, CN])
+eqratio ([KN, BK, CN, CD])
+eqratio ([KN, BN, CN, DN])
+contri ([BNK, DNC])
+contri ([NBK, NDC])
+================================================================================ 
+
+USING: cong ([BK, CD])
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+{[ line1, line9 ], [ line2, line9 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+cong ([CD, BK])
+eqratio ([BK, KN, CD, CN])
+eqratio ([BN, BK, DN, CD])
+eqratio ([BN, KN, DN, CN])
+eqratio ([KN, BK, CN, CD])
+eqratio ([KN, BN, CN, DN])
+contri ([BNK, DNC])
+contri ([NBK, NDC])
+================================================================================ 
+
+USING: cong ([CD, BK])
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+{[ line1, line9 ], [ line2, line9 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+eqratio ([BK, KN, CD, CN])
+eqratio ([BN, BK, DN, CD])
+eqratio ([BN, KN, DN, CN])
+eqratio ([KN, BK, CN, CD])
+eqratio ([KN, BN, CN, DN])
+contri ([BNK, DNC])
+contri ([NBK, NDC])
+================================================================================ 
+
+USING: eqratio ([BK, KN, CD, CN])
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+{[ line1, line9 ], [ line2, line9 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+eqratio ([BN, BK, DN, CD])
+eqratio ([BN, KN, DN, CN])
+eqratio ([KN, BK, CN, CD])
+eqratio ([KN, BN, CN, DN])
+contri ([BNK, DNC])
+contri ([NBK, NDC])
+================================================================================ 
+
+USING: eqratio ([BN, BK, DN, CD])
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+{[ line1, line9 ], [ line2, line9 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+eqratio ([BN, KN, DN, CN])
+eqratio ([KN, BK, CN, CD])
+eqratio ([KN, BN, CN, DN])
+contri ([BNK, DNC])
+contri ([NBK, NDC])
+================================================================================ 
+
+USING: eqratio ([BN, KN, DN, CN])
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+{[ line1, line9 ], [ line2, line9 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+eqratio ([KN, BK, CN, CD])
+eqratio ([KN, BN, CN, DN])
+contri ([BNK, DNC])
+contri ([NBK, NDC])
+================================================================================ 
+
+USING: eqratio ([KN, BK, CN, CD])
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+{[ line1, line9 ], [ line2, line9 ]}
+
+NEW FACTS:
+cong ([CN, KN])
+cong ([KN, CN])
+
+TOADD_FACT_LIST:
+cong ([CN, KN])
+cong ([KN, CN])
+eqratio ([KN, BN, CN, DN])
+contri ([BNK, DNC])
+contri ([NBK, NDC])
+================================================================================ 
+
+USING: cong ([CN, KN])
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+{[ line1, line9 ], [ line2, line9 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+cong ([KN, CN])
+eqratio ([KN, BN, CN, DN])
+contri ([BNK, DNC])
+contri ([NBK, NDC])
+================================================================================ 
+
+USING: cong ([KN, CN])
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+{[ line1, line9 ], [ line2, line9 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+eqratio ([KN, BN, CN, DN])
+contri ([BNK, DNC])
+contri ([NBK, NDC])
+================================================================================ 
+
+USING: eqratio ([KN, BN, CN, DN])
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+{[ line1, line9 ], [ line2, line9 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+contri ([BNK, DNC])
+contri ([NBK, NDC])
+================================================================================ 
+
+USING: contri ([BNK, DNC])
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+{[ line1, line9 ], [ line2, line9 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+contri ([NBK, NDC])
+================================================================================ 
+
+USING: contri ([NBK, NDC])
+
+EQANGLES:
+{[ line1, line3 ], [ line2, line3 ]}
+{[ line1, line4 ], [ line2, line4 ]}
+{[ line1, line5 ], [ line2, line5 ]}
+{[ line1, line6 ], [ line2, line6 ]}
+{[ line1, line7 ], [ line2, line7 ]}
+{[ line1, line8 ], [ line2, line8 ]}
+{[ line1, line9 ], [ line2, line9 ]}
+
+NEW FACTS:
+
+TOADD_FACT_LIST:
+
+================================================================================ 
+
+
+Database
+
+> Coll Facts
+  coll(A,B,K)
+  coll(B,C,E)
+  coll(C,K,N)
+  coll(E,M,N)
+  coll(A,C,M)
+  coll(B,D,N)
+
+> Para Facts
+  para( [A,B,K] [C,D] )
+
+> Eqangle Facts
+  eqangle( Angle([A,B,K],[B,C,E]), Angle([C,D],[B,C,E]) )
+  eqangle( Angle([A,B,K],[C,K,N]), Angle([C,D],[C,K,N]) )
+  eqangle( Angle([A,B,K],[E,M,N]), Angle([C,D],[E,M,N]) )
+  eqangle( Angle([A,B,K],[A,D]), Angle([C,D],[A,D]) )
+  eqangle( Angle([A,B,K],[A,C,M]), Angle([C,D],[A,C,M]) )
+  eqangle( Angle([A,B,K],[B,D,N]), Angle([C,D],[B,D,N]) )
+  eqangle( Angle([A,B,K],[D,K]), Angle([C,D],[D,K]) )
+
+> Cong Facts
+  cong(AM, CM)
+  cong(BN, DN)
+  cong(CN, KN)
+  cong(BK, CD)
+
+> Eqratio Facts
+  eqratio( Ratio([AM,CM],[AC]), Ratio([CN,KN],[CK]), Ratio([BN,DN],[BD]) )
+
+> Simtri Facts
+  simtri( NDC, NBK)
+
+> Contri Facts
+  contri( DNC, BNK)
+
+########################################
+
+
+[['M', 'A', 'C'], ['N', 'B', 'D']]

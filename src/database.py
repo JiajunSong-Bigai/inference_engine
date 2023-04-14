@@ -39,7 +39,39 @@ class Database:
 
     def _predicate_all_forms(self, fact: Fact) -> list[Predicate]:
         if fact.type == "coll":
-            return [Predicate("coll", fact.objects)]
+            # TODO: ADD other facts that are changed because of this
+            # IF the coll fact is contained in the database, NOTHING to do
+            # IF the coll fact gives a new line or adds new points on existing line,
+            #   FIND ALL the eqangle, perp, para facts contained this line
+            line = self.matchLine(fact.objects[:2])
+            predicates = []
+            # EQANGLE
+            for e in self.eqangleFacts:
+                angles = [a for a in e if line in [a.lk1, a.lk2]]
+                other_angles = [a for a in e if a not in angles]
+                for angle in angles:
+                    for other_angle in other_angles:
+                        predicates += [
+                            Predicate("eqangle",
+                                      lines=[
+                                          angle.lk1, angle.lk2,
+                                          other_angle.lk1, other_angle.lk2
+                                      ])
+                        ]
+            # PARA
+            for para in self.paraFacts:
+                if line not in para:
+                    continue
+                other_lines = [l for l in para if l != line]
+                for other_line in other_lines:
+                    predicates += self._predicate_all_forms(
+                        Fact("para", [line, other_line]))
+            # PERP
+            for perp in self.perpFacts:
+                if line in perp:
+                    predicates += self._predicate_all_forms(Fact("perp", perp))
+            return predicates
+
         if fact.type == "para":
             lk1, lk2 = fact.objects
             predicates = []
@@ -496,12 +528,13 @@ class Database:
         elif len(overlapsMap) == 1:
             # case 1 and case 3
             self.lines[overlapsMap[0]] = sorted(
-                self.lines[overlapsMap[0]].union(set(fact.objects)))
+                set(self.lines[overlapsMap[0]]).union(set(fact.objects)))
         elif len(overlapsMap) >= 2:
             # case 2
             keep, drop = overlapsMap
-            self.lines[keep] = sorted(self.lines[keep].union(
-                self.lines[drop].union(set(fact.objects))))
+            self.lines[keep] = sorted(
+                set(self.lines[keep]).union(
+                    set(self.lines[drop]).union(set(fact.objects))))
             del self.lines[drop]
 
             # key changes in eqangleFacts
@@ -531,7 +564,7 @@ class Database:
 
         overlapsMap = [
             cKey for cKey, segments in self.congs.items()
-            if overlaps(segments, {s1, s2})
+            if overlaps(set(segments), {s1, s2})
         ]
 
         if len(overlapsMap) == 0:
@@ -540,11 +573,12 @@ class Database:
         elif len(overlapsMap) == 1:
             # case 1 and case 2
             self.congs[overlapsMap[0]] = sorted(
-                self.congs[overlapsMap[0]].union({s1, s2}))
+                set(self.congs[overlapsMap[0]]).union({s1, s2}))
         elif len(overlapsMap) >= 2:
             # case 3
             keep, drop = overlapsMap
-            self.congs[keep] = sorted(self.congs[keep].union(self.congs[drop]))
+            self.congs[keep] = sorted(
+                set(self.congs[keep]).union(set(self.congs[drop])))
             del self.congs[drop]
 
             # handle key changes in eqratioFacts
@@ -731,7 +765,7 @@ class Database:
                 return name
 
         newName = self.newLineName
-        self.lines[newName] = set(points)
+        self.lines[newName] = sorted(points)
         return newName
 
     def matchCong(self, points: list[Point]):
@@ -778,6 +812,14 @@ class Database:
                 for lineName in lines:
                     s += f"[{','.join(sorted(self.lines[lineName]))}] "
                 s += f")\n"
+
+        # midp
+        if self.midpFacts:
+            s += "\n> Midp Facts\n"
+            for points in self.midpFacts:
+                s += f"  midp( "
+                s += ",".join(points)
+                s += f" )\n"
 
         # eqangle
         if self.eqangleFacts:
@@ -861,8 +903,8 @@ class Database:
             set(self.lines[lineA]).intersection(set(self.lines[lineB])))
         if not inter:
             # SHOULD CHECK parallelness, otherwise the temp point is infinity.
-            print("Warning: DATABASE::LINE_INTERSECTION",
-                  f"intersection of {lineA} and {lineB} is empty.")
+            # print("Warning: DATABASE::LINE_INTERSECTION",
+            #       f"intersection of {lineA} and {lineB} is empty.")
             return []
 
             point = self.next_temp_point_key()
@@ -875,3 +917,17 @@ class Database:
         """Generate a new key for a point."""
         self.num_temp_key += 1
         return f"__TEMPORARY_KEY_{self.num_temp_key}"
+
+    @property
+    def objects(self):
+        """
+        Returns all the objects in the database
+        including points and line keys
+
+        Will be used to tell whether facts
+        """
+        res = set()
+        for line in self.lines:
+            res.add(line)
+            res = res.union(set(self.lines[line]))
+        return sorted(res)
