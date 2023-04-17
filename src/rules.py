@@ -32,6 +32,7 @@ class FC:
             facts += self._ruleD22(p)
             facts += self._ruleD39(p)
             facts += self._ruleD47(p)
+            # facts += self._ruleD58auto(p)
             facts += self._ruleD58(p)
             facts += self._ruleD71(p)
             facts += self._ruleD72(p)
@@ -42,6 +43,7 @@ class FC:
             facts += self._ruleD12(p)
             facts += self._ruleD46(p)
             facts += self._ruleD75cong(p)
+            facts += self._ruleX4(p)
         if p.type == "cyclic":
             facts += self._ruleD41(p)
         if p.type == "perp":
@@ -49,6 +51,7 @@ class FC:
             facts += self._ruleD10perp(p)
             facts += self._ruleD52perp(p)
             facts += self._ruleX2(p)
+            facts += self._ruleX3(p)
         if p.type == "simtri":
             facts += self._ruleD59(p)
             facts += self._ruleD60(p)
@@ -58,21 +61,51 @@ class FC:
         if p.type == "eqratio":
             facts += self._ruleD75eqratio(p)
 
-        return set(facts)
+        return list(set(facts))
 
     def _ruleX2(self, predicate: Predicate) -> list[Fact]:
         """
         perp(A,B,C,D) & perp(P,Q,U,V) => eqangle(A,B,C,D,P,Q,U,V)
         """
+        if len(predicate.lines) == 2:
+            lAB, lCD = predicate.lines
+        else:
+            A, B, C, D = predicate.points
+            lAB = self.database.matchLine([A, B])
+            lCD = self.database.matchLine([C, D])
+        facts = []
+        for [lPQ, lUV] in self.database.perpFacts:
+            # print(lPQ, lUV, A, B, C, D)
+            if lAB == lPQ and lCD == lUV:
+                continue
+            if lAB == lUV and lCD == lPQ:
+                continue
+            facts += [
+                Fact("eqangle", [lAB, lCD, lPQ, lUV]),
+                Fact("eqangle", [lAB, lCD, lUV, lPQ])
+            ]
+        return facts
+
+    def _ruleX3(self, predicate: Predicate) -> list[Fact]:
+        """
+        perp(A,B,C,D) => eqangle(A,B,C,D,C,D,A,B)
+        """
         A, B, C, D = predicate.points
         lAB = self.database.matchLine([A, B])
         lCD = self.database.matchLine([C, D])
-        facts = []
-        for [lPQ, lUV] in self.database.perpFacts:
-            if lAB == lPQ and lCD == lUV:
-                continue
-            facts.append(Fact("eqangle", [lAB, lCD, lPQ, lUV]))
-        return facts
+
+        return [Fact("eqangle", [lAB, lCD, lCD, lAB])]
+
+    def _ruleX4(self, predicate: Predicate) -> list[Fact]:
+        """
+        cong(M,A,M,B) & coll(M,A,B) => midp(M,A,B)
+        """
+        M1, A, M2, B = predicate.points
+        if M1 != M2:
+            return []
+        if self.database.containsFact(Fact("coll", [M1, A, B])):
+            return [Fact("midp", [M1, A, B])]
+        return []
 
     def _ruleD09(self, predicate: Predicate) -> list[Fact]:
         """
@@ -158,34 +191,47 @@ class FC:
         eqangle(A,B,C,D,P,Q,U,V) & eqangle(P,Q,U,V,E,F,G,H)
         => eqangle(A,B,C,D,E,F,G,H)
         """
-        A, B, C, D, P, Q, U, V = predicate.points
-        lAB = self.database.matchLine([A, B])
-        lCD = self.database.matchLine([C, D])
-        lPQ = self.database.matchLine([P, Q])
-        lUV = self.database.matchLine([U, V])
+        lAB, lCD, lPQ, lUV = predicate.lines
 
         facts = []
+        # TODO: check the S_2 symmetric form.
         for angles in self.database.eqangleFacts:
-            if Angle(lPQ, lUV) not in angles:
-                continue
-            for angle in angles:
-                if angle == Angle(lPQ, lUV):
-                    continue
-                lEF, lGH = angle.lk1, angle.lk2
-                facts.append(Fact("eqangle", [lAB, lCD, lEF, lGH]))
+            if Angle(lAB, lCD) in angles:
+                angles = [
+                    angle for angle in angles
+                    if angle not in [Angle(lAB, lCD),
+                                     Angle(lPQ, lUV)]
+                ]
+                for angle in angles:
+                    lEF, lGH = angle.lk1, angle.lk2
+                    facts.append(Fact("eqangle", [lPQ, lUV, lEF, lGH]))
+            elif Angle(lPQ, lUV) in angles:
+                angles = [
+                    angle for angle in angles
+                    if angle not in [Angle(lAB, lCD),
+                                     Angle(lPQ, lUV)]
+                ]
+                for angle in angles:
+                    lEF, lGH = angle.lk1, angle.lk2
+                    facts.append(Fact("eqangle", [lAB, lCD, lEF, lGH]))
         return facts
 
     def _ruleD39(self, predicate: Predicate):
         """
         eqangle(A,B,P,Q,C,D,P,Q) => para(A,B,C,D)
         """
-        A, B, P1, Q1, C, D, P2, Q2 = predicate.points
-        if P1 != P2 or Q1 != Q2:
-            return []
+        if len(predicate.lines) == 4:
+            lAB, lPQ, lCD, lUV = predicate.lines
+            if lPQ != lUV:
+                return []
+        else:
+            A, B, P1, Q1, C, D, P2, Q2 = predicate.points
+            if P1 != P2 or Q1 != Q2:
+                return []
 
-        lAB = self.database.matchLine([A, B])
-        lPQ = self.database.matchLine([P1, Q1])
-        lCD = self.database.matchLine([C, D])
+            lAB = self.database.matchLine([A, B])
+            lPQ = self.database.matchLine([P1, Q1])
+            lCD = self.database.matchLine([C, D])
 
         if lAB == lCD or lAB == lPQ or lCD == lPQ:
             return []
@@ -227,18 +273,31 @@ class FC:
         """
         eqangle(P,A,P,B,Q,A,Q,B) & not coll(P,Q,A) => cyclic(A,B,P,Q)
         """
-        P1, A1, P2, B1, Q1, A2, Q2, B2 = predicate.points
-        if P1 != P2 or A1 != A2 or B1 != B2 or Q1 != Q2:
-            return []
-
-        if self.database.containsFact(Fact("coll", [P1, Q1, A1])):
-            return []
-
-        return [Fact("cyclic", [A1, B1, P1, Q1])]
+        if len(predicate.lines) == 4:
+            l1, l2, l3, l4 = predicate.lines
+            if l1 == l3:  # Q: Maybe check parallelization also?
+                return []
+            for la, lb in [(l1, l2), (l3, l4), (l1, l3), (l2, l4)]:
+                if not self.database.lineIntersection(la, lb):
+                    # print("Warning: fail to find intersections between",
+                    #       f"lines {la} and {lb}.",
+                    #       "This may cause incompleteness of facts.")
+                    # TODO: one possible solution is to define adhoc points and
+                    #       define a mechanics to identify
+                    #       when intersection shows up
+                    return []
+            A = self.database.lineIntersection(l1, l2)[0]
+            B = self.database.lineIntersection(l3, l4)[0]
+            P = self.database.lineIntersection(l3, l1)[0]
+            Q = self.database.lineIntersection(l2, l4)[0]
+            # print("\nCandidates FOR CYCLIC", A, B, P, Q, "\n")
+            if len(set([A, B, P, Q])) < 4:
+                return []
+            return [Fact("cyclic", [A, B, P, Q])]
 
     def _ruleD44(self, predicate: Predicate):
         """
-        midp(E,A,B) & midp(F,A,C) => para(E,F,B,C)        
+        midp(E,A,B) & midp(F,A,C) => para(E,F,B,C)
         """
         E, A1, B = predicate.points
         facts = []
@@ -292,10 +351,30 @@ class FC:
         """
         eqangle(O,A,A,B,A,B,O,B) => cong(O,A,O,B)
         """
+        if len(predicate.lines) == 4:
+            l1, l2, l3, l4 = predicate.lines
+            if l2 != l3:
+                return []
+            for la, lb in [(l1, l2), (l1, l4), (l2, l4)]:
+                if not self.database.lineIntersection(la, lb):
+                    # print("Warning: fail to find intersections between",
+                    #       f"lines {la} and {lb}.",
+                    #       "This may cause incompleteness of facts.")
+                    # TODO: one possible solution is to define adhoc points and
+                    #       define a mechanics to identify
+                    #       when intersection shows up
+                    return []
+            A1 = self.database.lineIntersection(l1, l2)[0]
+            O1 = self.database.lineIntersection(l1, l4)[0]
+            B1 = self.database.lineIntersection(l2, l4)[0]
+            if A1 == O1 or A1 == B1 or O1 == B1:
+                return []
+            return [Fact("cong", [Segment(O1, A1), Segment(O1, B1)])]
+
         O1, A1, A2, B1, A3, B2, O2, B3 = predicate.points
         valid = all([
             A1 == A2, A1 == A3, B1 == B2, B1 == B3, O1 == O2,
-            not self.database.containsFact(Fact("coll", [O1, A1, B1]))
+            not self.database.containsFact(Predicate("coll", [O1, A1, B1]))
         ])
         if not valid:
             return []
@@ -318,28 +397,116 @@ class FC:
 
         return facts
 
+    def _ruleD58auto(self, predicate: Predicate):
+        """
+        eqangle(A,B,B,D,A,C,C,D) & intersect(E,A,C,B,D)
+        => simtri(A,B,E,D,C,E)
+        """
+        ret = []
+        l1, l2, l3, l4 = predicate.lines
+        if len(set([l1, l2, l3, l4])) < 4:
+            return []
+
+        A = self.database.lineIntersection(l1, l3)
+        B = self.database.lineIntersection(l1, l2)
+        C = self.database.lineIntersection(l3, l4)
+        D = self.database.lineIntersection(l2, l4)
+        E = self.database.lineIntersection(l2, l3)
+        F = self.database.lineIntersection(l1, l4)
+        if not (A and B and C and D):
+            return []
+        A, B, C, D = A[0], B[0], C[0], D[0]
+        if E:
+            E = E[0]
+            ret += [Fact("simtri", [Triangle(A, B, E), Triangle(D, C, E)])]
+        if F:
+            F = F[0]
+            ret += [Fact("simtri", [Triangle(A, C, F), Triangle(D, B, F)])]
+
+        return ret
+
     def _ruleD58(self, predicate: Predicate):
         """
         eqangle(A,B,B,C,P,Q,Q,R) & eqangle(A,C,B,C,P,R,Q,R) & ~ coll(A,B,C)
         => simtri(A,B,C,P,Q,R)
         """
+        # print("PROVER::_RULE58", predicate)
 
-        A, B1, B2, C, P, Q1, Q2, R = predicate.points
-        if B1 != B2 or Q1 != Q2 or self.database.containsFact(
-                Fact("coll", [A, B1, C])):
+        l1, l2, l3, l4 = predicate.lines
+        if l1 == l2:
             return []
+        for (la, lb) in [(l1, l2), (l3, l4)]:
+            # print("PROVER::_RULED58", la, lb)
+            if not self.database.lineIntersection(la, lb):
+                # print("Warning: _RULED58 fail to find intersections between",
+                #       f"lines {la} and {lb}.",
+                #       "This may cause incompleteness of facts.")
+                # TODO: one possible solution is to define adhoc points and
+                #       define a mechanics to identify
+                #       when intersection shows up
+                return []
+            for (la, lb) in [(l1, l2), (l3, l4)]:
+                # print("PROVER::_RULED58", la, lb)
+                if not self.database.lineIntersection(la, lb):
+                    # print("Warning: _RULED58 fail to find intersections between",
+                    #       f"lines {la} and {lb}.",
+                    #       "This may cause incompleteness of facts.")
+                    # TODO: one possible solution is to define adhoc points and
+                    #       define a mechanics to identify
+                    #       when intersection shows up
+                    return []
+            B = self.database.lineIntersection(l1, l2)[0]
+            Q = self.database.lineIntersection(l3, l4)[0]
+            # MARK next we should call `self.prove`, but we do not need, just
+            # check for all existing lines, whether admit any existing eqangle.
+            ret = []
+            for e in self.database.eqangleFacts:
+                if (Angle(l1, l2) in e or Angle(l2, l1) in e
+                        or Angle(l3, l4) in e or Angle(l4, l3) in e):
+                    continue
+                a1 = [(l2 == a.lk1, a) for a in e
+                      if l2 == a.lk1 or l2 == a.lk2]
+                a2 = [(l4 == a.lk1, a) for a in e
+                      if l4 == a.lk1 or l4 == a.lk2]
+                for f1, angle1 in a1:
+                    for f2, angle2 in a2:
+                        if f1 != f2:
+                            # full angle does not fit in the eqangle.
+                            # does not imply simtri.
+                            continue
+                        if self.database.containsFact(
+                                Fact("eqangle", [
+                                    angle1.lk1, angle1.lk2, angle2.lk1,
+                                    angle2.lk2
+                                ])):
+                            C = self.database.lineIntersection(
+                                angle1.lk1, angle1.lk2)
+                            R = self.database.lineIntersection(
+                                angle2.lk1, angle2.lk2)
+                            if f1:
+                                A = self.database.lineIntersection(
+                                    angle1.lk2, l1)
+                                P = self.database.lineIntersection(
+                                    angle2.lk2, l3)
+                            else:
+                                A = self.database.lineIntersection(
+                                    angle1.lk1, l1)
+                                P = self.database.lineIntersection(
+                                    angle2.lk1, l3)
+                            if not (A and P and C and R):
+                                continue
 
-        lAC = self.database.matchLine([A, C])
-        lBC = self.database.matchLine([B1, C])
-        lPR = self.database.matchLine([P, R])
-        lQR = self.database.matchLine([Q1, R])
-
-        if self.database.containsFact(Fact(
-                "eqangle", [lAC, lBC, lPR, lQR
-                            ])) and Triangle(A, B1, C) != Triangle(P, Q1, R):
-            return [Fact("simtri", [Triangle(A, B1, C), Triangle(P, Q1, R)])]
-
-        return []
+                            A, P, C, R = A[0], P[0], C[0], R[0]
+                            if ((B != Q or C != R or A != P)
+                                    and len(set([A, B, C])) +
+                                    len(set([P, Q, R])) == 6):
+                                ret += [
+                                    Fact(
+                                        "simtri",
+                                        [Triangle(A, B, C),
+                                         Triangle(P, Q, R)])
+                                ]
+        return ret
 
     def _ruleD59(self, predicate: Predicate):
         """
@@ -481,13 +648,14 @@ class FC:
             A_, B_ = sorted([A, B])
             if [M, A_, B_] != midp:
                 N, C, D = midp
-                facts.append(
+                facts += [
                     Fact("eqratio", [
                         Segment(M, A),
                         Segment(A, B),
                         Segment(N, C),
                         Segment(C, D)
-                    ]))
+                    ]),
+                ]
 
         return facts
 
@@ -495,17 +663,21 @@ class FC:
         """
         eqangle(A,B,C,D,C,D,A,B) & ~ para(A,B,C,D) => perp(A,B,C,D)
         """
+        if len(predicate.lines) == 4:
+            l1, l2, l3, l4 = predicate.lines
+            if (l1 != l4 or l2 != l3
+                    or self.database.containsFact(Fact("para", [l1, l2]))):
+                return []
+            return [Fact("perp", [l1, l2])]
+
         A1, B1, C1, D1, C2, D2, A2, B2 = predicate.points
-
-        lAB = self.database.matchLine([A1, B1])
-        lCD = self.database.matchLine([C1, D1])
-
         if not all([
                 A1 == A2, B1 == B2, C1 == C2, D1 == D2,
-                not self.database.containsFact(Fact("para", [lAB, lCD]))
+                not self.prove(Predicate("para", [A1, B1, C1, D1]))
         ]):
             return []
-
+        lAB = self.database.matchLine([A1, B1])
+        lCD = self.database.matchLine([C1, D1])
         if lAB == lCD:
             return []
         return [Fact("perp", [lAB, lCD])]
@@ -532,12 +704,14 @@ class FC:
         """
         eqangle(A,B,C,D,P,Q,U,V) & para(P,Q,U,V) => para(A,B,C,D)
         """
+        if len(predicate.lines) == 4:
+            l1, l2, l3, l4 = predicate.lines
+            if self.database.containsFact(Fact("para", [l3, l4])) and l1 != l2:
+                return [Fact("para", [l1, l2])]
+            return []
+
         A, B, C, D, P, Q, U, V = predicate.points
-
-        lPQ = self.database.matchLine([P, Q])
-        lUV = self.database.matchLine([U, V])
-
-        if self.database.containsFact(Fact("para", [lPQ, lUV])):
+        if self.prove(Predicate("para", [P, Q, U, V])):
             lAB = self.database.matchLine([A, B])
             lCD = self.database.matchLine([C, D])
             if lAB == lCD:
@@ -549,12 +723,14 @@ class FC:
         """
         eqangle(A,B,C,D,P,Q,U,V) & perp(P,Q,U,V) => perp(A,B,C,D)
         """
+        if len(predicate.lines) == 4:
+            l1, l2, l3, l4 = predicate.lines
+            if self.database.containsFact(Fact("perp", [l3, l4])):
+                return [Fact("perp", [l1, l2])]
+            return []
+
         A, B, C, D, P, Q, U, V = predicate.points
-
-        lPQ = self.database.matchLine([P, Q])
-        lUV = self.database.matchLine([U, V])
-
-        if self.database.containsFact(Fact("perp", [lPQ, lUV])):
+        if self.prove(Predicate("perp", [P, Q, U, V])):
             lAB = self.database.matchLine([A, B])
             lCD = self.database.matchLine([C, D])
             if lAB == lCD:

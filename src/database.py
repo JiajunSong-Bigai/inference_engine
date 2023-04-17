@@ -3,13 +3,14 @@ from src.fact import Fact
 from src.predicate import Predicate
 
 import itertools
+from collections import OrderedDict
 
 
 class Database:
 
     def __init__(self,
-                 lines: dict[LineKey, set[Point]] = None,
-                 congs: dict[CongKey, set[Segment]] = None,
+                 lines: OrderedDict[LineKey, list[Point]] = None,
+                 congs: OrderedDict[CongKey, list[Segment]] = None,
                  circles: list[Circle] = None,
                  midpFacts: list[list[Point]] = None,
                  paraFacts: list[set[LineKey]] = None,
@@ -31,20 +32,53 @@ class Database:
         self.contriFacts = contriFacts or []
 
         self.version = version
+        self.num_temp_key = 0
 
     def version_update(self):
         self.version += 1
 
     def _predicate_all_forms(self, fact: Fact) -> list[Predicate]:
         if fact.type == "coll":
-            return [Predicate("coll", fact.objects)]
+            # TADD other facts that are changed because of this
+            # IF the coll fact is contained in the database, NOTHING to do
+            # IF the coll fact gives a new line or adds new points on existing line,
+            #   FIND ALL the eqangle, perp, para facts contained this line
+            line = self.matchLine(fact.objects[:2])
+            predicates = []
+            # EQANGLE
+            for e in self.eqangleFacts:
+                angles = [a for a in e if line in [a.lk1, a.lk2]]
+                other_angles = [a for a in e if a not in angles]
+                for angle in angles:
+                    for other_angle in other_angles:
+                        predicates += [
+                            Predicate("eqangle",
+                                      lines=[
+                                          angle.lk1, angle.lk2,
+                                          other_angle.lk1, other_angle.lk2
+                                      ])
+                        ]
+            # PARA
+            for para in self.paraFacts:
+                if line not in para:
+                    continue
+                other_lines = [l for l in para if l != line]
+                for other_line in other_lines:
+                    predicates += self._predicate_all_forms(
+                        Fact("para", [line, other_line]))
+            # PERP
+            for perp in self.perpFacts:
+                if line in perp:
+                    predicates += self._predicate_all_forms(Fact("perp", perp))
+            return predicates
+
         if fact.type == "para":
             lk1, lk2 = fact.objects
             predicates = []
             for (A, B) in itertools.permutations(self.lines[lk1], 2):
                 for (C, D) in itertools.permutations(self.lines[lk2], 2):
                     predicates.append(Predicate("para", [A, B, C, D]))
-                    predicates.append(Predicate("para", [C, D, A, B]))
+                    # predicates.append(Predicate("para", [C, D, A, B]))
             for lines in self.paraFacts:
                 if lk1 not in lines and lk2 not in lines:
                     continue
@@ -65,7 +99,10 @@ class Database:
             predicates = []
             for (A, B) in itertools.permutations(self.lines[lk1], 2):
                 for (C, D) in itertools.permutations(self.lines[lk2], 2):
-                    predicates.append(Predicate("perp", [A, B, C, D]))
+                    predicates.append(
+                        Predicate("perp", [A, B, C, D], [lk1, lk2]))
+                    predicates.append(
+                        Predicate("perp", [C, D, A, B], [lk2, lk1]))
             return predicates
         if fact.type == "midp":
             M, A, B = fact.objects
@@ -81,46 +118,14 @@ class Database:
             ]
         if fact.type == "eqangle":
             lk1, lk2, lk3, lk4 = fact.objects
-            angle_pairs = [
-                [Angle(lk1, lk2), Angle(lk3, lk4)],
-                [Angle(lk2, lk1), Angle(lk4, lk3)],
-                [Angle(lk1, lk3), Angle(lk2, lk4)],
-                [Angle(lk3, lk1), Angle(lk4, lk2)],
-            ]
+            # Give a test generating lines directly instead of to points.
             predicates = []
-            for (a1, a2) in angle_pairs:
-                l1, l2 = self.lines[a1.lk1], self.lines[a1.lk2]
-                l3, l4 = self.lines[a2.lk1], self.lines[a2.lk2]
-
-                for (A, B) in itertools.permutations(l1, 2):
-                    for (C, D) in itertools.permutations(l2, 2):
-                        for (P, Q) in itertools.permutations(l3, 2):
-                            for (U, V) in itertools.permutations(l4, 2):
-                                predicates.append(
-                                    Predicate("eqangle",
-                                              [A, B, C, D, P, Q, U, V]))
-
-            # handle transitivity
-            for (a1, a2) in angle_pairs:
-                for angles in self.eqangleFacts:
-                    if a1 not in angles and a2 not in angles:
-                        continue
-                    for a3 in angles:
-                        if a3 in [a1, a2]:
-                            continue
-                        for a in [a1, a2]:
-                            l1, l2 = self.lines[a.lk1], self.lines[a.lk2]
-                            l3, l4 = self.lines[a3.lk1], self.lines[a3.lk2]
-                            for (A, B) in itertools.permutations(l1, 2):
-                                for (C, D) in itertools.permutations(l2, 2):
-                                    for (P,
-                                         Q) in itertools.permutations(l3, 2):
-                                        for (U, V) in itertools.permutations(
-                                                l4, 2):
-                                            predicates.append(
-                                                Predicate(
-                                                    "eqangle",
-                                                    [A, B, C, D, P, Q, U, V]))
+            for lines in [[lk1, lk2, lk3, lk4], [lk2, lk1, lk4, lk3],
+                          [lk1, lk3, lk2, lk4], [lk3, lk1, lk4, lk2]]:
+                l1, l2, l3, l4 = lines
+                if l1 != l2 and l3 != l4:
+                    predicates.append(Predicate("eqangle", lines=list(lines)))
+            # print("DATABASE::_PREDICATE_ALL_FORM::PREDICATES", predicates)
             return predicates
 
         if fact.type == "eqratio":
@@ -204,6 +209,8 @@ class Database:
             lCD = self.matchLine([C, D])
             return Fact("perp", [lAB, lCD])
         if predicate.type == "eqangle":
+            if len(predicate.lines) == 4:
+                return Fact("eqangle", predicate.lines)
             A, B, C, D, P, Q, U, V = predicate.points
             lAB = self.matchLine([A, B])
             lCD = self.matchLine([C, D])
@@ -354,10 +361,11 @@ class Database:
                 [Angle(lk3, lk1), Angle(lk4, lk2)],
             ]
             for (a1, a2) in angle_pairs:
-                if a1 in factsi or a2 in factsi:
-                    angle = (a1, a2)
-                    found = True
-                    break
+                if a1.lk1 != a1.lk2 and a2.lk1 != a2.lk2:
+                    if a1 in factsi or a2 in factsi:
+                        angle = (a1, a2)
+                        found = True
+                        break
             i += 1
 
         if not found:
@@ -513,21 +521,22 @@ class Database:
 
         overlapsMap = [
             lk for lk, points in self.lines.items()
-            if overlaps(points, fact.objects)
+            if overlaps(set(points), set(fact.objects))
         ]
 
         if len(overlapsMap) == 0:
             # case 4
-            self.lines[self.newLineName] = set(fact.objects)
+            self.lines[self.newLineName] = sorted(set(fact.objects))
         elif len(overlapsMap) == 1:
             # case 1 and case 3
-            self.lines[overlapsMap[0]] = self.lines[overlapsMap[0]].union(
-                set(fact.objects))
+            self.lines[overlapsMap[0]] = sorted(
+                set(self.lines[overlapsMap[0]]).union(set(fact.objects)))
         elif len(overlapsMap) >= 2:
             # case 2
             keep, drop = overlapsMap
-            self.lines[keep] = self.lines[keep].union(self.lines[drop].union(
-                set(fact.objects)))
+            self.lines[keep] = sorted(
+                set(self.lines[keep]).union(
+                    set(self.lines[drop]).union(set(fact.objects))))
             del self.lines[drop]
 
             # key changes in eqangleFacts
@@ -557,20 +566,21 @@ class Database:
 
         overlapsMap = [
             cKey for cKey, segments in self.congs.items()
-            if overlaps(segments, {s1, s2})
+            if overlaps(set(segments), {s1, s2})
         ]
 
         if len(overlapsMap) == 0:
             # case 4
-            self.congs[self.newCongName] = {s1, s2}
+            self.congs[self.newCongName] = sorted({s1, s2})
         elif len(overlapsMap) == 1:
             # case 1 and case 2
-            self.congs[overlapsMap[0]] = self.congs[overlapsMap[0]].union(
-                {s1, s2})
+            self.congs[overlapsMap[0]] = sorted(
+                set(self.congs[overlapsMap[0]]).union({s1, s2}))
         elif len(overlapsMap) >= 2:
             # case 3
             keep, drop = overlapsMap
-            self.congs[keep] = self.congs[keep].union(self.congs[drop])
+            self.congs[keep] = sorted(
+                set(self.congs[keep]).union(set(self.congs[drop])))
             del self.congs[drop]
 
             # handle key changes in eqratioFacts
@@ -757,7 +767,7 @@ class Database:
                 return name
 
         newName = self.newLineName
-        self.lines[newName] = set(points)
+        self.lines[newName] = sorted(points)
         return newName
 
     def matchCong(self, points: list[Point]):
@@ -804,6 +814,14 @@ class Database:
                 for lineName in lines:
                     s += f"[{','.join(sorted(self.lines[lineName]))}] "
                 s += f")\n"
+
+        # midp
+        if self.midpFacts:
+            s += "\n> Midp Facts\n"
+            for points in self.midpFacts:
+                s += f"  midp( "
+                s += ",".join(points)
+                s += f" )\n"
 
         # eqangle
         if self.eqangleFacts:
@@ -876,3 +894,42 @@ class Database:
         c1str = ",".join([str(s) for s in self.congs[c1]])
         c2str = ",".join([str(s) for s in self.congs[c2]])
         return f"Ratio([{c1str}],[{c2str}])"
+
+    def lineIntersection(self, lineA: LineKey, lineB: LineKey) -> list[Point]:
+        """Find intersection of two lines."""
+        # TODO: return an adhoc point if no intersection are found,
+        #       combine all resulting points when multiple points are found.
+        # print("DATABASE::LINE_INTERSECTION",
+        #       self.lines[lineA].intersection(self.lines[lineB]))
+        inter = list(
+            set(self.lines[lineA]).intersection(set(self.lines[lineB])))
+        if not inter:
+            # SHOULD CHECK parallelness, otherwise the temp point is infinity.
+            # print("Warning: DATABASE::LINE_INTERSECTION",
+            #       f"intersection of {lineA} and {lineB} is empty.")
+            return []
+
+            point = self.next_temp_point_key()
+            self.lines[lineA].add(point)
+            self.lines[lineB].add(point)
+            return [point]
+        return inter
+
+    def next_temp_point_key(self):
+        """Generate a new key for a point."""
+        self.num_temp_key += 1
+        return f"__TEMPORARY_KEY_{self.num_temp_key}"
+
+    @property
+    def objects(self):
+        """
+        Returns all the objects in the database
+        including points and line keys
+
+        Will be used to tell whether facts
+        """
+        res = set()
+        for line in self.lines:
+            res.add(line)
+            res = res.union(set(self.lines[line]))
+        return sorted(res)
