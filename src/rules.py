@@ -648,13 +648,14 @@ class FC:
             A_, B_ = sorted([A, B])
             if [M, A_, B_] != midp:
                 N, C, D = midp
-                facts.append(
+                facts += [
                     Fact("eqratio", [
                         Segment(M, A),
                         Segment(A, B),
                         Segment(N, C),
                         Segment(C, D)
-                    ]))
+                    ]),
+                ]
 
         return facts
 

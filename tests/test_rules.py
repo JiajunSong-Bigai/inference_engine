@@ -746,7 +746,7 @@ def test_rd66():
     assert prover.prove(quest)
 
 
-def test_rd67coll():
+def test_rd67():
     hypotheses = [
         Predicate("coll", ["A", "B", "C"]),
         Predicate("cong", ["A", "B", "A", "C"]),

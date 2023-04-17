@@ -39,7 +39,7 @@ class Database:
 
     def _predicate_all_forms(self, fact: Fact) -> list[Predicate]:
         if fact.type == "coll":
-            # TODO: ADD other facts that are changed because of this
+            # TADD other facts that are changed because of this
             # IF the coll fact is contained in the database, NOTHING to do
             # IF the coll fact gives a new line or adds new points on existing line,
             #   FIND ALL the eqangle, perp, para facts contained this line
@@ -119,11 +119,12 @@ class Database:
         if fact.type == "eqangle":
             lk1, lk2, lk3, lk4 = fact.objects
             # Give a test generating lines directly instead of to points.
-            predicates = [
-                Predicate("eqangle", lines=list(obj))
-                for obj in [[lk1, lk2, lk3, lk4], [lk2, lk1, lk4, lk3],
-                            [lk1, lk3, lk2, lk4], [lk3, lk1, lk4, lk2]]
-            ]
+            predicates = []
+            for lines in [[lk1, lk2, lk3, lk4], [lk2, lk1, lk4, lk3],
+                          [lk1, lk3, lk2, lk4], [lk3, lk1, lk4, lk2]]:
+                l1, l2, l3, l4 = lines
+                if l1 != l2 and l3 != l4:
+                    predicates.append(Predicate("eqangle", lines=list(lines)))
             # print("DATABASE::_PREDICATE_ALL_FORM::PREDICATES", predicates)
             return predicates
 
@@ -360,10 +361,11 @@ class Database:
                 [Angle(lk3, lk1), Angle(lk4, lk2)],
             ]
             for (a1, a2) in angle_pairs:
-                if a1 in factsi or a2 in factsi:
-                    angle = (a1, a2)
-                    found = True
-                    break
+                if a1.lk1 != a1.lk2 and a2.lk1 != a2.lk2:
+                    if a1 in factsi or a2 in factsi:
+                        angle = (a1, a2)
+                        found = True
+                        break
             i += 1
 
         if not found:

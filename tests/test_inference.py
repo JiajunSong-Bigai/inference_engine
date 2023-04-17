@@ -112,14 +112,92 @@ def test_02():
     # assert len(db.simtriFacts) == 0
     # assert len(db.circles) == 0
     # assert len(increased_facts) == 3
-    db = Database()
-    current_objects = []
-    for i, step in enumerate(steps):
-        print("STEP", i + 1)
+    # db = Database()
+    # current_objects = []
+    # for i, step in enumerate(steps):
+    #     print("STEP", i + 1)
 
-        db, increased_facts = inference_update(db, step)
-        for fact in increased_facts:
-            if all(o in current_objects for o in fact.objects):
-                print("FOUND!!!!!!", fact)
-        current_objects = db.objects
-        print("=" * 80, "\n")
+    #     db, increased_facts = inference_update(db, step)
+    #     for fact in increased_facts:
+    #         if all(o in current_objects for o in fact.objects):
+    #             print("FOUND!!!!!!", fact)
+    #     current_objects = db.objects
+    #     print("=" * 80, "\n")
+
+    db = Database()
+    # step 1
+    db, increased_facts = inference_update(db, steps[0])
+
+    print(len(db.lines))
+    print(len(db.eqangleFacts))
+    print(len(db.simtriFacts))
+    print(len(db.circles))
+    print(len(increased_facts))
+
+    assert len(db.lines) == 6
+    assert len(db.eqangleFacts) == 4
+    assert len(db.simtriFacts) == 0
+    assert len(db.circles) == 0
+    assert len(increased_facts) == 5
+
+    # step 2
+    db, increased_facts = inference_update(db, steps[1])
+
+    print(len(db.lines))
+    print(len(db.eqangleFacts))
+    print(len(db.simtriFacts))
+    print(len(db.circles))
+    print(len(increased_facts))
+
+    assert len(db.lines) == 6
+    assert len(db.eqangleFacts) == 4
+    assert len(db.simtriFacts) == 0
+    assert len(db.circles) == 0
+    assert len(increased_facts) == 3
+
+    # step 3
+    db, increased_facts = inference_update(db, steps[2])
+
+    print(len(db.lines))
+    print(len(db.eqangleFacts))
+    print(len(db.simtriFacts))
+    print(len(db.circles))
+    print(len(increased_facts))
+
+    assert len(db.lines) == 6
+    assert len(db.eqangleFacts) == 4
+    assert len(db.simtriFacts) == 0
+    assert len(db.circles) == 0
+    assert len(increased_facts) == 4
+
+    # step 4
+    db, increased_facts = inference_update(db, steps[3])
+
+    print(len(db.lines))
+    print(len(db.eqangleFacts))
+    print(len(db.simtriFacts))
+    print(len(db.circles))
+    print(len(increased_facts))
+
+    assert len(db.lines) == 7
+    assert len(db.eqangleFacts) == 4
+    assert len(db.simtriFacts) == 0
+    assert len(db.circles) == 0
+    assert len(increased_facts) == 2
+
+    # step 5
+    db, increased_facts = inference_update(db, steps[4], verbose=True)
+
+    print(len(db.lines))
+    print(len(db.eqangleFacts))
+    print(len(db.simtriFacts))
+    print(len(db.circles))
+    print(len(increased_facts))
+
+    print("\n".join(str(f) for f in increased_facts))
+
+    assert len(db.lines) == 16
+    assert len(db.eqangleFacts) == 24
+    assert len(db.simtriFacts) == 6
+    assert len(db.circles) == 0
+    assert len(increased_facts) >= 91

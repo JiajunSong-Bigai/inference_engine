@@ -76,7 +76,7 @@ def inference_update(
             print("\n".join(str(f) for f in facts_to_add))
             print("=" * 80, "\n")
 
-    return db, sorted(increased_facts)
+    return db, sorted(set(increased_facts))
 
 
 def test():

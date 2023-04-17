@@ -12,7 +12,7 @@ def test_p1():
     db = Database()
     for predicate in predicates:
         db.addPredicate(predicate=predicate)
-    assert db.lines == {'line1': {'B', 'A', 'C'}, 'line2': {'F', 'G', 'E'}}
+    assert db.lines == {'line1': ['A', 'B', 'C'], 'line2': ['E', 'F', 'G']}
 
 
 def test_p2():
@@ -23,7 +23,7 @@ def test_p2():
     db = Database()
     for predicate in predicates:
         db.addPredicate(predicate=predicate)
-    assert db.lines == {'line1': {'A', 'B', 'C'}, 'line2': {'E', 'A', 'D'}}
+    assert db.lines == {'line1': ['A', 'B', 'C'], 'line2': ['A', 'D', 'E']}
 
 
 def test_p3():
@@ -35,7 +35,7 @@ def test_p3():
     db = Database()
     for predicate in predicates:
         db.addPredicate(predicate=predicate)
-    assert db.lines == {'line1': {'D', 'E', 'C', 'B', 'A'}}
+    assert db.lines == {'line1': ['A', 'B', 'C', 'D', 'E']}
 
 
 def test_p4():

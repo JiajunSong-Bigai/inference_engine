@@ -1,5 +1,0 @@
-Script started on 2023-04-12 10:56:52+08:00 [TERM="xterm-256color" TTY="/dev/pts/3" COLUMNS="116" LINES="43"]
-[?2004h[01;32mjiajun[00m:[01;34minference_engine[01;31m(simp-dev)[00m$ tou[K[K[Kexit
-[?2004lexit
-
-Script done on 2023-04-12 10:56:59+08:00 [COMMAND_EXIT_CODE="0"]
